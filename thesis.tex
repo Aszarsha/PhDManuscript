@@ -1,93 +1,33 @@
-\documentclass[draft]{memoir}
+\documentclass[draft,a4paper]{memoir}
+
+\usepackage{polyglossia}
+\usepackage{microtype}
+
+\setdefaultlanguage{english}
 
 \setsecnumdepth{all}
 \settocdepth{all}
 
-\title{Opt. Comb. in comp. gen.}
+\title{Module extraction and discovery in biological interactions networks with exact methods}
 \author{Thomas Hume}
 \date{Rev. \today}
 
 \begin{document}
+
+\frontmatter
 \tableofcontents
 
-\chapter{Introduction}
- \section{A few biology notions}
-  \subsection{From genome to proteins, the Central Dogma}
-   \subsubsection{ADN, genome}
-   \subsubsection{ARN, transcriptome}
-   \subsubsection{Proteins, peptides, proteome, and interactions}
-  \subsection{Measuring the state of the living, sequencing}
-   \subsubsection{Genome sequencing}
-   \subsubsection{ARN sequencing, expression levels}
-   \subsubsection{ARN levels as a proxy for proteins expression levels}
-   \subsubsection{Differential analysis}
-  \subsection{??? Phage display ???}
-  \subsection{??? Mass spectrometry ???}
+\mainmatter
+\input{intro}
+\input{stateart}
+\input{xheinz}
+\input{apxhard}
+%\input{multiheinz}
+%\input{pepteam}
+\input{conclusion}
 
- \section{Some computer science elements}
-  \subsection{String}
-   \subsubsection{suffix tree}
-   \subsubsection{generalized suffix tree}
-   \subsubsection{generalized suffix array}
-  \subsection{Graph}
-   \subsubsection{Connectivity}
-   \subsubsection{Minimum cut}
-  \subsection{Combinatorial optimization}
-   \subsubsection{Dynamic programming}
-   \subsubsection{Decision trees, Branch and bound, Branch and cut}
-   \subsubsection{Linear programming, Mixed integer linear programming}
-  \subsection{Complexity}
-   \subsubsection{APX-difficulty}
-   \subsubsection{Pseudo-polynomial time}
-
-\chapter{String selection}
-
- \section{Intro}
-  \subsection{Sequences}
-   \subsubsection{Two sets of sequences (PhD or ?? + proteome)}
-   \subsubsection{Equals two sets of small sequences (kmers)}
-  \subsection{Distance measure of two AA sequences}
-
- \section{Algorithm}
-  \subsection{Encoding the two sets as generalized suffix arrays}
-  \subsection{Minimum-Maximum distance over length, and pruning}
-  \subsection{Mappings, profiles, and significance}
-
- \section{Analysis}
-  \subsection{Performance}
-  \subsection{Significance}
-   \subsubsection{Pathways test}
-
- \section{Biology, pretty please ?!}
-
-\chapter{Biological module discovery}
-
- \section{Module introduction (topological module --connected-- vs. aggregation module --stats--)}
- \section{Mapping biological weights onto PPI networks}
- \section{Maximum-Weight Connected Subgraph}
-  \subsection{Prize-Collecting Steiner Tree}
-  \subsection{Direct methods (Miranda-Alvarez)}
-
-\chapter{??? Multi-modules discovery ???}
- \section{Some methods find multiple modules}
- \section{We want exact method}
-  \subsection{Linear program}
-
-\chapter{Cross-species biological module discovery}
- \section{Cross-species modules}
- \section{Maximum-Weight Cross-Connected Subgraph}
-
-\chapter{Difficulty of the Maximum-Weight Cross-Connected Subgraph}
-
- \section{APX-difficulty of the MWCCS problem}
-  \subsection{Frontier of solvability: tree, tree, 1-to-1}
-
- \section{An MWCCS subproblem: the Ratio-Bounded MWCS}
-  \subsection{A more general variant of the Budget-Constrained MWCS}
-  \subsection{Producing pseudo-P algorithms for BC-MWCS and RB-MWCS from P algorithms for MWCS}
-
-\chapter{??? Module recognition, cancer classification ???}
-
-\chapter{Conclusion}
+\backmatter
+\bibliographystyle{alpha}
+\bibliography{thesis}
 
 \end{document}

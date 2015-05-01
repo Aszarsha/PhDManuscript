@@ -1,0 +1,74 @@
+\chapter{Introduction}
+
+\section{Context}
+
+	\begin{itemize}
+		\item bioinformatics pipeline
+		\item type of data
+		\item more integrative approaches
+	\end{itemize}
+
+\section{Preliminary notions}
+
+	\subsection{Small biology overview}
+
+		\subsubsection{From genome to proteins, the Central Dogma}
+			\paragraph{Genome}
+			\paragraph{Transcriptome}
+			\paragraph{Proteome}
+
+		\subsubsection{Modeling the living, biological networks}
+			Biological networks are abstract representations of biological entities interconnected over some criteria.
+			It can represent for example the relationships between species inside an ecosystem, or interconnections between cell types in any multicellular organism.
+
+			In this work, we are mostly interested in biological networks that pertain to the living, i.e. networks of components of an organism. Many such networks exists, to name a few:
+			\begin{itemize}
+				\item \emph{Metabolic networks} represent biochemical reactions between substrates, enzymes and metabolites, and cluster them into pathways,
+				\item \emph{Gene co-expression networks} represent the similarity of expression between genes in some biological setup, by interconnecting pairs of genes similarly expressed,
+				\item \emph{Protein-protein interaction networks} represent the interaction between two proteins, usually of the same species.
+			\end{itemize}
+
+			On the one hand biological networks can be seen as observed or inferred facts, where the network is the knowledge in itself ; e.g. a known pathway that connect chemical reactants and products through enzymes.
+			On the other hand they can be seen as an abstract representation of knowledge where nodes represent entities and edges represent some form of deduced connection ; e.g. a gene co-expression network which can be constructed from the control and condition expression profiles of the genes, with a statistical inference over the two samples resulting in the presence or absence of the edges.
+
+			Protein-protein interaction (PPI) networks play an important role in this work, and we will present them in more detail.
+			But first let us stress the importance of biological networks in modern biology.
+	
+			They structure our understanding of biological systems in such ways that both allow a comprehension of biological processes, and permit automated processing of the knowledge that they represent.
+			As automated processing enabling tools, they can serve as both knowledge bases for local decisions and as global networks that can serve as substrate for integrated analysis.
+
+			XXX.
+
+			\paragraph{Protein-Protein Interactions}
+
+		\subsubsection{Measuring the state of the living}
+
+			\paragraph{Measuring gene expression levels}
+
+			\paragraph{Differential analysis}
+
+				\begin{itemize}
+					\item better understanding of cellular processes
+					\item biomarkers discovery
+				\end{itemize}
+
+	%	\subsubsection{??? Phage display ???}
+	%	\subsubsection{??? Mass spectrometry ???}
+
+	\subsection{Some computer science elements}
+
+	\subsubsection{Graphs}
+%		\paragraph{Minimum cut}
+
+	\subsubsection{Combinatorial optimization}
+		\paragraph{Dynamic programming}
+		\paragraph{Decision trees, Branch and bound, Branch and cut}
+		\paragraph{Linear programming, Mixed integer linear programming}
+
+	\subsubsection{Complexity}
+		\paragraph{APX-hardness}
+		\paragraph{Pseudo-polynomial time}
+
+	\subsubsection{String}
+		\paragraph{Suffix trees and array}
+
