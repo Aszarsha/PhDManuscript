@@ -1,74 +1,33 @@
-\chapter{Introduction}
-
-\section{Context}
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+\chaptermark{Introduction}
+\label{chap:intro}
 
 	\begin{itemize}
+		\item genomic, transcriptomic
+		\item sequencing
+		\item database construction (networks ?)
+
 		\item bioinformatics pipeline
 		\item type of data
-		\item more integrative approaches
+		\item integrative approaches
 	\end{itemize}
 
-\section{Preliminary notions}
+\paragraph*{This thesis is structured in three main parts.}
 
-	\subsection{Small biology overview}
 
-		\subsubsection{From genome to proteins, the Central Dogma}
-			\paragraph{Genome}
-			\paragraph{Transcriptome}
-			\paragraph{Proteome}
+In \cref{pt:1} we present an outline of the domain, first with a general overview, and later with an analysis of the state of the art.
+\Cref{chap:prelim} is separated in two main sections, introducing some biology notions and some computer science background relating to this work.
+\Cref{chap:state} presents a thorough review of the existing work and main methods that either serve as direct support or are relevant for our work for both module discovery and complexity analysis of similar problems.
 
-		\subsubsection{Modeling the living, biological networks}
-			Biological networks are abstract representations of biological entities interconnected over some criteria.
-			It can represent for example the relationships between species inside an ecosystem, or interconnections between cell types in any multicellular organism.
+\Cref{pt:2} is dedicated to our methodological and software contribution. It is mainly constituted of \cref{chap:xheinz}, which is sectionned as follows.
+\Cref{sec:weights} establishes the basis for module discovery, assigning weights to genes based on experimental evidence.
+This chapter describes two methods for weight assignment, from transcriptomic expression profiles, and from secondary evidence obtained through proteomic analysis.
+\Cref{sec:mip} introduces an important algorithmic contribution to the module detection problem by describing a robust mathematical model, serving as our definition of cross-species module, with flexible requirement of sequence conservation.
+Multiple techniques could be used to express and resolve this model, which implicitly includes the Maximum-Weight Connected Subgraph problem.
+It will first be expressed as a Mixed-Integer Linear program, and we will present an in-depth algorithmic implementation to solve the problem in the general case.
+\Cref{sec:xhres} presents our biological results and empirical analysis of algorithmic performance.
 
-			In this work, we are mostly interested in biological networks that pertain to the living, i.e. networks of components of an organism. Many such networks exists, to name a few:
-			\begin{itemize}
-				\item \emph{Metabolic networks} represent biochemical reactions between substrates, enzymes and metabolites, and cluster them into pathways,
-				\item \emph{Gene co-expression networks} represent the similarity of expression between genes in some biological setup, by interconnecting pairs of genes similarly expressed,
-				\item \emph{Protein-protein interaction networks} represent the interaction between two proteins, usually of the same species.
-			\end{itemize}
-
-			On the one hand biological networks can be seen as observed or inferred facts, where the network is the knowledge in itself ; e.g. a known pathway that connect chemical reactants and products through enzymes.
-			On the other hand they can be seen as an abstract representation of knowledge where nodes represent entities and edges represent some form of deduced connection ; e.g. a gene co-expression network which can be constructed from the control and condition expression profiles of the genes, with a statistical inference over the two samples resulting in the presence or absence of the edges.
-
-			Protein-protein interaction (PPI) networks play an important role in this work, and we will present them in more detail.
-			But first let us stress the importance of biological networks in modern biology.
-	
-			They structure our understanding of biological systems in such ways that both allow a comprehension of biological processes, and permit automated processing of the knowledge that they represent.
-			As automated processing enabling tools, they can serve as both knowledge bases for local decisions and as global networks that can serve as substrate for integrated analysis.
-
-			XXX.
-
-			\paragraph{Protein-Protein Interactions}
-
-		\subsubsection{Measuring the state of the living}
-
-			\paragraph{Measuring gene expression levels}
-
-			\paragraph{Differential analysis}
-
-				\begin{itemize}
-					\item better understanding of cellular processes
-					\item biomarkers discovery
-				\end{itemize}
-
-	%	\subsubsection{??? Phage display ???}
-	%	\subsubsection{??? Mass spectrometry ???}
-
-	\subsection{Some computer science elements}
-
-	\subsubsection{Graphs}
-%		\paragraph{Minimum cut}
-
-	\subsubsection{Combinatorial optimization}
-		\paragraph{Dynamic programming}
-		\paragraph{Decision trees, Branch and bound, Branch and cut}
-		\paragraph{Linear programming, Mixed integer linear programming}
-
-	\subsubsection{Complexity}
-		\paragraph{APX-hardness}
-		\paragraph{Pseudo-polynomial time}
-
-	\subsubsection{String}
-		\paragraph{Suffix trees and array}
-
+Finally, \cref{pt:3} is dedicated to the algorithmic complexity analysis of the combinatorial optimization problem underlying our model.
+\Cref{chap:hard} provides detailed proofs for the frontier of difficulty for the problem introduced by our model, producing a precise separation of complexity classes between types of input graphs.
+\Cref{chap:rbmwcs} describes a general scheme to construct efficient, pseudo-polynomial algorithms for a subclass of our initial problem.

@@ -1,30 +1,51 @@
 \chapter{State of the art}
+\label{chap:state}
 
-\section{Protein-protein interaction networks}
+\section{Gene selection}
 
-	\begin{itemize}
-		\item String: \cite{szklarczyk2014string}
-	\end{itemize}
+	\subsection{Gene expression}
 
-\section{Module discovery}
+	In the last two decades, the large adoption of \emph{microarray} technologies have damatically changed the landscape of biology.
+	Microarray technologies are high-thoughput screening methods for biological material, that allow experimenters to assay the amount the quantity of a specific material on a large scale.
+	Where previous assey methods were rate limited, non-parallelizable and non-multiplexable, microarrays allow multiple material to be sceened for and quantified in parallel.
+	Those methods also usually involved human interaction and were expensive, whereas microarray are typically the size of a microscope slide, are more sensitive and can be automated.
+	This ability to quantify many molecular markers in parallel led to a whole new level of understanding of complex biological processes.
+
+	There exists many different kinds of microarray, for different biolgical material.
+	Amino-acid sequences microarray are an important one, and the first to be introduced.
+	\Textcite{chang1983binding} realised that he could create a bidimentional array of sequence probes that would allow him to screen for antibodies by assessing presence and quantity of bound material.
+	He latter developed the concept in a series of patents \parencites{chang1986matrix}{chang1989immunoassay}{chang1992antibody} which led to a whole new industry.
+
+	But by far the most important kind of microarray are the one that screen DNA sequences.
+	They evolved from \emph{DNA blotting}\footnote{Also known as \emph{Southern blotting}.} techniques introduced by \textcite{southern1975detection}, where DNA fragments are first separated then selectively hybridized by a probe.
+	Two decades ago, \textcite{schena1995quantitative} used robotic printing to prepare microarrays plates with fluorescently labeled complementary DNA (\emph{cDNA}) sequences from \emph{Arabidopsis thaliana}.
+	Using high-precision laser to excite the fluorescent markers, they used those microarrays for quantitative expression measurement of the corresponding genes \emph{mRNA} expression levels.
+
+	This technology has been for a long time the gold standard to capture the state of a cell.
+	Indeed, it is a cost-efficent and fast method to assess genes expression levels.
+	It allowed the accumulation of large-scale experimental data, which led to a lot of research aimed at understanding the complex biomolecular mechanisms of organisms.
+
+	The ability to assey biomolecular profiles cheaply and extensively permitted the wide adoption of whole cell differential analysis.
+	Whole cell differential analysis is a cornerstone of modern biology, allowing the analysis of many phenomenons.
+	Indeed, genes for which their expression profile is correlated over many different conditions are very likely to be involved in the same processes of to exhibit similar functionalities.
+	On the other hand, genes profiles which exhibit widely different levels in seemingly equivalent conditions provide an important clue for cancer cell detection.
+	Furthermore, whole cell expression profiles can be used to classify cancer tumors and predict patient clinical outcome.
+
+	\subsection{Gene set selection}
+
+	One of the key concepts to understand biological processes is that of \emph{modules} within biological networks.
+	Modules are considered to be sets of entities (genes, proteins, etc.) that function in a coordinated fashion or physically interact (for a review see \textcite{mitra2013integrative}).
+
+	The problem of finding gene modules within a biological network was first solved using simulated annealing by \textcite{ideker2002discovering}.
 
 	\begin{itemize}
 		\item context, differential analysis
 		\item traditionnally, gene centric (cf. next subsection)
 	\end{itemize}
 
-	\subsection{Module as a set of genes}
-
-		\begin{itemize}
-			\item First: \cite{golub1999molecular}
-		\end{itemize}
-
-	\subsection{Module as a connected cluster of genes}
-
-		\begin{itemize}
-			\item Heuristic: \cite{ideker2002discovering}, \cite{mitra2013integrative}, ...
-			\item Exact: \cite{dittrich2008identifying}
-		\end{itemize}
+	\begin{itemize}
+		\item First: \cite{golub1999molecular}
+	\end{itemize}
 
 	\subsection{Cross-species discovery}
 
@@ -32,13 +53,113 @@
 			\item single gene conservation: \cite{van2003predicting}
 		\end{itemize}
 
+
+\section{(Protein-protein?) Interaction networks}
+
+	Increasingly advanced experimental methods are used to provide evidence of existing interactions and nowadays comprehensive resources provide access to this knowledge XXX.%(see for example \cite{String} and \cite{IMEx}).
+
+	\begin{itemize}
+		\item String: \parencite{szklarczyk2014string}
+	\end{itemize}
+
 \section{The Maximum-Weight Connected Subgraph problem}
 
-	\subsection{Problem overview}
+	In \cref{subsec:mwcsintro} we first introduce the \textsc{steiner tree}, the \textsc{prize-collecting steiner tree} (\pcst{}), and the \textsc{maximum-weight connected subgraph} (\mwcs{}) problems.
+	We also provide the main complexity results for the \mwcs{} problem, and since a number of those results mostly follows from results for the \pcst{} problem, we will provide the most important ones for this problem too.
+	In \cref{subsec:mwcsbiouses} we then describe in more depth their use in biological modeling contexts through integrative approach to gene set selection.
 
-		\subsubsection{The Prize-Collecting Steiner-Tree problem}
+	\subsection{Problems introductions}
+	\label{subsec:mwcsintro}
 
-	\subsection{Solving the problem, optimization methods}
+	The \textsc{steiner tree} problem is an extremely well known combinatorial optimization problem, which is part of Karp's original 21 NP-complete problems \parencite{karp1972reducibility}.
+	It has its origin in the geometry of Jakob Steiner's eponym Steiner problem, and pertain to the class of mathematical optimization problems over graphs.
+	A large number of variations of this problem exists: the \emph{Steiner tree problems}.
+	\Textcite{hauptmann2014compendium} maintain an extensive and up-to-date compendium of those variants.
+
+	The \textsc{maximum-weight connected subgraph} problem, or \mwcs{} problem, falls inside the same classification as the various Steiner tree problems: its a combinatorial optimization over graphs problem.
+	It is informally definined as follows.
+
+	Given a graph and a real-valued weight for each vertex, the goal is to find the connected set of vertices that maximizes the sum of the weights.
+
+	Note that the solution is trivial, full or empty, if the vertices' weights are respectively all positive or all negative.
+
+	From a computer science point of view, the \mwcs{} problem is simple in its definition.
+	Nevertheless, it is actually a very difficult problem to solve, and in many cases remains intractable.
+	The first text to prove NP-hardness of the problem is the unpublished manuscript from \textcite{vergis1983manuscript}.
+	Manuscript that \textcite[Section 5]{johnson1985np} acknowledge when he looked into a series of graph problems in his famous \emph{NP-Completeness Columns}.
+	The proof is based on the reduction from the \textsc{steiner tree} problem, provided by \textcite{garey1979computers}.
+	Johnson made the fundamental observation that the solution to the \mwcs{} problem can always be reduced to a tree, since the additional edges serve no purpose.
+	Karp later provided another proof of NP-hardness for the \mwcs{} problem in \parencite[Supplementary Material]{ideker2002discovering}, by providing a reduction from the \textsc{minimum set cover} problem, another problem which is one of his first 21 NP-complete problems \parencite{karp1972reducibility}.
+
+	One of the variants of the \textsc{steiner tree} problem is the \textsc{prize-collecting steiner tree} problem, or \textsc{pcst} problem.
+	It is an \emph{utility versus cost optimization}\footnote{As defined by \textcite{conrad2007connections}.} variant of the \textsc{steiner tree} problem, for which the first proof of NP-hardness is in \parencite{camerini1979complexity}.
+	Even if the result if easy\footnote{According to \textcite[footnote 12]{feigenbaum2000sharing}.}, \textcite{feigenbaum2000sharing} were the firsts to prove that the \pcst{} problem is NP-hard to approximate within any constant ratio $0 < \epsilon < 1$, or APX-hard, using a reduction from SAT.
+	This variant is highly relevant to our context as there exists bidirectional reductions between the \pcst{} and \mwcs{} problems, and for a long time reducting an \mwcs{} instance to a \pcst{} instance was the technique of choice to actually solve the problem.
+
+	And indeed, lately \textcite{alvarez2013maximum} recognized that the \mwcs{} problem is actually APX-hard itself.
+	Using the SAT reduction previously mentioned \parencite{feigenbaum2000sharing}, they extended the result to \mwcs{} using a straightforward reduction of \pcst{} to \mwcs{}.
+
+	In the same way the \textsc{steiner tree} broadly defines a large set of related problems, the \mwcs{} problem defines itself a set of closely related problems.
+	Nowadays those problems have a very wide breadth of applications, of which: social network sciences, operations research, certainly networks design, and system biology, which is out main interest in this manuscript.
+
+	Based on the basic version of the \mwcs{} problem, the principal variants are the \emph{constrained} versions, with an allocated budget and an additional costs assigned to each vertex.
+	Of which the \textsc{$k$-cardinality \mwcs{}}, the \textsc{cardinality-constrained \mwcs{}}, and the \textsc{budget-constrained \mwcs{}} serve interesting purposes in our context.
+	The first one require that the solution be comprised of exactly $k$ vertices, whereas the second variant require that the solution includes at most $K$ vertices.
+	The last variant assigns an additional positive cost to each vertex, and requires that the sum of the costs be at most a given budget $B$.
+	Clearly, assigning a positive cost of $1$ for each node of the \textsc{cardinality-constrained \mwcs{}} problem provides a trivial reduction to the \textsc{budget-constrained \mwcs{}} problem.
+
+	Note that for all those constrained versions, the problems remain non-trivial even when the nodes' weights are all positives.
+	Furthermore, note that while removing the connectivity constraint in the basic version of the problem makes it trivial, in those variants the problems then become equivalent to the \textsc{0-1 knapsack} problem (which is another one of Karp's original 21 NP-complete problems \parencite{karp1972reducibility}).
+
+	They can all be defined either on graphs or on directed graphs, and there exists rooted variants where one (or multiple) root(s) have to be selected in the solution.
+
+	There exist minimization variants for all those problems, which are stricly equivalent from an optimality standpoint\footnote{It is equivalent to minimizing the opposite or the inverse of the nodes' weights}.
+	XXX they might differ from approximation standpoint though (working draft --\emph{Approximation algorithms for finding a $k$-connected subgraph of a graph with minimum weight}, Tam\'{a}s Hajba--). Need to read in more depth XXX.
+
+	XXX Variants with costs on the edges also exists. Do we talk about them ? Never used afterward XXX
+
+	\subsection{Problems introductions}
+
+		\Textcite{hochbaum1994node} first described the fixed cardinality variant of the problem (\textsc{$k$-cardinality \mwcs{}}).
+		They relate its use in two contexts.
+		First in off-shore oil-drilling where each facility is represented by a node and the weight their costs over benefits.
+		Second in forest harvesting where we need to find the $k$ connected parcel to harvest considering their associated benefits.
+		They call it the \textsc{connected $k$-subgraph} problem.
+		They where the first to observe that, for this variant, since adding a constant to the weight of each node does not change the optimal set of nodes, in the optimality context the nodes' weights can all be non-negative.
+		They also show that the problem is NP-hard even for bipartite or planar input graphs or if the nodes' weights are boolean.
+
+		\Textcite{lee1998decomposition} reintroduced the \textsc{$k$-cardinality \mwcs{}} problem, and called it simply the \textsc{maximum-weight connected graph} (\textsc{mcg}) problem.
+		They were the firsts to introduce the rooted variant where a single root is provided for the solution, that they called the \textsc{constrained mcg} (\textsc{cmcg}).
+		They used this rooted variant to provide a decomposition scheme of the \mwcs{} problem into multiple \textsc{cmcg} subproblems.
+		They acknowledge that the optimal solution is NP-hard to find, and provide heuristics for their incremental roots selection.
+
+		Gomes' team recently looked into the budget constrained version of the problem, both rooted and unrooted variants, that they apply in the context of \emph{conservation planning} \parencites{conrad2007connections}{gomes2008connections}{dilkina2010solving}.
+
+
+	\subsection{Biological modeling with \mwcs{}}
+	\label{subsec:mwcsbiouses}
+
+		Biological context: \cite{dittrich2008identifying}, \cite{backes2012integer}
+
+		\cite{yamamoto2009better} introduce an heuristic method based on betweenness centrality measures in order to converge faster to optimality.
+		They further use use the cardinality-constraned \mwcs{} variant to detect core components in gene interaction networks.
+
+	\subsection{Module as a connected cluster of genes}
+
+		A possible formulation for the problem of finding modules within a network is to look for connected sub-networks that maximize weights on the nodes.
+		These weights typically represent some measure of biological activity, for example the expression level of genes.
+		The seminal work of \textcite{ideker2002discovering} XXX shows it XXX.
+
+		Finding the optimal (with respect to sum of weights) module in a biological network has been formally defined as the \textsc{maximum \mbox{(node-)weight} connected subgraph} problem (\mwcs{}) \cite{dittrich2008identifying}.
+
+		XXX
+
+		\begin{itemize}
+			\item Heuristic: \cite{ideker2002discovering}, \cite{mitra2013integrative}, ...
+			\item Exact: \cite{dittrich2008identifying}
+		\end{itemize}
+
+	\subsection{Solving the \mwcs{} problems}
 
 		\subsubsection{Through the Prize-Collecting Steiner Tree problem}
 

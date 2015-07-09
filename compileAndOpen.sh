@@ -1,3 +1,2 @@
 #!/usr/bin/env sh
-latexmk -lualatex $* thesis.tex
-xdg-open thesis.pdf
+latexmk -pdf $* thesis.tex && xdg-open thesis.pdf > /dev/null 2>&1

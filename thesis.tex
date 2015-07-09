@@ -1,33 +1,161 @@
-\documentclass[draft,a4paper]{memoir}
+\RequirePackage[l2tabu, orthodox]{nag}
 
-\usepackage{polyglossia}
-\usepackage{microtype}
+\documentclass[draft,11pt,a4paper,twoside]{memoir}
 
-\setdefaultlanguage{english}
+%\usepackage{fourier}
+%\usepackage{tgschola}
+\usepackage[bitstream-charter]{mathdesign}
 
-\setsecnumdepth{all}
-\settocdepth{all}
+%\usepackage{polyglossia}
+%\setdefaultlanguage{english}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+
+\usepackage[style=authoryear-comp,maxbibnames=99,maxcitenames=2,uniquelist=false,backref=true,backend=biber]{biblatex}
+
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+%\usepackage[activate={true,nocompatibility},final,tracking=true,factor=1100,stretch=10,shrink=10]{microtype}
+\SetProtrusion{encoding={*},family={bch},series={*},size={6,7}}
+              {1={ ,750},2={ ,500},3={ ,500},4={ ,500},5={ ,500},
+               6={ ,500},7={ ,600},8={ ,500},9={ ,500},0={ ,500}}
+\SetExtraKerning[unit=space]
+    {encoding={*}, family={bch}, series={*}, size={footnotesize,small,normalsize}}
+    {\textendash={400,400}, % en-dash, add more space around it
+     "28={ ,150}, % left bracket, add space from right
+     "29={150, }, % right bracket, add space from left
+     \textquotedblleft={ ,150}, % left quotation mark, space from right
+     \textquotedblright={150, }} % right quotation mark, space from left
+\SetExtraKerning[unit=space]
+   {encoding={*}, family={qhv}, series={b}, size={large,Large}}
+   {1={-200,-200}, 
+    \textendash={400,400}}
+\SetTracking{encoding={*}, shape=sc}{0}
+
+%\usepackage{showframe}
+\usepackage{showlabels}
+
+\usepackage{titletoc}
+
+\usepackage{amsmath}
+%\usepackage{amsfonts}
+%\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{units}
+\usepackage{xcolor}
+\usepackage{graphicx}
+
+\usepackage{bookmark}
+\usepackage[nameinlink]{cleveref}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newtheorem{problem}{Problem}
+
+\cftpagenumbersoff{part}      % Do not put page number in toc for parts
+\setsecnumdepth{subsection}   % Stop numbering after subsection level
+
+\renewcommand\partnumberlinebox[2]{#2\hspace{0.5em}}
+
+\cftinsertcode{IndentChap}{
+	\setlength{\cftchapterindent}{\cftsectionindent}
+	\setlength{\cftsectionindent}{\cftsubsectionindent}
+	\setlength{\cftsubsectionindent}{\cftsubsubsectionindent}
+}
+\cftinsertcode{UnindentChap}{
+	\setlength{\cftsubsectionindent}{\cftsectionindent}
+	\setlength{\cftsectionindent}{\cftchapterindent}
+	\setlength{\cftchapterindent}{0em}
+}
+
+\setlrmarginsandblock{3.5cm}{3cm}{*}
+%\setulmarginsandblock{2.5cm}{3cm}{*}
+\checkandfixthelayout
+
+\hypersetup{
+  colorlinks=false,           % hyperlinks will be black
+  linkbordercolor=blue,       % hyperlink borders will be red
+  pdfborderstyle={/S/U/W 1}   % border style will be underline of width 1pt
+}
+
+\newcommand{\eg}{\emph{e.g.}}
+\newcommand{\ie}{\emph{i.e.}}
+
+\newcommand{\mN}{\mathbb{N}}
+\newcommand{\mZ}{\mathbb{Z}}
+\newcommand{\mR}{\mathbb{R}}
+
+\newcommand{\Vsub}{V_{\text{sub}}}
+\newcommand{\mwcs}{\mbox{\textsc{mwcs}}}
+\newcommand{\mmwcs}{\mbox{\text{\textsc{mwcs}}}}
+\newcommand{\pcst}{\mbox{\textsc{pcst}}}
+\newcommand{\mpcst}{\mbox{\text{\textsc{pcst}}}}
+\newcommand{\rbmwcs}{\mbox{\textsc{rb-mwcs}}}
+\newcommand{\mrbmwcs}{\mbox{\text{\textsc{rb-mwcs}}}}
+\newcommand{\bcmwcs}{\mbox{\textsc{b-mwcs}}}
+\newcommand{\mbcmwcs}{\mbox{\text{\textsc{b-mwcs}}}}
+\newcommand{\mwccs}{\mbox{\textsc{mwccs}}}
+\newcommand{\mmwccs}{\mbox{\text{\textsc{mwccs}}}}
+\newcommand{\msat}{\mbox{\textsc{max-3sat(B)}}}
+\newcommand{\mmsat}{\mbox{\text{\textsc{max-3sat(B)}}}}
+\newcommand{\cnf}{\mbox{\textsc{3-cnf(3)}}}
+\newcommand{\mcnf}{\mbox{\text{\textsc{3-cnf(3)}}}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lvert}{\rvert}
+\DeclarePairedDelimiter\card{\lvert}{\rvert}
+\DeclarePairedDelimiter\set{\lbrace}{\rbrace}
+\DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}%
+        { #1 \,\,\delimsize|\,\, #2 }
+
+\graphicspath{ {img/} }
 
 \title{Module extraction and discovery in biological interactions networks with exact methods}
 \author{Thomas Hume}
 \date{Rev. \today}
 
+\addbibresource{bio.bib}
+\addbibresource{compsi.bib}
+
 \begin{document}
 
 \frontmatter
-\tableofcontents
+\pagenumbering{Roman}
+
+\microtypesetup{protrusion=false}
+\tableofcontents*
+\microtypesetup{protrusion=true}
 
 \mainmatter
+
 \input{intro}
+
+\cftinserthook{toc}{IndentChap}
+%\part{Preliminary notions}
+\label{pt:1}
+
+\input{prelim}
 \input{stateart}
+
+%\part{Cross-species module discovery}
+\label{pt:2}
+
 \input{xheinz}
+
+%\part{Computational complexity}
+\label{pt:3}
+
 \input{apxhard}
-%\input{multiheinz}
-%\input{pepteam}
+\input{mwrbcs}
+
+\bookmarksetup{startatroot}
+\cftinserthook{toc}{UnindentChap}
 \input{conclusion}
 
 \backmatter
-\bibliographystyle{alpha}
-\bibliography{thesis}
+\pagenumbering{alph}
+
+\printbibliography
 
 \end{document}
