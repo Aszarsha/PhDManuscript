@@ -1,17 +1,33 @@
-\RequirePackage[l2tabu, orthodox]{nag}
+\RequirePackage[l2tabu,orthodox]{nag}
 
-\documentclass[draft,11pt,a4paper,twoside]{memoir}
+\documentclass[11pt,a4paper,twoside]{memoir}
+\usepackage[utf8]{inputenc}
 
+\usepackage{amsmath}
+%\usepackage{amsfonts}
+%\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+
+%\usepackage{lmodern}
+%\usepackage{slantsc}
 %\usepackage{fourier}
 %\usepackage{tgschola}
 \usepackage[bitstream-charter]{mathdesign}
+%\usepackage[libertine]{newtxmath}
 
 %\usepackage{polyglossia}
 %\setdefaultlanguage{english}
 \usepackage[english]{babel}
 \usepackage{csquotes}
 
-\usepackage[style=authoryear-comp,maxbibnames=99,maxcitenames=2,uniquelist=false,backref=true,backend=biber]{biblatex}
+\frenchspacing
+\nonzeroparskip
+\setlength\parskip{0.58\parskip}
+
+\usepackage[style=authoryear-icomp,maxbibnames=99,dashed=false,maxcitenames=2,uniquelist=false,backref=true,backend=biber]{biblatex}
+
+\setlength\bibitemsep{\parskip}
 
 \usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
 %\usepackage[activate={true,nocompatibility},final,tracking=true,factor=1100,stretch=10,shrink=10]{microtype}
@@ -36,11 +52,6 @@
 
 \usepackage{titletoc}
 
-\usepackage{amsmath}
-%\usepackage{amsfonts}
-%\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{mathtools}
 \usepackage{units}
 \usepackage{xcolor}
 \usepackage{graphicx}
@@ -69,9 +80,12 @@
 	\setlength{\cftchapterindent}{0em}
 }
 
-\setlrmarginsandblock{3.5cm}{3cm}{*}
+\setlrmarginsandblock{3.4cm}{3cm}{*}
 %\setulmarginsandblock{2.5cm}{3cm}{*}
 \checkandfixthelayout
+
+
+\usepackage{hyperref}
 
 \hypersetup{
   colorlinks=false,           % hyperlinks will be black
@@ -79,12 +93,25 @@
   pdfborderstyle={/S/U/W 1}   % border style will be underline of width 1pt
 }
 
+\usepackage{footnotebackref}
+
+\makeatletter
+    \renewcommand\@makefntext[1]{%
+        \let\BHFN@thefnmark\@thefnmark
+        \renewcommand\@thefnmark{\hyperref[\BackrefFootnoteTag]{\BHFN@thefnmark}}%
+        \BHFN@OldMakefntext{#1}}%
+\makeatother
+
 \newcommand{\eg}{\emph{e.g.}}
 \newcommand{\ie}{\emph{i.e.}}
 
 \newcommand{\mN}{\mathbb{N}}
 \newcommand{\mZ}{\mathbb{Z}}
 \newcommand{\mR}{\mathbb{R}}
+
+\newcommand{\xheinz}{xHeinz}
+\newcommand{\nexus}{neXus}
+\newcommand{\moduleblast}{ModuleBlast}
 
 \newcommand{\Vsub}{V_{\text{sub}}}
 \newcommand{\mwcs}{\mbox{\textsc{mwcs}}}
