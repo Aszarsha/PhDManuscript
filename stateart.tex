@@ -1,15 +1,32 @@
 \chapter{State of the art  XXX(need better name)XXX}
 \label{chap:state}
 
-\section{Gene detection and selection}
+\section{Genes detection, genes selection}
+
+	A gene, in itself, is but a sequence located at a specific region on the DNA of an organism.
+	XXX we don't measure the transcription reaction / RNA polymeration directly XXX.
+	The ability to measuring gene expression levels requires first and foremost the capacity to measure their byproducts.
+	\Cref{subsec:measuregenes} treat of the measurement techniques of those genes byproducts.
+	XXX... the ability to measure the transcriptome state of a cell dramatically changed the analysis of biolomecular processes, and provided the ... XXX
+	In \cref{subsec:diffanalysis} we present the most important methods that are based on this ability to measure the state of a cell at its biomolecular level.
 
 	\subsection{Measuring genes expression}
+	\label{subsec:measuregenes}
+
+	In 1956, \textcite{berson1956insulin}, for which Rosalyn S. Yalow receiced multiple awards including the Nobel Prize of Medicine in 1977 \parencite{SJI:SJI21}, introduced the radioimmunoassay (RIA) technique.
+	At the time they used their technique to measure the rate of insulin metabolic \emph{in vitro} degradation using the radioactively-labeled insulin-I$^{131}$ as a competitive proxy.
+	There were techniques that allowed to test for the presence of a specific analyte, but the novelty in their approch is that it allowed them to take quantitative measurements of the biomolecules.
+
+	XXX Talk about enzyme-linked immunosorbent assay (ELISA) XXX
+
+	XXX However those methods are not multiplexable (measure up to million of analytes) -> limit the analysis of whole cells.
+	Introduce microarrays and seq. XXX
 
 	\subsubsection{Microarrays}
 
 	In the last two decades, the large adoption of \emph{microarray} technologies have dramatically changed the landscape of biology and biomedical research.
 	Microarray technologies are high-throughput screening methods for biological material, that allow experimenters to assay the amount the quantity of a specific material on a large scale.
-	Where previous assey methods were rate limited, non-parallelizable and non-multiplexable, microarrays allows multiple material to be screened for and quantified in parallel.
+	Where previous assey methods were rate limited, non-parallelizable and seldom multiplexable\footnote{Some are considered low-plex (in the order of ten analytes) or mid-plex (in the order of hendred or thousands of analytes), which is not enough to capture the whole transcriptome state of a cell.}, modern microarrays allows for many multiple materials to be screened for and quantified in parallel.
 	Previous methods also usually involved human interaction and only enabled to screen for a small number of targets, whereas microarray are typically the size of a microscope slide yet allow to screen up to or more than ten thousand different targets\footnote{The very first microarray introduced were screening for a maximum of 400 antigens \parencite{chang1983binding}.} \parencites{smyth2005use}{sealfon2011rna}, are more sensitive, and can be automated.
 	This ability to quantify many molecular targets in parallel led to a whole new level of understanding of complex biological processes.
 
@@ -23,7 +40,8 @@
 
 	But by far the most widely used type of microarray is the \emph{DNA microarray}\footnote{Also known as \emph{DNA chip}.} that screen for both DNA or RNA sequences \parencite{sealfon2011rna}.
 	They evolved from \emph{DNA blotting}\footnote{Also known as \emph{Southern blotting}.} techniques introduced by \textcite{southern1975detection}, where DNA fragments are first separated then selectively hybridized by probes\footnote{Which is the opposite operation of microarrays where the probes are fixed and the screened for medium is applied on the chip.}.
-	Two decades ago, \textcite{schena1995quantitative} used robotic printing to prepare microarrays plates with fluorescently labeled complementary DNA (\emph{cDNA}) sequences from \emph{Arabidopsis thaliana}.
+	Two decades ago, \textcite{schena1995quantitative} used robotic printing to prepare microarrays plates with PCR amplified complementary DNA (\emph{cDNA}) probes\footnote{\label{ft:invterm}Note that they use the opposite of the usual terminilogy in their paper: the targets are on the plate and it is the probes that are made fluorescent and are hybridized.} sequences from \emph{Arabidopsis thaliana}.
+	They then hybridized fluorescent targets\footref{ft:invterm} made from reverse transcription of \emph{Arabidopsis}' mRNA at high stringency.
 	Using high-precision laser to excite the hybridized fluorescent markers, they used those microarrays for quantitatively measuring the levels of the corresponding genes' \emph{mRNA}.
 
 	This technology has been for a long time the gold standard to capture the state of a cell.
@@ -45,6 +63,8 @@
 
 	\subsubsection{Sequencing}
 
+	\Textcite{marioni2008rna} showed that RNA-seq is more accurate than expression microarrays when larger differences in gene expression levels are present. \Textcite{fu2009estimating} reproced the results with proteomics controls.
+
 		\begin{itemize}
 			\item Introduce sequencing similarly to microarray, which...
 			\item ... leads to Next-gen DNA- and RNA-sequencing
@@ -56,6 +76,7 @@
 		Review of gene expression profiling with RNA-seq: \parencite{rapaport2013comprehensive}.
 
 	\subsection{Genes profiles, differential analysis, and applications}
+	\label{subsec:diffanalysis}
 
 	Nowadays, the differential analysis of transcriptomic profiles is ubiquitous in molecular biology.
 	The ability to broadly assey biomolecular profiles of multiple samples cheaply enabled the wide adoption of techniques based on the differential analysis of multiple whole-genome samples.
@@ -79,7 +100,7 @@
 
 	However, most of those studies are based on gene-centric methods, which use univariate statistical testing to call for significantly differentially expressed genes.
 
-\section{Proteins interactions, and similarities}
+\section{Proteins interactions, and proteins similarities}
 
 	\subsection{Protein-protein interaction networks}
 
@@ -91,6 +112,7 @@
 	\end{itemize}
 
 	\subsection{Orthologous genes}
+	\label{subsec:orthology}
 
 	What is homology: \parencite{mccune2012using}
 
@@ -102,51 +124,120 @@
 
 	-> Identification of functionally similar with brute force PPI topology analysis across species: \parencite{bandyopadhyay2006systematic}
 
+
+	Orthology information can effectively be represented as a $k$-partite graph between $k$ species.
+
 	XXX in conclusion, use those functionally similar as bipartite ? XXX
 
-\section{Integrative approaches to gene selection}
+\section{Using biological networks for gene selection}
 
-	Already in 2001, \textcite{altman2001whole} recognized the need to integrate networks of genetic interactions to tackle the analysis of expression data.
+There exists mostly two approaches to use biological networks to detect interesting biological processes.
+The first category is composed of techniques that aim to select sets of genes in specific biological contexts.
+These techniques usually combine both biological network structures and experimental data, and are called \emph{integrative} approaches since they combine data of different types into a single algorithm.
+The second category is composed of \emph{comparative} approaches of the networks structures, that enables to compare networks from different species or of the same species but under different conditions.
 
-	\subsection{Integrating network knowledge}
+	\subsection{Integrative approaches}
 
-		One of the key concepts to understand biological processes is that of \emph{modules} within biological networks.
-		Modules are considered to be sets of entities\footnote{Genes, proteins, etc.} that function in a coordinated fashion or physically interact (for a review see \textcite{mitra2013integrative}).
+	The category of methods use the networks combined with biological experimental data, for example expression profiles, to detect structures of interest in the context of the experiment.
+	These methods are well adapted for an understanding of single-species processes, for which the interpretation of the results follow logically from the inputs.
+	They can also be used to look across multiple species for interesting process.
+
+	Already in 2001, \textcite{altman2001whole} recognized the need to use networks of genetic interactions to tackle the analysis of expression data.
+	One of the key concepts to understand biological processes in those networks is that of \emph{modules}.
+	Modules are considered to be sets of entities\footnote{Genes, proteins, etc.} that function in a coordinated fashion or physically interact (for a review see \textcite{mitra2013integrative}).
+
+		\subsubsection{Modules within single-species biological networks}
+		\label{subsec:moduledisc}
 
 		A possible formulation for the problem of finding modules within a network is to look for connected sub-networks that maximize weights on the nodes.
 		These weights typically represent some measure of biological activity, for example the expression level of genes.
 		In their seminal work, \textcite{ideker2002discovering} were the first to solve the problem of finding gene modules within a biological network, using simulated annealing heuristic optimization.
 		They recognize that finding the optimal (with respect to the sum of the nodes' weights) module in a biological network is formally equivalent to the combinatorial \textsc{maximum-weight connected subgraph} problem.
-		Problem that will be treated with more depth in \cref{sec:mwcsproblem}.
+		This problem will be treated in \cref{sec:mwcsproblem}.
 
 		More biology of modules XXX TODO: \parencites{dittrich2008identifying}{yamamoto2009better}{backes2012integer}{mitra2013integrative}.
 
-	\subsubsection{Integrating orthology information}
+		\subsubsection{Looking across species}
 
-		Several authors already identified the benefits of combining and comparing cross-species experiments.
+		Several authors already identified the benefits of combining cross-species experimental data.
 		At the single gene level, \textcite{noort2003predicting} have demonstrated that conserved co-expression is a strong co-evolutionary signal.
 		More recent  studies suggested to identify conserved biological processes.
-
-		\Textcite{lu2009cross} analyzed transcriptomic profiles of human and mouse macrophages and dendritic cells, under two conditions, to derive common response genes involved in innate immunity.
-		They used a probalistic graphical model to propagate information for each gene about its involvement in the innate immunity response across species or cell types and conditions, then seek pathway enriched with those common responses genes.
-
-		\Textcite{waltman2010multi} presented a multi-species integrative method to heuristically identify conserved biclusters.
-		In their setting, a conserved bicluster is a subset of orthologous genes and a subset of conditions that achieve a high score with respect to co-expression, motif co-occurrence and network density.
-
-		\Textcite{berthier2012cross} found that murine and human responses to lupus nephritis involves similar gene networks.
-		They first derived species-specific networks of significantly differentially expressed genes by using the genomatix software (networks are literature-based) and then determined common subnetworks using a graph matching algorithm.
-
-		\Textcite{kristiansson2013novel} proposed a method for the analysis of gene expression data that takes the homology structure between the different species into account.
-		Their method is an extension of the Fisher's method for meta-analysis that explicitly account for in-paralagous and orthologous genes and is able to call differential expression with increased statistical power when compared to methods ignoring this relationship.
-
-		\Textcite{dede2014triclust} introduced a method that finds triclusters consisting of genes that are coexpressed across a subset of samples and a subset of species.
-
-	\subsubsection{Combining both}
 
 		Talk about cMonkey: \parencite{reiss2006integrated}.
 		And cMonkey2: \parencite{reiss2015cmonkey2}.
 
-		\Textcite{deshpande2010scalable} suggested the \nexus{} algorithm for finding conserved active subnetworks.
+		\Textcite{lu2009cross} analyzed transcriptomic profiles of human and mouse macrophages and dendritic cells, under two conditions, to derive common response genes involved in innate immunity.
+		They used a probabilistic graphical model that propagates information for each gene about its involvement in the innate immunity response across species or cell types and conditions then seeks pathway enriched with those common responses genes.
+
+		\Textcite{waltman2010multi} presented a multi-species integrative method to heuristically identify conserved biclusters.
+		In their setting, a conserved bicluster is a subset of orthologous genes and a subset of conditions that achieve a high score with respect to co-expression, motif co-occurrence and network density.
+
+		\Textcite{kristiansson2013novel} proposed a method for the analysis of gene expression data that takes the homology structure between the different species into account.
+		Their method is an extension of the standard Fisher's method for meta-analysis \parencites{hu2006statistical}{campain2010comparison}{tseng2012comprehensive} that explicitly account for in-paralagous and orthologous genes and is able to call differential expression with increased statistical power when compared to methods ignoring this relationship.
+
+		\Textcite{dede2014triclust} introduced a method that finds triclusters consisting of genes that are coexpressed across a subset of samples and a subset of species.
+
+	\subsection{Comparative approaches}
+	\label{subsec:compapproches}
+
+	\Textcite{sharan2006modeling} identify three broad types of comparative approaches:
+	\begin{itemize}
+	\item \emph{Network alignment} methods.
+		They consist in the detection of similar substructures in $k$ different networks, using whole networks comparative techniques.
+		They enable the detection of similar (or dissimilar) structures across the networks.
+
+	\item \emph{Network integration} methods.
+		These methods integrate networks of different types, but defined over the same set of elements, and study their interrelations.
+
+	\item \emph{Network querying} methods.
+		They consist in the detection of one or multiple specific substructures in one network.
+		These substructures can be densely connected subgraphs, for example, or a specific topology that represent a known pathway in another species.
+	\end{itemize}
+
+	Even though network integration is an important aspect of networks comparison (which is used for example for protein interaction prediction \parencite{rhodes2005probabilistic}, or for protein modules detection \parencites{kelley2005systematic}{zhang2005biology}), it is different enough from our core problem that we will not go into details.
+
+	On the other hand, networks alignments and networks querying problems are two sides of the same coin.
+	Indeed, in general terms, network alignment is two seemingly similar subproblems: the \emph{local graph alignment} problem, and the \emph{global graph alignment} problem.
+	Precisely, in the local alignment problem we look for a subgraph in the larger input that most closely resemble a query graph or query criteria.
+	In the global alignment problem we try to match every nodes of one graph to every nodes of the other graph.
+
+	These two subproblem mirror the similarities that exists between the local and global sequence alignment problems.
+	Indeed, similarly to the global sequence alignment problem which is usually used to compare different species or organisms of the same species, the global network alignment problem correspond to the \emph{network alignment} category describe above.
+	And similarly to the local sequence alignment problem which is usually used to compare or locate subsequences, the local network alignment problem correspond to the \emph{network querying} category.
+
+	When looking for matchings networks, vertices are usually mapped on a one-to-one basis, but it can be many-to-one or many-to-many queries.
+	Furthermore, the matching can be weighted, or constrained by a bipartite similarity relationship between the two graphs.
+	They are all optimization problems where some criteria, for example the number of matched nodes or edges, must be maximized.
+
+	First, there are the methods that use the networks in themselves to extract structures deemed interesting.
+	They usually use topological structures of the network in study combined with graph algorithms to detect substructures that are known to appear in targeted biological function.
+
+	However, an interesting problem with biological networks is the detection of similar substructures in $k$ different networks.
+	They can either represent different species or the same species in different conditions.
+	The most simple\footnote{But nonetheless difficult, cf. \cref{subsec:netalignment}.} version of the problem is that of topological alignment, but there exists weighted alignment problems that can be used.
+
+	This section is broken in three independent subsections.
+	First in \cref{subsec:substructure} we present an overview of the topological techniques over biological networks used to infer interesting structures.
+	In \cref{subsec:moduledisc} we provide a detailed look into the module discovery problem, where biological networks and experimental data are combined in order to explain some specific biological process.
+	Finally, in \cref{subsec:netalignment} we look at solutions that look across multiple networks to infer information.
+	In this subsection we will look into technique that explicitly recognize the networks structures through alignment as well as other models.
+
+		\subsubsection{Network alignment}
+		\label{subsec:netalignment}
+
+		\Textcite{berthier2012cross} found that murine and human responses to lupus nephritis involves similar gene networks.
+		They first derived species-specific networks of significantly differentially expressed genes by using commercial softwares.
+		They used Genomatix GeneSphere software (\url{www.genomatix.de}) to create literature-based networks and Ingenuity Pathway Analysis software (\url{www.ingenuity.com}) to extract canonical pathways.
+		They then determined interesting common subnetworks using a graph matching algorithm.
+
+		\subsubsection{Network querying}
+		\label{subsec:substructure}
+
+
+		\subsection{Combining expression data and comparative techniques}
+		\label{subsec:combining}
+
+		\Textcite{deshpande2010scalable} developed the \nexus{} algorithm for finding conserved active subnetworks.
 		\nexus{} is based on simple notions of activity and orthology and uses a heuristic search strategy.
 		The authors use the average fold change of genes in a module as a measure for activity.
 		To deal with conservation, they collapse paralogous genes within a cluster of orthologous genes (COG) \parencite{tatusov1997genomic}\footnote{As provided by databases such as Inparanoid \parencite{obrien2005inparanoid}.} into single nodes in the respective networks.
@@ -164,9 +255,13 @@
 \section{The \textsc{maximum-weight connected subgraph} problem}
 \label{sec:mwcsproblem}
 
+	This section is separated in two parts.
 	In \cref{subsec:mwcsintro} we first introduce the \textsc{steiner tree}, the \textsc{prize-collecting steiner tree} (\pcst{}), and the \textsc{maximum-weight connected subgraph} (\mwcs{}) problems.
-	We also provide the main complexity results for the \mwcs{} problem, and since a number of those results mostly follows from results for the \pcst{} problem, we will provide the most important ones for this problem too.
-	In \cref{subsec:mwcsbiouses} we then describe in more depth their use in biological modeling contexts through integrative approach to gene set selection.
+	We also provide the main complexity results for the \mwcs{} problem, and since a number of those results mostly follow from results for the \pcst{} problem, we provide the most important ones for this problem too.
+	In \cref{subsec:solvingmwcs} we present the main methods used to solve those problems.
+	There are many techniques to solve these problems, and they can be classified to two caterogies.
+	The theoretically-sound methods, that can provide either a provably optimal (or a proven gap\footnote{Proven maximal distance to the optimal solution.}) solution, or an approximation solution to a proven bounded-factor.
+	And the heuristic methods, that approximate the optimal solution to an unknown factor, but which are usually much faster.
 
 	\subsection{Problems introductions}
 	\label{subsec:mwcsintro}
@@ -176,7 +271,7 @@
 	A large number of variations of this problem exists: the \emph{Steiner tree problems}.
 	\Textcite{hauptmann2014compendium} maintain an extensive and up-to-date compendium of those variants.
 
-	The \textsc{maximum-weight connected subgraph} problem, or \mwcs{} problem, falls inside the same classification as the various Steiner tree problems: its a combinatorial optimization over graphs problem.
+	The \textsc{maximum-weight connected subgraph} problem, or \mwcs{} problem, falls within the same classification as various Steiner tree problems: it is a problem of combinatorial optimization over graphs.
 	It is informally defined as follows.
 
 	Given a graph and a real-valued weight for each vertex, the goal is to find the connected set of vertices that maximizes the sum of the weights.
@@ -193,27 +288,27 @@
 
 	One of the variants of the \textsc{steiner tree} problem is the \textsc{prize-collecting steiner tree} problem, or \textsc{pcst} problem.
 	It is an \emph{utility versus cost optimization}\footnote{As defined by \textcite{conrad2007connections}.} variant of the \textsc{steiner tree} problem, for which the first proof of NP-hardness is provided by \textcite{camerini1979complexity}.
-	Even if the result if easy\footnote{According to \textcite[footnote 12]{feigenbaum2000sharing}.}, \textcite{feigenbaum2000sharing} were the firsts to prove that the \pcst{} problem is NP-hard to approximate within any constant ratio $0 < \epsilon < 1$, or APX-hard, using a reduction from \textsc{sat}.
-	This variant is highly relevant to our context as there exists bidirectional reductions between the \pcst{} and \mwcs{} problems, and for a long time reducing an \mwcs{} instance to a \pcst{} instance was the technique of choice to actually solve the problem (cf. \cref{subsec:solvingmwcs}).
+	Surprisingly, \textcite{feigenbaum2000sharing} were the first to prove that the \pcst{} problem is NP-hard to approximate within any constant ratio $0 < \epsilon < 1$, or APX-hard, using a reduction from \textsc{sat}\footnote{They themselves acknowledge that this is an easy result \parencite[footnote 12]{feigenbaum2000sharing}.}.
+	This variant is highly relevant to our context as there exist bidirectional reductions between the \pcst{} and \mwcs{} problems, and for a long time reducing an \mwcs{} instance to a \pcst{} instance was the technique of choice to actually solve the problem (cf. \cref{subsec:solvingmwcs}).
 
-	And indeed, lately \textcite{alvarez2013maximum} recognized that the \mwcs{} problem is actually APX-hard itself.
+	Indeed, \textcite{alvarez2013maximum} proved that the \mwcs{} problem is actually APX-hard itself.
 	Using the SAT reduction previously mentioned \parencite{feigenbaum2000sharing}, they extended the result to \mwcs{} using a straightforward reduction of \pcst{} to \mwcs{}.
 
 	In the same way the \textsc{steiner tree} broadly defines a large set of related problems, the \mwcs{} problem defines itself a set of closely related problems.
-	Nowadays those problems have a very wide breadth of applications, of which: social network sciences, operations research, certainly networks design, and system biology, which is out main interest in this manuscript.
+	These problems can be applied in many different contexts, of which: social network sciences, operations research, certainly networks design, and system biology, which is out main interest in this manuscript.
 
-	Based on the basic version of the \mwcs{} problem, the principal variants are the \emph{constrained} versions, with an allocated budget and an additional costs assigned to each vertex.
-	Of which the \textsc{$k$-cardinality \mwcs{}}, the \textsc{cardinality-constrained \mwcs{}}, and the \textsc{budget-constrained \mwcs{}} serve interesting purposes in our context.
-	The first one require that the solution be comprised of exactly $k$ vertices, whereas the second variant require that the solution includes at most $K$ vertices.
-	The last variant assigns an additional positive cost to each vertex, and requires that the sum of the costs be at most a given budget $B$.
+	Based on the basic version of the \mwcs{} problem, the principal variants are the \emph{constrained} versions, with an allocated budget and additional cost assigned to each vertex.
+	The \textsc{$k$-cardinality \mwcs{}}, the \textsc{cardinality-constrained \mwcs{}}, and the \textsc{budget-constrained \mwcs{}} serve interesting purposes.
+	The \textsc{$k$-cardinality \mwcs{}} require that the solution be comprised of exactly $k$ vertices, whereas the \textsc{cardinality-constrained \mwcs{}} variant require that the solution includes at most $K$ vertices.
+	The \textsc{budget-constrained \mwcs{}} variant assigns an additional positive cost to each vertex, and requires that the sum of the costs be at most a given budget $B$.
 	Clearly, assigning a positive cost of $1$ for each node of the \textsc{cardinality-constrained \mwcs{}} problem provides a trivial reduction to the \textsc{budget-constrained \mwcs{}} problem.
 
-	Note that for all those constrained versions, the problems remain non-trivial even when the nodes' weights are all positives.
+	Note that for all these constrained versions, the problems remain non-trivial even when the nodes' weights are all positive.
 	Furthermore, note that while removing the connectivity constraint in the basic version of the problem makes it trivial, in those variants the problems then become equivalent to the \textsc{0-1 knapsack} problem (which is another one of Karp's original 21 NP-complete problems \parencite{karp1972reducibility}).
 
 	They can all be defined either on graphs or on directed graphs, and there exists rooted variants where one (or multiple) root(s) have to be selected in the solution.
 
-	There exist minimization variants for all those problems, which are strictly equivalent from an optimality standpoint\footnote{It is equivalent to minimizing the opposite or the inverse of the nodes' weights}.
+	There also exists minimization variants for all those problems, which are strictly equivalent from an optimality standpoint\footnote{It is equivalent to minimizing the opposite or the inverse of the nodes' weights}.
 	XXX they might differ from approximation standpoint though (working draft --\emph{Approximation algorithms for finding a $k$-connected subgraph of a graph with minimum weight}, Tam\'{a}s Hajba--). Need to read in more depth XXX.
 
 	XXX Variants with costs on the edges also exists. Do we talk about them ? Never used afterward XXX

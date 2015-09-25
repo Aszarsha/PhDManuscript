@@ -1,6 +1,6 @@
 \RequirePackage[l2tabu,orthodox]{nag}
 
-\documentclass[11pt,a4paper,twoside]{memoir}
+\documentclass[draft,11pt,a4paper,twoside]{memoir}
 \usepackage[utf8]{inputenc}
 
 \usepackage{amsmath}
@@ -21,11 +21,15 @@
 \usepackage[english]{babel}
 \usepackage{csquotes}
 
+\usepackage{enumitem}
+
+\sloppy
+
 \frenchspacing
 \nonzeroparskip
 \setlength\parskip{0.58\parskip}
 
-\usepackage[style=authoryear-icomp,maxbibnames=99,dashed=false,maxcitenames=2,uniquelist=false,backref=true,backend=biber]{biblatex}
+\usepackage[style=authoryear-comp,maxbibnames=99,dashed=false,maxcitenames=2,uniquelist=false,backref=true,backend=biber]{biblatex}
 
 \setlength\bibitemsep{\parskip}
 
@@ -48,16 +52,14 @@
 \SetTracking{encoding={*}, shape=sc}{0}
 
 %\usepackage{showframe}
-\usepackage{showlabels}
+%\usepackage{showlabels}
 
 \usepackage{titletoc}
 
 \usepackage{units}
+\usepackage[squaren,Gray]{SIunits}
 \usepackage{xcolor}
 \usepackage{graphicx}
-
-\usepackage{bookmark}
-\usepackage[nameinlink]{cleveref}
 
 \newtheorem{proposition}{Proposition}
 \newtheorem{corollary}{Corollary}
@@ -65,7 +67,8 @@
 \newtheorem{problem}{Problem}
 
 \cftpagenumbersoff{part}      % Do not put page number in toc for parts
-\setsecnumdepth{subsection}   % Stop numbering after subsection level
+\setsecnumdepth{subsubsection}   % Stop numbering after subsection level
+\setcounter{secnumdepth}{6} % allow for the referencing of paragraphs
 
 \renewcommand\partnumberlinebox[2]{#2\hspace{0.5em}}
 
@@ -80,20 +83,18 @@
 	\setlength{\cftchapterindent}{0em}
 }
 
-\setlrmarginsandblock{3.4cm}{3cm}{*}
+\setlrmarginsandblock{3.8cm}{3.35cm}{*}
 %\setulmarginsandblock{2.5cm}{3cm}{*}
 \checkandfixthelayout
 
 
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 
-\hypersetup{
-  colorlinks=false,           % hyperlinks will be black
-  linkbordercolor=blue,       % hyperlink borders will be red
-  pdfborderstyle={/S/U/W 1}   % border style will be underline of width 1pt
-}
-
+\usepackage{bookmark}
+\usepackage[nameinlink]{cleveref}
 \usepackage{footnotebackref}
+
+\crefname{subsection}{subsection}{subsections}
 
 \makeatletter
     \renewcommand\@makefntext[1]{%
@@ -108,6 +109,9 @@
 \newcommand{\mN}{\mathbb{N}}
 \newcommand{\mZ}{\mathbb{Z}}
 \newcommand{\mR}{\mathbb{R}}
+
+\newcommand{\absLOGFC}{\ensuremath{\abs{\log \mathrm{FC}}}}
+\newcommand{\FDR}{\mathrm{FDR}}
 
 \newcommand{\xheinz}{xHeinz}
 \newcommand{\nexus}{neXus}
@@ -136,6 +140,8 @@
 \DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}%
         { #1 \,\,\delimsize|\,\, #2 }
 
+\DeclareMathOperator*{\argmax}{argmax}
+
 \graphicspath{ {img/} }
 
 \title{Module extraction and discovery in biological interactions networks with exact methods}
@@ -148,37 +154,37 @@
 \begin{document}
 
 \frontmatter
-\pagenumbering{Roman}
+ \pagenumbering{Roman}
+ 
+ \microtypesetup{protrusion=false}
+%\tableofcontents*
+ \microtypesetup{protrusion=true}
 
-\microtypesetup{protrusion=false}
-\tableofcontents*
-\microtypesetup{protrusion=true}
+ \mainmatter
 
-\mainmatter
-
-\input{intro}
-
-\cftinserthook{toc}{IndentChap}
-%\part{Preliminary notions}
-\label{pt:1}
-
-\input{prelim}
-\input{stateart}
-
-%\part{Cross-species module discovery}
-\label{pt:2}
-
-\input{xheinz}
-
-%\part{Computational complexity}
-\label{pt:3}
-
-\input{apxhard}
-\input{mwrbcs}
-
-\bookmarksetup{startatroot}
-\cftinserthook{toc}{UnindentChap}
-\input{conclusion}
+%\input{abstract}
+ 
+ \cftinserthook{toc}{IndentChap}
+ %\part{Preliminary notions}
+ %\label{pt:1}
+ 
+%\input{prelim}
+%\input{stateart}
+ 
+ %\part{Cross-species module discovery}
+ %\label{pt:2}
+ 
+ \input{xheinz}
+ 
+ %\part{Computational complexity}
+ %\label{pt:3}
+ 
+ \input{apxhard}
+%\input{mwrbcs}
+ 
+ \bookmarksetup{startatroot}
+ \cftinserthook{toc}{UnindentChap}
+%\input{conclusion}
 
 \backmatter
 \pagenumbering{alph}

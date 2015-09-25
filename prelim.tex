@@ -1,4 +1,4 @@
-\chapter{Interactions networks}
+\chapter{Introduction}
 \label{chap:prelim}
 
 \section{Sequence and network data}
@@ -16,7 +16,7 @@
 				\item biomarkers discovery
 			\end{itemize}
 
-	\subsection{Modeling the living, biological networks}
+	\subsection{Biological networks}
 		Biological networks are abstract representations of biological entities interconnected by some criteria.
 		They can represent for example the relationships between species inside an ecosystem, or interconnections between cell types in any multicellular organism.
 
@@ -29,12 +29,16 @@
 			\item \emph{Protein-protein interaction networks} represent interactions between two proteins, usually of the same species.
 		\end{itemize}
 
-		On the one hand biological networks can be seen as observed or inferred facts, where the network represents the knowledge ; e.g. a known pathway that connect chemical reactants and products through enzymes.
-		On the other hand they can be seen as an abstract representation of knowledge where nodes represent entities and edges represent some form of deduced connections ; XXX e.g. a gene co-expression network which can be constructed from the control and condition expression profiles of the genes, with a statistical inference over the two samples resulting in the presence or absence of the edges. (trop embrouille -- Macha) XXX
+		Unfortunately, there exists some ambiguity in the uses of the term biological networks, and biological networks can be seen as a combination of observed and inferred facts.
+		Usually the context can help understand the variations in meaning, but let us explicit the two most understood meanings here.
+		It is not uncommon for biologists to treat biological networks as observed biological facts.
+		In these uses, the network \emph{is the knowledge}, usually some well observed biological interaction; e.g. a known pathway that connect chemical reactants and products through enzymes.
+		On the other hand, mostly in computational contexts, the networks are \emph{abstract representation of the knowledge}.
+		There, nodes represent entities and edges represent some form of deduced connections; e.g. a gene co-expression network, which is statistically constructed from control and condition genes expression profiles.
 
 		Let us stress the importance of biological networks in modern biology.
-		They structure our understanding of biological systems in such ways that both allow a comprehension of biological processes at the system level, and permit automated processing of the knowledge that they represent.
-		As automated processing enabling tools, they can serve as both knowledge bases for local decisions and as global networks that can serve as XXX substrate (de quoi parles-tu? -- Macha) XXX for integrated analysis.
+		They structure our understanding of biological systems and both allow a comprehension of biological processes at the systems level, and permit automated processing of the knowledge that they represent.
+% XXX TODO		As automated processing enabling tools, they can serve as both knowledge bases for local decisions and as global networks that can serve as XXX substrate (de quoi parles-tu? -- Macha) XXX for integrated analysis.
 
 		XXX.
 
