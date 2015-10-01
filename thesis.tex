@@ -1,6 +1,6 @@
 \RequirePackage[l2tabu,orthodox]{nag}
 
-\documentclass[draft,11pt,a4paper,twoside]{memoir}
+\documentclass[11pt,a4paper,twoside]{memoir}
 \usepackage[utf8]{inputenc}
 
 \usepackage{amsmath}
@@ -58,8 +58,13 @@
 
 \usepackage{units}
 \usepackage[squaren,Gray]{SIunits}
+\usepackage{accents}
 \usepackage{xcolor}
+
 \usepackage{graphicx}
+\newsubfloat{figure}
+
+\usepackage{tikz}
 
 \newtheorem{proposition}{Proposition}
 \newtheorem{corollary}{Corollary}
@@ -70,7 +75,10 @@
 \setsecnumdepth{subsubsection}   % Stop numbering after subsection level
 \setcounter{secnumdepth}{6} % allow for the referencing of paragraphs
 
+\newcommand*{\Scale}[2][4]{\scalebox{#1}{\ensuremath{#2}}}%
+
 \renewcommand\partnumberlinebox[2]{#2\hspace{0.5em}}
+
 
 \cftinsertcode{IndentChap}{
 	\setlength{\cftchapterindent}{\cftsectionindent}
@@ -155,33 +163,33 @@
 
 \frontmatter
  \pagenumbering{Roman}
- 
+
  \microtypesetup{protrusion=false}
-%\tableofcontents*
+ \tableofcontents*
  \microtypesetup{protrusion=true}
 
  \mainmatter
 
 %\input{abstract}
- 
+
  \cftinserthook{toc}{IndentChap}
- %\part{Preliminary notions}
- %\label{pt:1}
- 
+%%\part{Preliminary notions}
+%%\label{pt:1}
+
 %\input{prelim}
 %\input{stateart}
- 
- %\part{Cross-species module discovery}
- %\label{pt:2}
- 
+
+%%\part{Cross-species module discovery}
+%%\label{pt:2}
+
  \input{xheinz}
- 
- %\part{Computational complexity}
- %\label{pt:3}
- 
+
+%%\part{Computational complexity}
+%%\label{pt:3}
+
  \input{apxhard}
-%\input{mwrbcs}
- 
+%%\input{mwrbcs}
+
  \bookmarksetup{startatroot}
  \cftinserthook{toc}{UnindentChap}
 %\input{conclusion}

@@ -3,23 +3,6 @@
 
 	In this chapter, XXX explain XXX.
 
-	A slightly more general version\footnote{the contribution function is more expressive here} of the problem introduced at the end of the previous chapter is called the \textsc{ratio-bounded maximum-weight connected subgraph} (\rbmwcs) problem, and in the general case is defined formally as follows.
-
-	\textbf{\rbmwcs{}}: Given a node-weighted graph $G = (V, E)$, its node-weighting function $w\colon V \to \mR$, its contribution function $c\colon V \to \mR$, a ratio $\alpha \in [0,1]$ and a constant $C \in \mR$, find a subset $V^* \subseteq V$ such that:
-	\begin{enumerate}
-		\item the induced graph $G\left[V^*\right]$ is connected, and
-		\item the ratio of the sum of contributions plus some constant over the number of nodes in the solution is greater than or equal to $\alpha$, that is:\\
-			$\sum\limits_{v \in V^*}{c(v)} + C \geq \alpha\times\card{V^*}$, and
-		\item $\sum\limits_{v \in V^*}{w(v)}$ is maximum.
-	\end{enumerate}
-
-	\begin{proposition}
-		\rbmwcs{} is as difficult as \mwcs{}.
-	\end{proposition}
-	\begin{proof}
-		Indeed, when $\forall v\in V, c(v) = 1$, the ratio $\sum\limits_{v \in V^*}{c(v)} / \card{V^*} = 1 \geq \alpha$, and the \mwcs{} and \rbmwcs{} problems are equivalent.
-	\end{proof}
-
 	\section{A more general variant of the \textsc{budget-constrained mwcs}}
 		The \textsc{budget-constrained maximum-weight connected subgraph}, also named the \textsc{budgeted mwcs} (\bcmwcs{}) is formally defined as follow.
 		
