@@ -1,25 +1,25 @@
-\chapter{xHeinz: a cross-species module discovery tool}
+\chapter[xHeinz: a cross-species module discovery tool][xHeinz]{xHeinz: a cross-species module discovery tool}
 \label{chap:xheinz}
 
 \label{sec:xhintro}
 Protein-protein interaction networks play a key role in understanding of cellular processes.
-Among bioinformatic techniques that rely on these networks, module extraction and network alignment are two majors classes of methods (see \cref{chap:state}).
+Among bioinformatic techniques that rely on these networks, module extraction and network alignment are two majors classes of methods (see chapter \emph{state of the art}).
 Traditionally, module extraction allows for the discovery of interesting gene sets from single species experiments.
 Network alignment is often used to discover conserved structures between species, that is similar subnetworks that are assumed to have the same biological functionality.
 %These structures are fundamental in the construction of a comprehensive knowledge of transferability between species.
 
-For multiple reasons, including ethical and practical ones, molecular profiles are most often measured and validated on well studied model species.
-This is partly due to the fact that, when differential analysis is involved, the experiments require 1) sufficient replication, and 2) control and condition samples~\parencite{trapnell2013differential} for the results to be statistically significant.
+Molecular profiles are most often measured and validated on well studied model species.
+This is partly due to the fact that, when differential analysis is involved, the experiments require 1) sufficient replication, and 2) control and condition samples \parencite{trapnell2013differential} for the results to be statistically significant.
 Unfortunately these two requirements are difficult to obtain in human studies since there are large variations between physiological states of humans, making statistical analysis of replicates more difficult.
 %XXX TODO Indeed, \textcites{stranger2012patterns}{martin2014transcriptome} showed that even non genetic factors contribute to regulatory variations between diverse human populations.
 %On the other hand, for clinical reasons, control samples are harder to obtain once the patient is infected, if possible at all.
 Model species or cellular models are thus the source of choice for experimentation and gene expression analysis, and bioinformatics techniques for gene sets extraction often works with single species experimental data.
 
-Unfortunately, immediate transferability from model organisms to human is rare, when possible~\parencite{okyere2014cross}.
-In their systematic review of cross-species extrapolation in pharmacokinetic modeling,~\textcite{thiel2015systematic} recently estimated that, at best, roughly 83.5\% of the model extrapolations\footnote{In their study, mouse is the model organism and human the transfer target, which is a very standard coupling in phamacological transfer studies.} are in agreement with known results.
+Unfortunately, immediate transferability from model organisms to human is rare, when possible \parencite{okyere2014cross}.
+In their systematic review of cross-species extrapolation in pharmacokinetic modeling, \textcite{thiel2015systematic} recently estimated that, at best, roughly 83.5\% of the model extrapolations\footnote{In their study, mouse is the model organism and human the transfer target, which is a very standard coupling in phamacological transfer studies.} are in agreement with known results.
 As a result, \Textcite{csermely2013structure} attribute the very low phase-II survival rate of potential drug compounds (25\%) to the lack of transferability between model organisms and human.
 
-In this chapter we present a cross-species module discovery technique.
+In this chapter we present a cross-species module discovery technique that we initially introduced in \parencite{el2015xheinz}.
 It enables the simultaneous search of interesting gene sets in the two species, and such that those gene set have a high percentage of conservation across the two species.
 
 \paragraph{}
@@ -36,7 +36,7 @@ We then cast our model as an integer linear programming formulation and present 
 In \cref{sec:xexp} we apply \xheinz{} to understand the mechanisms underlying Th17 T cell differentiation in both mouse and human.
 As a main biological result, we find that the key regulation factors of Th17 differentiation are conserved between human and mouse and demonstrate that all aspects of our model are needed to obtain this insight.
 We further demonstrate the robustness of our approach by comparing samples of the differentiation process obtained at different time points, in which we search for optimal, conserved active modules under a wide range of conservation ratios.
-Using a permutation test, we show that our results are statistically significant. Finally, we discuss the main differences between our results and the results obtained by the \nexus{} (see \cref{subsec:combining}) tool on the same data set.
+Using a permutation test, we show that our results are statistically significant. Finally, we discuss the main differences between our results and the results obtained by the \nexus{} tool (see chapter \emph{state of the art}) on the same data set.
 
 \section{Algorithmic approach: the \mwccs{} problem}
 \label{sec:mip}
@@ -55,7 +55,7 @@ Using a permutation test, we show that our results are statistically significant
 		\item \textbf{Activity:}
   	  	  Node activity scores are given by $w \in
     	 	 \mathbb{R}^{V_1 \cup V_2}$, where positive scores correspond to
-    	 	 significant differential expression. For details see Section~\ref{sub:statistical_analysis_and_node_scoring}.
+    	 	 significant differential expression. For details see \cref{sub:statistical_analysis_and_node_scoring}.
   	  	  %Note that it is up to the user to normalize the node weights as to prevent a bias in activity score towards one species. 
 		We require that the sum $\sum_{v \in V^*} w_v$ is maximal.
 		\item \textbf{Conservation:}
@@ -73,12 +73,12 @@ Using a permutation test, we show that our results are statistically significant
 		If no conservation is enforced ($\alpha = 0$), the solution will correspond to two independent maximum-weight connected subgraphs, thereby achieving maximal overall activity.
 		Conversely, if complete conservation is required ($\alpha = 1$), the solution can only consist of conserved nodes, which results in the lowest overall activity modules.
 		The user controls this trade-off by varying the value of the parameter $\alpha$ from 0 to 1.
-		The activity score monotonically decreases as $\alpha$ increases, see Fig.~\ref{fig:exmpl_tradeoff_alpha}.
+		The activity score monotonically decreases as $\alpha$ increases, see \cref{fig:exmpl_tradeoff_alpha}.
 
 		\begin{figure}[t]
 			\centering
 			\includegraphics{exmpl_tradeoff_alpha}
-			\caption{\textbf{Trade-off between activity and conservation.}
+			\caption[Trade-off between activity and conservation]{\textbf{Trade-off between activity and conservation.}
 				Three optimal solutions (indicated in yellow) for varying conservation ratios $\alpha$ in a toy example instance.
 				Node activities are given next to the nodes, conserved node pairs are linked by dotted lines.
 				The activity of a conserved module is the sum of the activities of its comprising nodes.
@@ -202,24 +202,6 @@ Using a permutation test, we show that our results are statistically significant
 		It effectively requires that among all positively weighted nodes in the solution, the root node is the smallest one -- according to some arbitrary order\footnote{In our case: the order of apperances of the nodes in the network definition.}.
 		This last set of constraints also provide determinism: the ordering garantee that two runs of the ILP will choose the same root node.
 
-	\subsection{Implementation}
-
-	\xheinz{} is implemented in modern C++\footnote{C++14 and using the best practice patterns recently introduced}, using the boost libraries and the LEMON graph library \parencite{dezsHo2011lemon}.
-		CPLEX 12.6 is used to solve the ILP\@.
-		The source code is publicly available in a git repository linked to from \mbox{\url{http://software.cwi.nl/xheinz}}.
-
-		Given two species, \xheinz{} takes as input:
-		\begin{enumerate}
-			\item a network for each of the species: $G_1$ and $G_2$,
-			\item a mapping between the nodes of the two networks,
-			\item scores associated to each of the nodes, \eg, derived from the p-value of the moderated t-test,
-			\item the threshold value $\alpha$, and
-			\item an optional time limit.
-		\end{enumerate}
-
-		\xheinz{} returns two node sets corresponding to a solution found within the time limit together with an upper bound on the optimal objective value.
-		If the objective value equals this upper bound, the computed solution is provably optimal.
-
 \section{Material and methods}
 \label{sec:xexp}
 
@@ -239,7 +221,8 @@ Furthermore, most of the already identified regulator genes show high sequence c
 These findings indicate that the differentiation process seems well conserved between human and mouse and that a cross-species approach is reasonable.
 Other studies, however, show stimulus requirements for effective differentiation of human cells that differ from those required for mice \parencites{mcgeachy2008th17}{o2008differentiation}{annunziato2009human}.
 
-The simultaneous analysis of both human and mouse expression data allows the identification of conserved candidate regulators that are likely to be key regulators of the differentiation process, as well as potential drug targets.
+The simultaneous analysis of both human and mouse expression data allows the identification of conserved candidate regulators% that are likely to be key regulators of the differentiation process
+, as well as potential drug targets.
 Most of our current understanding on Th17 cell differentiation relies on studies carried out in mice, whereas the molecular mechanisms controlling human Th17 cell differentiation are less well defined.
 A characterization of the similarities and differences will not only increase our understanding of this fundamental process, but is also essential for sound translational research.
 
@@ -270,12 +253,12 @@ We summarize here the experimental procedure followed by \textcite{tuomela2012id
 \textcite{tuomela2012identification} isolated CD4+ T-cells from umbilical cord blood of several healthy neonates, arranged in three different pools, then activated with anti-CD3 and anti-CD28.
 Cells from each pool were then divided in two batches, one to be polarized toward Th17 direction, and one serving as control (Th0).
 Th17 differentiating cytokines consisted of IL6~(\unit{20}{\nano\gram\per\milli\liter}), IL1B~(\unit{10}{\nano\gram\per\milli\liter}) and TGFB~(\unit{10}{\nano\gram\per\milli\liter}), along with neutralizing anti-IFNG~(\unit{1}{\micro\gram\per\milli\liter}) and anti-IL4~(\unit{1}{\micro\gram\per\milli\liter}).
-Cells that were activated without Th17 cytokines were cultured as controls (Th0).
+%Cells that were activated without Th17 cytokines were cultured as controls (Th0).
 Three biological replicates of human cells, for both conditions (coming from each pool), were collected between \unit{0.5-72}{h} (\unit{0.5}{h}, \unit{1}{h}, \unit{2}{h}, \unit{4}{h}, \unit{6}{h}, \unit{12}{h}, \unit{24}{h}, \unit{48}{h}, \unit{72}{h} time points) and hybridized on Illumina Sentrix HumanHT-12 Expression BeadChip Version~3.
 The microarray data were analyzed using the beadarray Bioconductor package \parencite{dunning2007beadarray}.
 
 \textcite{yosef2013dynamic} purified CD4+ T-cells from spleen and lymph nodes from wild type C57BL/6 mice, then activated with anti-CD3 and anti-CD28. For Th17 differentiation, cells were cultured with TGFB (\unit{2}{\nano\gram\per\milli\liter}), IL6 (\unit{20}{\nano\gram\per\milli\liter}), IL23 (\unit{20}{\nano\gram\per\milli\liter}) and IL1B (\unit{20}{\nano\gram\per\milli\liter}) during \unit{0.5-72}{h} (at time points \unit{0.5}{h}, \unit{1}{h}, \unit{2}{h}, \unit{4}{h}, \unit{6}{h}, \unit{8}{h}, \unit{10}{h}, \unit{12}{h}, \unit{16}{h}, \unit{20}{h}, \unit{24}{h}, \unit{30}{h}, \unit{42}{h}, \unit{48}{h}, \unit{50}{h}, \unit{52}{h}, \unit{60}{h}, \unit{72}{h}), and finally hybridized on an Affymetrix HT\_MG-430A.
-Highly-correlated replicates were generated for 8 time points (\unit{1}{h}, \unit{4}{h}, \unit{10}{h}, \unit{20}{h}, \unit{30}{h}, \unit{42}{h}, \unit{52}{h}, \unit{60}{h}).
+%Highly-correlated replicates were generated for 8 time points (\unit{1}{h}, \unit{4}{h}, \unit{10}{h}, \unit{20}{h}, \unit{30}{h}, \unit{42}{h}, \unit{52}{h}, \unit{60}{h}).
 
 
 \subsection{Microarray processing, statistical analysis and node scoring}
@@ -436,27 +419,27 @@ The orthology mapping corresponds to a bipartite graph involving $67,304$ human 
 			All computations were done in single-thread mode on a desktop computer (Intel XEON e5 3~Ghz) with 16~Gb of RAM and a time limit of 12,000 CPU seconds.
 			After this timeout, the best feasible solution is returned by the solver.
 
-			Figure~\ref{fig:scores} shows for the five time points and eleven values of the $\alpha$ parameter, the human and mouse scores of the found modules as well as the distribution of the module contents.
+			\Cref{fig:scores} shows for the five time points and eleven values of the $\alpha$ parameter, the human and mouse scores of the found modules as well as the distribution of the module contents.
 			For 26 of the 55 instances we solved the conserved active modules problem to provable optimality  within the time and memory limit.
 			The optimality gap of a solution is defined as $(\mathit{UB} - \mathit{LB}) / \abs{\mathit{LB}}$, where $\mathit{LB}$ and $\mathit{UB}$ are the value of the best solution and the lowest upper bound as identified by the branch-and-cut algorithm, respectively.
 			Of the 29 instances that are not solved to optimality, 22 have a gap smaller than $5\%$.
 
-\begin{figure*}[btp]
+\begin{figure}[btp]
   \centering
   \includegraphics[width=\linewidth,trim=0 0 0 10mm,clip]{img/score_by_alpha_array-crop.pdf}\\
   \includegraphics[width=\linewidth,trim=0 0 0 10mm,clip]{img/node_classes_by_alpha_array_scores-crop.pdf}
-  \caption{\textbf{Statistics of \xheinz{} solutions.}
+  \caption[Statistics of \xheinz{} solutions]{\textbf{Statistics of \xheinz{} solutions.}
   	  The conserved active module problem was solved for five time points (columns) over a sequence of 11 consecutive values of the $\alpha$ conservation parameter ($x$-axis).
   	  We report in the top row the score of the best solution ($y$-axis) and whether optimality was proven by our algorithm (circles).
   All runs were limited to 12,000 CPU seconds on a standard desktop computer.
   The second row illustrates how module contents vary as $\alpha$ increases.
   The height of each bar indicates the size of the respective module, colors indicate the fraction of positive and conserved nodes.
   \label{fig:scores}}
-\end{figure*}
+\end{figure}
 
 Any feasible solution for a conservation ratio of $\alpha$ is also a solution for any $\alpha' \leq \alpha$.
-We indeed see in Fig.~\ref{fig:scores} that this property holds, the solution values decrease monotonically with increasing $\alpha$.
-Consequently, if we obtain an optimal solution (\ie, with maximal activity score) for $\alpha'$ then any solution for $\alpha$ must have an activity score that is greater or equal.
+We indeed see in \cref{fig:scores} that this property holds, the solution values decrease monotonically with increasing $\alpha$.
+Consequently, if we obtain an optimal solution (\ie, with maximal activity score) for $\alpha'$ then, any solution for $\alpha$ must have its activity score that is greater or equal to the one for $\alpha'$.
 When we only account for the optimal solutions of our instances, we indeed see that this property holds.
 % MEK: I DON'T UNDERSTAND THIS THE FOLLOWING
 %Conversely, this implies that we can bound the optimal activity scores whenever
@@ -469,13 +452,37 @@ As an added validation, we observe that the solutions for $\alpha=0$ (no conserv
 There is a sharp decrease in module size for $\alpha = 1$.
 Indeed, this is the most restrictive setting since it enforces that all the nodes in a module must be conserved.
 We also observe that as $\alpha$ increases, both positive and negative \emph{conserved} nodes are added, indicating that we manage to retrieve informative nodes in a gradual manner.
-See also Supplementary Text~A.8 for a detailed analysis of module overlap for all combinations of $\alpha$ values.
+See also \cref{app:significance} for a detailed analysis of module overlap for all combinations of $\alpha$ values.
 
 When we compare solutions across time points, we see that the conserved active modules capture two phases of the differentiation process.
 We observe high activity at \unit{2}{h} as well as at the late time points.
 Several authors reported such biphasic behavior during early Th17 differentiation, for example \textcites{ciofani2012validated}{yosef2013dynamic} in mouse, and \textcite{tuomela2012identification} for human.
 The low activity score observed at the \unit{4}{h} time point is in line with \textcite{yosef2013dynamic}'s mouse studies, which suggest that after the initial induction sustained by Stat3 and Stat1 in the first four hours, a phase of Rorc induction takes place and lasts until the \unit{20}{h} time point, after which the effective protein level of Rorc starts to increase and to trigger the cytokine production phase.
 Our model and the solutions obtained suggest that these dynamics are conserved between the two organisms.
+
+Furthermore, \cref{fig:spider-xheinz_modules} illustrates the strong conservation of these overall dynamics, in human and mouse at \unit{2}{h}.
+The plots show that in our modules all but two conserved gene pairs change expression in the same direction.
+It is worth noting that we do not enforce any conservation of directionality in the \xheinz{} model.
+
+\begin{landscape}
+\begin{figure}[h]
+  \centering
+  %\includegraphics[width=1\linewidth]{spider_panel.pdf}
+  \includegraphics{spider_panel.pdf}
+  \caption[Comparison of log fold change expression in mouse and human for conserved gene pairs at \unit{2}{h} and \unit{48}{h}]{\textbf{Comparison of log fold change expression in mouse and human for conserved gene pairs at \unit{2}{h} (left) and \unit{48}{h} (right).}
+ Each panel shows the log fold change correlation between conserved gene pairs:
+ For each pair, a line segments connects the human logFC ($x$-axis) to the mouse
+ logFC ($y$-axis). Point color indicates whether the human or mouse gene has a
+ positive score.
+      A line segment in the 1st or 3rd quadrant
+   signifies positively correlated logFC values whereas a link in the
+   2nd and 4th quadrant corresponds to negative correlation. The sign
+   of the activity score is indicated by the coloring. Genes discussed
+   in the main text are indicated with white boxes.}
+  \label{fig:spider-xheinz_modules}
+\end{figure}
+\end{landscape}
+
 
 \subsubsection{Early regulation of Th17 differentiation is conserved between human and mouse}
 \label{sub:main_regulation_of_th17_differentiation_is_conserved_between_human_and_mouse}
@@ -484,64 +491,63 @@ In the following, we study the two phases of the Th17 differentiation process in
 We focus on the \unit{2}{h} and \unit{48}{h} time points.
 We selected for this evaluation $\alpha=0.8$ for both time points, as this value provides a balance between conservation and activity and produces modules of interpretable size.
 All results at all time points are available on the accompanying website.
-Fig.~\ref{fig:panel_wht-xheinz_modules} reports the resulting human and mouse modules for the two time points.
+\Cref{fig:panel_wht-xheinz_modules} reports a reduced version of the resulting human and mouse Th17 modules for the two time points, and \cref{fig:full_1} and \cref{fig:full_2} show the full, unfiltered module contents of the modules.
 
 We assess statistical significance of the resulting modules by performing 100 runs on randomized networks for each value of $\alpha$, and additional 400 runs for the selected $\alpha=0.8$.
 We do this using two randomization methods: (1) permuting the node weights while keeping the graph fixed, and (2) permuting the network topology while keeping the node weights and the node degrees fixed as described in \parencite{mihail2003markov}.
 With the exception of a few extreme cases at the \unit{48}{h} time point, all modules were found to be highly significant.
-For details see Supplementary Text~A.8.
+For details see \cref{app:significance}.
 
 Our model for conserved modules relies on the hypothesis that similar biological processes between two related species are realized by orthologous genes.
 To evaluate the relevance of the conserved modules returned by \xheinz, we solved the conserved active modules problem between the Th0 and Th17 conditions at \unit{2}{h} and \unit{48}{h}.
 
 At the \unit{2}{h} time point, \xheinz{} identifies a conserved module consisting of $58$ human and $50$ mouse proteins.
 Interestingly, both the human and mouse modules are centered around STAT3/Stat3, even if these genes are not the ones showing the higher fold change in both species.
-STAT3 is a signal transducer having transcription factor activity and was shown to play a key role in the differentiation process of Th17~\parencite{harris2007cutting}.
+STAT3 is a signal transducer having transcription factor activity and was shown to play a key role in the differentiation process of Th17 \parencite{harris2007cutting}.
 Once activated by Th17 polarizing cytokines (such as IL6 in our case), it eventually binds to the promoter regions of IL17A/Il17a and IL17F/Il17f cytokines and activates transcription.
 These cytokines are the hallmark cytokines produced by activated Th17 cells.
-It is worth noting that IL17/Il17 cytokines and associated receptors are not in the \unit{2}{h} modules, as these proteins have been shown to be expressed only at later time points~\parencite{tuomela2012identification}.
-Moreover, STAT1/Stat1, another member of the STAT family, is part of the solution and belongs to the central core of the human and mouse modules, which is consistent with its major role during the early phases of Th17 differentiation~\parencite{yosef2013dynamic}.
+It is worth noting that IL17/Il17 cytokines and associated receptors are not in the \unit{2}{h} modules, as these proteins have been shown to be expressed only at later time points \parencite{tuomela2012identification}.
+Moreover, STAT1/Stat1, another member of the STAT family, is part of the solution and belongs to the central core of the human and mouse modules, which is consistent with its major role during the early phases of Th17 differentiation \parencite{yosef2013dynamic}.
 
 
 %%Il17a vs IL17F 
-We also observe that the STAT3/BATF/IL6ST/SOCS3 region of the \unit{2}{h} module is well-conserved.
-NOTCH1 has been recently implicated as an intrinsic requirement for Th17 polarization both in human and mouse.
-NOTCH1 directly targets the IL17 and RORC loci and its deficiency is associated with impaired Th17 differentiation~\parencite{keerthivasan2011notch}.
-We further expected that NOTCH1 is implicated in the early phase of the differentiation process as it directly activates transcription of these two Th17 hallmarks proteins that are expressed later.
-Similarly, Batf has been shown to directly control Th17 differentiation in mouse~\parencite{schraml2009ap} and BATF proteins are detected as early as after \unit{12}{h} of polarization in human~\parencite{tuomela2012identification}. 
-Similarly, SOCS3 is a known IL6 and IL21-induced negative regulator of Th17 polarization, that is eventually down-regulated by TGFB and IL6ST at a later phase in order to prolong STAT3 activation \parencites{zhu2008socs3,qin2009tgf}.
-
-Overall, these modules show highly conserved and significant enrichment for response to cytokine stimulus (Benjamini-Hochberg (BH) FDR 5.6e-4), JAK-STAT (BH FDR 4.8e-4) cascade and transcription regulator activity (BH FDR 2.3e-4), computed using the DAVID functional annotation chart \parencite{huang2008systematic}.
-This indicates that the identified module matches expected biological mechanisms observed at early phases~\parencite{ciofani2012validated}.
-Furthermore, comparison of the dynamics of expression shows that genes differentially expressed in both species change expression in the same direction (see Supplementary~Text~A.3).
+%We also observe that the STAT3/BATF/IL6ST/SOCS3 region of the \unit{2}{h} module is well-conserved.
+%NOTCH1 has been recently implicated as an intrinsic requirement for Th17 polarization both in human and mouse.
+%NOTCH1 directly targets the IL17 and RORC loci and its deficiency is associated with impaired Th17 differentiation~\parencite{keerthivasan2011notch}.
+%We further expected that NOTCH1 is implicated in the early phase of the differentiation process as it directly activates transcription of these two Th17 hallmarks proteins that are expressed later.
+%Similarly, Batf has been shown to directly control Th17 differentiation in mouse~\parencite{schraml2009ap} and BATF proteins are detected as early as after \unit{12}{h} of polarization in human~\parencite{tuomela2012identification}. 
+%Similarly, SOCS3 is a known IL6 and IL21-induced negative regulator of Th17 polarization, that is eventually down-regulated by TGFB and IL6ST at a later phase in order to prolong STAT3 activation \parencites{zhu2008socs3,qin2009tgf}.
+%
+%Overall, these modules show highly conserved and significant enrichment for response to cytokine stimulus (Benjamini-Hochberg (BH) FDR 5.6e-4), JAK-STAT (BH FDR 4.8e-4) cascade and transcription regulator activity (BH FDR 2.3e-4), computed using the DAVID functional annotation chart \parencite{huang2008systematic}.
+%This indicates that the identified module matches expected biological mechanisms observed at early phases~\parencite{ciofani2012validated}.
+%Furthermore, comparison of the dynamics of expression shows that genes differentially expressed in both species change expression in the same direction (see Supplementary~Text~A.3).
 
 %\comment[Hayssam]{Add IL2RB/CXCR5 details? Add SOCS3 role. STAT1, easily
 %involved. STAT1 implicated in the early phase, STAT3 in all phases [ciofiani]}
 
 We also applied \xheinz{} to find a conserved module at a later time point (\unit{48}{h}).
-Kinetics analysis of Th17 differentiation showed that the effective secretion of Th17 hallmark cytokines only happens after several days of polarization~\parencites{tuomela2012identification,yosef2013dynamic} and we do observe in these modules a significant enrichment for interleukin related proteins present in both species, which was absent for the \unit{2}{h} modules, such as up-regulation of IL9/Il9.
+Kinetics analysis of Th17 differentiation showed that the effective secretion of Th17 hallmark cytokines only happens after several days of polarization \parencites{tuomela2012identification,yosef2013dynamic} and we do observe in these modules a significant enrichment for interleukin related proteins present in both species, which was absent for the \unit{2}{h} modules, such as up-regulation of IL9/Il9.
 Secretion of IL9 by Th17 cells have been demonstrated both in mouse and human cells \parencite{beriou2010tgf}, Il9 is known to be induced by Bcl3 \parencite{richard1999interleukin}, and Bcl3 inhibition has been recently shown to affect the function of Th17 cells in mouse \parencite{ruan2010roles}.
 We also observe the conserved down-regulation of GATA3/Gata3, which is known to be the master regulator of Th2 cells \parencite{zheng1997transcription}, and is likely to constrain the Th17 regulation program \parencite{van2008enforced}.
 Similarly to the modules found at \unit{2}{h}, the \unit{48}{h} modules are centered around STAT3, although at the \unit{48}{h} time point this gene is not differentially expressed anymore neither in human or mouse (resp.\ logFC of 0.17, score of -4.59 for human, and logFC 0.52, score of -3.21 for mouse).
-This observation is in line with the major role of STAT3 along the differentiation process at all time points~\parencite{yosef2013dynamic}.
-To the contrary, STAT1 has been indicated as an exclusively early regulator~\parencite{yosef2013dynamic} in mouse and is indeed not present anymore in the \unit{48}{h} modules.%, even though Stat1 is called as differentially expressed in the mouse measurements (BH FDR of $2e-04$, score of $-3.16$ for mouse; BH FDR of $0.99$, score of $-6.54$ for human).
+This observation is in line with the major role of STAT3 along the differentiation process at all time points \parencite{yosef2013dynamic}.
+To the contrary, STAT1 has been indicated as an exclusively early regulator \parencite{yosef2013dynamic} in mouse and is indeed not present anymore in the \unit{48}{h} modules.%, even though Stat1 is called as differentially expressed in the mouse measurements (BH FDR of $2e-04$, score of $-3.16$ for mouse; BH FDR of $0.99$, score of $-6.54$ for human).
 %This demonstrates the strength of performing module identification in both species simultaneously in our setup.
 %\comment[Hayssam]{Find ref about plasticity in the early tp. Compute overlap between early and late?}
 % , the lack of evidence for differential expression in mouse (FDR 0.93) as well as the conservation constraint in the \xheinz formulation 
 
-We also observe the presence of the RORA/RORC/Rora/Rorc members of the RORs family of intracellular transcription factors, which are considered to be the master regulators of the Th17 lineage~\parencite{yang2008t}, and have been implicated in both species~\parencite{crome2009role}.
+We also observe the presence of the RORA/RORC/Rora/Rorc members of the RORs family of intracellular transcription factors, which are considered to be the master regulators of the Th17 lineage \parencite{yang2008t}, and have been implicated in both species \parencite{crome2009role}.
 Interestingly, these regulators are linked to the up-regulation of the vitamin-D receptor (VDR/Vdr), whose role in Th17 differentiation and several human auto-immune related disease have been recently studied \parencite{chang2010vitamin}.
-
 
 \paragraph{}
 In summary, our findings show the relevance of the identified conserved active modules with regard to the biological process of interest.
 By requiring the active modules to contain a certain fraction of conserved nodes, \xheinz{} identifies the main core proteins involved in the differentiation of Th17.
 Our analysis confirms that these proteins are very likely to have similar roles in both species.
 
-\begin{figure*}[btp]
+\begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{img/modules_panel.pdf}
-  \caption{\textbf{Conserved active Th17 differentiation modules in human and mouse at \unit{2}{h} and \unit{48}{h}.}
+  \caption[Conserved active Th17 differentiation modules in human and mouse at \unit{2}{h} and \unit{48}{h}]{\textbf{Conserved active Th17 differentiation modules in human and mouse at \unit{2}{h} and \unit{48}{h}.}
   We obtained node activity scores capturing the significance of differential gene expression between the Th17 and Th0 conditions in human and mouse using the BUM model with $\FDR = 0.1$.
   \xheinz{} uses these scores to search for conserved active modules in the STRING protein action network.
   The first row shows the human counterparts of the best scoring conserved modules for the \unit{2}{h} (left) and \unit{48}{h} (right) samples.
@@ -552,10 +558,24 @@ Our analysis confirms that these proteins are very likely to have similar roles 
   Node labels and sizes are proportional to betweenness centrality and edge width to
   edge-betweenness -- both centralities are with respect to the subnetwork module.
   Only nodes having a degree larger than $2$ (resp. $3$) are displayed for the \unit{2}{h} (resp. \unit{48}{h}) module.
-  The full networks are available on the accompanying website and in Supplementary Text~A.3.
+  The full networks in tabular format are available on the accompanying website and in \cref{app:details}.
     }
 \label{fig:panel_wht-xheinz_modules}
-\end{figure*}
+\end{figure}
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=\textwidth]{full_networks_2h.pdf}
+  \caption{Full module at \unit{2}{h} for $\alpha = 0.8$ conservation ratio}
+  \label{fig:full_1}
+\end{figure}
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=\textwidth]{full_networks_48h.pdf}
+  \caption{Full module at \unit{48}{h} for $\alpha = 0.8$ conservation ratio}
+  \label{fig:full_2}
+\end{figure}
 
 % The parameter $\alpha$ represents as equilibrium between module's conservation
 % and activity. We have evaluated if best conserved active modules show an
@@ -579,10 +599,10 @@ Our analysis confirms that these proteins are very likely to have similar roles 
 % main_regulation_of_th17_differentiation_is_conserved_between_human_and_mouse
 % (end)
 
-\subsubsection{Comparison to \nexus}
+\subsubsection{Comparison to \nexus{}}
 \label{sec:Nexus}
 
-We compare the \unit{48}{h} \xheinz{} modules (\emph{see}~Fig.~\ref{fig:panel_wht-xheinz_modules}) with subnetworks computed by \nexus{} version 3~\parencite{deshpande2010scalable}.
+We compare the \unit{48}{h} \xheinz{} modules (see \cref{fig:panel_wht-xheinz_modules,fig:full_1,fig:full_2}) with subnetworks computed by \nexus{} version 3 \parencite{deshpande2010scalable}.
 In contrast to our exact approach, \nexus{} uses a heuristic technique to grow subnetworks from seed nodes simultaneously in two species in an iterative fashion.
 Neighborhoods of the two current modules are determined using a depth-first search.
 This search is restricted to only consider nodes that have a path to the seed node with a confidence larger than the user-specified parameter $\mathtt{dfscutoff}$.
@@ -592,7 +612,7 @@ This whole procedure is repeated until either the cluster coefficient drops belo
 
 We ran \nexus{} with the default parameters $\mathtt{cc = 0.1,0.2}$, $\mathtt{scorecutoff=0.15}$ and $\mathtt{dfscutoff=0.3,0.8}$ for mouse and human respectively for all time points. \Cref{tab:nexus_all} gives the resulting modules sizes for human and mouse.
 
-\begin{table*}[htbp]
+\begin{table}[h]
 	\centering
 	\makebox[0pt]{
 	\scriptsize
@@ -608,13 +628,13 @@ We ran \nexus{} with the default parameters $\mathtt{cc = 0.1,0.2}$, $\mathtt{sc
 	\hline
 	\end{tabular}
 	}
-	\caption{\textbf{Modules calculated with \nexus{} for all time points.}
+	\caption[Modules calculated with \nexus{} for all time points]{\textbf{Modules calculated with \nexus{} for all time points.}
 	Shown are the sizes in number of nodes of the first 15 representative solutions and the average sizes for the human subnetwork and for the mouse subnetwork in brackets.
 	The last column lists the number of solutions for each time point.
 	No solutions were obtained for time points \unit{24}{h} and \unit{72}{h}.
 	}
 	\label{tab:nexus_all}
-\end{table*}
+\end{table}
 
 \nexus{} finds 1 module for time point \unit{48}{h} which is shown in \cref{fig:nexus} for human (A) and mouse (B).
 In total 5 genes are contained in the module, which are identical for human and mouse, but the number of edges differs.
@@ -624,31 +644,310 @@ These genes show changes in expression, but only two of these changes are statis
 
 The low number of active nodes points to a drawback in the \nexus{} algorithm: due to the locality of the greedy search strategy it may happen that the average activity of the subnetwork in construction keeps on degrading without reaching the next active node.
 The effects of this issue can be seen, for example, in \cref{fig:nexus}, where CCL20 is the seed node and the majority of other neighboring nodes are not differentially expressed.
-Furthermore, since the activity score of a single gene is just the log fold-change and does not reflect both, fold change and variability as a p-value, the neighboring nodes of the seed node in
-subnetwork \cref{fig:nexus}E might merely originate from the noise in the data and represent nothing biologically relevant for the interpretation of the data.
+Furthermore, since the activity score of a single gene is just the log fold-change, and does not reflect both fold change and variability as a p-value, the neighboring nodes of the seed node in subnetwork \cref{fig:nexus} might merely originate from the noise in the data and represent nothing biologically relevant for the interpretation of the data.
 
-\begin{figure}[tbp]
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=\linewidth]{img/Nexus_module_A.pdf}
-	\caption{\textbf{\nexus{} modules for the time point 48 hours for human (A) and mouse (B).}
+	\caption[\nexus{} modules for the time point 48 hours for human and mouse]{\textbf{\nexus{} modules for the time point 48 hours for human (A) and mouse (B).}
 	Orange coloring indicates genes with significant differential expression (BH FDR $\leq 0.1$, $\absLOGFC \geq 1$).
 	Here only one gene is significantly differentially expressed (CCL20).
 	}
 	\label{fig:nexus}
 \end{figure}
 
-Another consequence of the \nexus{} search strategy is that the module sizes are small (\emph{see}~\cref{tab:nexus_all}) and thus only give a limited view of the molecular mechanisms at play.
+\paragraph{}
+Another consequence of the \nexus{} search strategy is that the module sizes are small (see \cref{tab:nexus_all}) and thus only give a limited view of the molecular mechanisms at play.
 Theoretically, the parameter $\mathtt{dfscutoff}$ can be decreased to increase the module size.
-Doing so, however, produces only slightly larger modules, but drastically increases the running time (Supplementary~Table~1).
-Changes in the clustering coefficient parameter $\mathtt{cc}$ only reduce the module size with increasing $\mathtt{cc}$ (Supplementary~Table~2).
+Doing so, however, produces only slightly larger modules, but drastically increases the running time.
+\Cref{tab:dfs} shows the \nexus{} solutions for time point \unit{48}{h} with different values for parameter \texttt{dfscutoff}.
 
-Conservation in \nexus{} is enforced stringently by only allowing pairs of orthologous genes or genes that are only present in one of the networks to be included in the subnetworks (see~\cref{fig:nexus}).
+\begin{table}[h]
+	\caption[\nexus{} solutions for time point \unit{48}{h} with different values for parameter \texttt{dfscutoff}.]{\textbf{\nexus{} solutions for time point \unit{48}{h} with
+    different values for parameter \texttt{dfscutoff}.} Shown are  the number of solutions, the average and maximum number of nodes and running times for the human network.}
+\begin{center}
+\tabcolsep=0.08cm
+%\small
+%%\color{red}
+\begin{tabular}{lrrrrrrr}
+\hline
+dfscutoff & no.\ sols. & avg.\ size & max.\ size& CPU time [s] \\ \hline
+0.1 & 2 & 5.00 & 5 & 176039.91\\
+0.2 & 3 & 7.00 & 9 & 110282.61\\
+0.3 & 5 & 6.60 & 9 & 77502.13\\
+0.4 & 4 & 6.62 & 10 & 54972.92\\
+0.5 & 6 & 5.58 & 9 & 35360.42\\
+0.6 & 4 & 5.38 & 6 & 20538.4\\
+0.7 & 3 & 5.33 & 6 & 11164.19\\
+0.8 & 60 & 4.04 & 6 & 4639.59\\
+0.9 & 0 & 0.00 & 0 & 1359.87\\ \hline
+\end{tabular}
+\end{center}
+\label{tab:dfs}
+\end{table}
+
+
+Also note that changes in the clustering coefficient parameter $\mathtt{cc}$ only reduce the module size with increasing $\mathtt{cc}$.
+\Cref{tab:cc} shows the \nexus{} solutions for time point \unit{48}{h} with different values for parameter \texttt{cc}.
+
+\begin{table}[h]
+	\caption[\nexus{} solutions for time point \unit{48}{h} with different values for parameter \texttt{cc}]{\textbf{\nexus{} solutions for time point \unit{48}{h} with
+    different values for parameter \texttt{cc}.} Shown are  the number of solutions, the average and maximum number of nodes and running times for the human network.}
+\begin{center}
+\tabcolsep=0.08cm
+%\small
+%%\color{red}
+\begin{tabular}{lrrrrrrr}
+\hline
+cc & no.\ sols. & avg.\ size & max.\ size& CPU time [s] \\ \hline
+0.1 & 1 & 5 & 5 & 23367.68\\
+0.2 & 1 & 5 & 5 & 23243.83\\
+0.3 & 1 & 5 & 5 & 23903.09\\
+0.4 & 1 & 5 & 5 & 24285.30\\
+0.5 & 1 & 3 & 3 & 24318.78\\
+0.6 & 1 & 3 & 3 & 24059.59\\
+0.7 & 1 & 3 & 3 & 24518.68\\
+0.8 & 1 & 3 & 3 & 24321.92\\
+0.9 & 1 & 3 & 3 & 24246.56\\ \hline
+\end{tabular}
+\end{center}
+\label{tab:cc}
+\end{table}
+%%}
+
+\paragraph{}
+Conservation in \nexus{} is enforced stringently by only allowing pairs of orthologous genes or genes that are only present in one of the networks to be included in the subnetworks (see \cref{fig:nexus}).
 This is too restrictive if the underlying mechanisms in the two species differ.
-For instance, for time point 48 hours and all but $\alpha=1$ values, \xheinz{} finds the non-conserved gene IL23R (BH FDR 3.52e-8, score 14.50, logFC 1.38) in human, which is involved in Th17 autocrine signaling~\parencite{wei200721} but which is not differentially expressed in mouse.
+For instance, for time point 48 hours and all but $\alpha=1$ values, \xheinz{} finds the non-conserved gene IL23R (BH FDR 3.52e-8, score 14.50, logFC 1.38) in human, which is involved in Th17 autocrine signaling \parencite{wei200721} but which is not differentially expressed in mouse.
 \xheinz{} also finds JUNB, which at the 2 hour time point is up-regulated in human data (BH FDR 1e-2, score 0.02, logFC 1.3) and not detected as differentially expressed in the mouse data (BH FDR 0.48, score -4.01, logFC 0.65).
-JUNB is a known partner of BATF with which it heterodimerizes preferentially during Th17 differentiation~\parencite{schraml2009ap}, indicating its relevance.
+JUNB is a known partner of BATF with which it heterodimerizes preferentially during Th17 differentiation \parencite{schraml2009ap}, indicating its relevance.
 Both important genes would have been missed by a more restrictive conservation setting.
 Indeed, both \nexus{} and \xheinz{} at $\alpha = 1$ fail to find these genes showing that a more flexible view on conservation is required to adequately deal with transferability.
+
+\section{Implementation and evaluation details}
+	\subsection{Implementation}
+
+	\xheinz{} is implemented in modern C++14 using the best practice patterns recently introduced by \textcite{meyers2014effective}, and makes use of the boost libraries and the LEMON graph library \parencite{dezsHo2011lemon}.
+		CPLEX 12.6 is used as a black-box solver for our Mixed-Integer Linear Program formulation.
+		The source code is publicly available in a git repository linked to from \mbox{\url{http://software.cwi.nl/xheinz}}.
+
+		\paragraph{}
+		Given two species, \xheinz{} takes as input:
+		\begin{enumerate}
+			\item a network for each of the species: $G_1$ and $G_2$,
+			\item a mapping between the nodes of the two networks,
+			\item scores associated to each of the nodes, \eg, derived from the p-value of the moderated t-test,
+			\item the threshold value $\alpha$, and
+			\item an optional time limit.
+		\end{enumerate}
+
+		\xheinz{} returns two node sets corresponding to a solution found within the time limit together with an upper bound on the optimal objective value.
+		If the objective value equals this upper bound, the computed solution is provably optimal.
+
+  \subsection{Data processing pipeline}
+  The full pipeline, implemented using Snakemake, from data downloading to running xheinz, goes as follows:\pagebreak
+  \begin{enumerate}
+    \item Retrieve human and mouse ENSEMBL orthologs, STRING species specific network
+    \item Retrieve human dataset from GEO (all time points, all conditions)
+    \item Annotate human probes with ENSEMBL 
+    \item Select human probes based on variance filter
+    \item Perform linear modeling of the whole human dataset 
+    \item Retrieve mouse dataset (all time points, all conditions)
+    \item Annotate mouse probes with ENSEMBL 
+    \item Select mouse probes based on variance filter
+    \item Perform linear modeling of the whole mouse dataset 
+    \item For each time point of interest: 
+    \begin{enumerate}
+      \item Call differentially expressed human genes by contrasting the Th17 with the Th0 condition $\Rightarrow$ p-value for each gene at this time point
+      \item Call differentially expressed mouse genes by contrasting the Th17 with the Th0 condition $\Rightarrow$ p-value for each gene at this time point
+      \item For an FDR threshold of 0.1, fit a BUM model for the human genes $\Rightarrow$ positive and negative scores for human genes
+      \item For an FDR threshold of 0.1, fit a BUM model for the mouse genes $\Rightarrow$ positive and negative score for mouse genes 
+      \item Rank normalize the mouse score based on the human scores $\Rightarrow$ update the scores of the mouse genes
+      \item Map human and mouse genes to proteins on the STRING network
+      \item For each value of interest for the conservation threshold $\alpha$:
+      \begin{enumerate}
+        \item Run xHeinz with the following inputs: 
+        \begin{enumerate} 
+          \item the human STRING network 
+          \item the mouse STRING network
+          \item the BUM scored human proteins
+          \item the BUM scored mouse proteins
+          \item the human and mouse orthologs
+        \end{enumerate}
+      \end{enumerate}
+    \end{enumerate}
+  \end{enumerate}
+
+  \subsection{Significance of results}
+  \label{app:significance}
+
+  We computed empirical p-values to assess the significance of
+  the obtained scores at \unit{2}{h} and \unit{48}{h}, for each value of
+  $\alpha \in \{0.1, 0.2, \ldots, 1.0\}$, with the following two procedures:
+  \begin{enumerate}
+    \item \emph{Weights permutation:} We shuffled the node weights by generating random permutations of the activity scores of all genes.
+    \item \emph{Topology permutation:} We repeated a million times the following operation: given two randomly selected edges A1--A2 and B1--B2, if the edges A1--B2 and B1--A2 are not present in the network we add them and remove the original edges, thus generating a random network with the same node weights and degree distribution.
+  \end{enumerate}
+
+  For each resulting permuted network we applied a modified version of xHeinz a
+  fixed number of times (500 times for $\alpha = 0.8$, 100 times otherwise). This
+  modified version allows to check whether the optimal score on the new random
+  network would exceed the best score we found on the original network.
+
+  To speed up these computations, we used the observation that solving a relaxed
+  version of the conserved modules problem is sufficient, since we only need a
+  sufficiently low upper bound (less than the score we obtained with unshuffled
+  data) on the optimal values for those shuffled instances to make this decision.
+  
+  We therefore consider the following ILP for the shuffled instances:
+  \allowdisplaybreaks
+  \begin{alignat}{3}
+   \label{eq:relaxed}\max\: & \sum_{v \in V_1 \cup V_2} w_v x_v \\
+   \text{s.t.}\:\: & \eqref{eq:m_u}, \eqref{eq:m_v},
+  \eqref{eq:b}, \eqref{eq:vars}
+  \end{alignat}
+  that is, we drop the connectivity constraints. Note that the objective
+  value is an upper bound of the optimal score of the original problem
+  since this new ILP is a relaxation of the original one. In
+  addition, we can stop the branch-and-cut algorithm as soon as the
+  upper bound on \eqref{eq:relaxed} is lower than the best found
+  solution of the original ILP on the unshuffled data. These two
+  observations help to speed up the significance computations tremendously.
+
+  \Cref{tab:pval} shows the results of these runs, which we
+  performed using a cumulative time limit of \unit{500}{h}. It can be seen that only
+  at extreme values of $\alpha$ for the \unit{48}{h} time point the
+  upper bound on \eqref{eq:relaxed} was not good enough to prove
+  significance. This result was actually expected, since the original run was the only one
+  with a very high gap ($33.36\%$) at the end of the allocated timelimit.
+
+  Note that the p-values $\hat p$ that we demonstrate here are actually upper bounds to the
+  underlying p-values $p$ that we would obtain without the relaxation to the ILP.
+
+  For all other combinations, including the ones we chose to compute the Th17 modules
+  and where we computed even more permutations, our procedure
+  demonstrates that the signal in the real network is useful to obtain a
+  statistically significant score.
+
+  \begin{center}
+  \begin{table}[h]
+  \centering
+  \tabcolsep=0.08cm
+  {%\small
+  \begin{tabular}{| c | c | c | c | c | c |}
+  \hline
+  Timepoint & $\alpha$ & FDR & $k$ & $k'$ & $\hat p$ \\ \hline
+  \unit{2}{h}  & 0.1 & 0.1 & 100 & 0   & 0.0   \\
+  \unit{2}{h}  & 0.2 & 0.1 & 100 & 0   & 0.0   \\
+  \unit{2}{h}  & 0.3 & 0.1 & 100 & 0   & 0.0   \\
+  \unit{2}{h}  & 0.4 & 0.1 & 100 & 0   & 0.0   \\
+  \unit{2}{h}  & 0.5 & 0.1 & 100 & 0   & 0.0   \\
+  \unit{2}{h}  & 0.6 & 0.1 & 100 & 0   & 0.0   \\
+  \unit{2}{h}  & 0.7 & 0.1 & 100 & 0   & 0.0   \\
+  \textbf{\unit{2}{h}}  & \textbf{0.8} & \textbf{0.1} & \textbf{500} & \textbf{0}   & \textbf{0.0}   \\
+  \unit{2}{h}  & 0.9 & 0.1 & 100 & 0   & 0.0   \\
+  \unit{2}{h}  & 1.0 & 0.1 & 100 & 0   & 0.0   \\ \hline
+  \unit{48}{h} & 0.1 & 0.1 & 100 & 7   & \textbf{0.07}  \\
+  \unit{48}{h} & 0.2 & 0.1 & 100 & 4   & \textbf{0.04}  \\
+  \unit{48}{h} & 0.3 & 0.1 & 100 & 0   & 0.0   \\
+  \unit{48}{h} & 0.4 & 0.1 & 100 & 0   & 0.0   \\
+  \unit{48}{h} & 0.5 & 0.1 & 100 & 0   & 0.0   \\
+  \unit{48}{h} & 0.6 & 0.1 & 100 & 0   & 0.0   \\
+  \unit{48}{h} & 0.7 & 0.1 & 100 & 0   & 0.0   \\
+  \textbf{\unit{48}{h}} & \textbf{0.8} & \textbf{0.1} & \textbf{500} & \textbf{0}   & \textbf{0.0}   \\
+  \unit{48}{h} & 0.9 & 0.1 & 100 & 0   & 0.0   \\
+  \unit{48}{h} & 1.0 & 0.1 & 100 & 100 & \textbf{1.0} \\
+   \hline
+  \end{tabular}}
+  \qquad
+  {%\small
+  \begin{tabular}{| c | c | c | c | c | c |}
+  \hline
+  Timepoint & $\alpha$ & FDR & $k$ & $k'$ & $\hat p$ \\ \hline
+  \unit{2}{h}  & 0.1 & 0.1 & 100 & 0   & 0.0   \\
+  \unit{2}{h}  & 0.2 & 0.1 & 100 & 0   & 0.0   \\
+  \unit{2}{h}  & 0.3 & 0.1 & 100 & 0   & 0.0   \\
+  \unit{2}{h}  & 0.4 & 0.1 & 100 & 0   & 0.0   \\
+  \unit{2}{h}  & 0.5 & 0.1 & 100 & 0   & 0.0   \\
+  \unit{2}{h}  & 0.6 & 0.1 & 100 & 0   & 0.0   \\
+  \unit{2}{h}  & 0.7 & 0.1 & 100 & 0   & 0.0   \\
+  \textbf{\unit{2}{h}}  & \textbf{0.8} & \textbf{0.1} & \textbf{500} & \textbf{0}   & \textbf{0.0}   \\
+  \unit{2}{h}  & 0.9 & 0.1 & 100 & 0   & 0.0   \\
+  \unit{2}{h}  & 1.0 & 0.1 & 100 & 0   & 0.0   \\ \hline
+  \unit{48}{h} & 0.1 & 0.1 & 100 & 7   & 0.0   \\
+  \unit{48}{h} & 0.2 & 0.1 & 100 & 4   & 0.0   \\
+  \unit{48}{h} & 0.3 & 0.1 & 100 & 0   & 0.0   \\
+  \unit{48}{h} & 0.4 & 0.1 & 100 & 0   & 0.0   \\
+  \unit{48}{h} & 0.5 & 0.1 & 100 & 0   & 0.0   \\
+  \unit{48}{h} & 0.6 & 0.1 & 100 & 0   & 0.0   \\
+  \unit{48}{h} & 0.7 & 0.1 & 100 & 0   & 0.0   \\
+  \textbf{\unit{48}{h}} & \textbf{0.8} & \textbf{0.1} & \textbf{500} & \textbf{0}   & \textbf{0.0}   \\
+  \unit{48}{h} & 0.9 & 0.1 & 100 & 0   & 0.0   \\
+  \unit{48}{h} & 1.0 & 0.1 & 100 & 20  & \textbf{0.2} \\
+   \hline
+  \end{tabular}}
+  \caption[Results of significance experiments]{Results of significance experiments. For $\alpha \in \{0.1, 0.2,
+  	\ldots, 1.0\}$ at time points \unit{2}{h} and \unit{48}{h} we computed upper
+  	bounds on $k$ instances with permuted scores using the procedures described
+  	above (weights permutation on the left, topology permutation on the right).
+  	In $k'$ of these cases, %after a cumulative time limit of \unit{500}{h}, the
+  	resulting upper bound was not lower than the score of the best found
+  	conserved active module on the original network, resulting in a p-value $p
+  \leq \hat p = k'/k$. Values at the threshold $\alpha = 0.8$ we used to compute
+  the Th17 modules and non-zero p-values are highlighted.}
+  \label{tab:pval}
+  \end{table}
+  \end{center}
+
+  \subsection{Robustness of modules for varying $\alpha$}
+
+  Given two modules $V_1' \subseteq V_1$ and $V_2' \subseteq V_2$, the
+  Jaccard index is defined as $(V_1' \cap V_2')/(V_1' \cup
+    V_2')$. Fig.~\ref{fig:jaccard_alpha} shows for each time point the
+  Jaccard index for all pairs of conservation ratios. For consecutive
+  values of $\alpha$ we can see that the module contents do not change
+  much.
+
+  Fig.~\ref{fig:focus_plot} shows the human gene module contents for time
+  point \unit{2}{h} for varying values of $\alpha$, one gene per
+  line. Genes in the left panel (FALSE) are negatively scored, that is,
+  they are not differentially expressed at an FDR of 0.1. Genes in the
+  right panel (TRUE) have a positive score. Squares represent conserved genes,
+  whereas triangles represent non-conserved genes. An \xheinz module
+  solution is thus the set of genes marked with a square or
+  triangle at a given value of $\alpha$. The coloring is as follows:
+  \begin{itemize}
+  \item Genes that are selected at all values of $\alpha$ or
+    are coloured red. These are the core genes. 
+  \item Genes that are selected at $\alpha=0$ (no conservation)
+    but not at $\alpha = 1$ are green. 
+  \item Genes that are selected by $\alpha=1$
+    (strict conservation) but not at $\alpha=0$ are turquoise. 
+  \item Genes that can only be picked by \xheinz (intermediate $\alpha$ values)
+    are orchid.
+  \end{itemize}
+
+  This figure shows that a large fraction of genes
+  only occur in an intermediate $\alpha$ regime (orchid
+  color). Furthermore, the module content smoothly changes as $\alpha$
+  varies, which illustrates the robustness of the approach. \xheinz thus
+  allows the investigator to make an informed choice on the conservation
+  of genes in the modules, which is not possible with methods assuming
+  no or strict conservation.
+
+  \begin{figure}[b]
+    \centering
+    \includegraphics[width=1\linewidth]{jaccard_corrplot_numbers_v2.pdf}
+    \caption{Jaccard index evolution over changes of $\alpha$}
+    \label{fig:jaccard_alpha}
+  \end{figure}
+
+  \begin{figure}[p]
+    \centering
+    \includegraphics[width=1.2\linewidth]{focus_plot_2h_v2.pdf}
+    \caption{Human module contents of the \unit{2}{h} time point with varying $\alpha$}
+    \label{fig:focus_plot}
+  \end{figure}
 
 \section{Discussion}
 \label{sec:xdisc}
@@ -664,7 +963,7 @@ We have translated our model into an integer linear programming formulation and 
 As a validation of our approach, our computational experiments for understanding the mechanisms underlying Th17 T cell differentiation in both mouse and human demonstrate that the flexibility in the definition of conservation is crucial for the computation of meaningful conserved active modules.
 We have found two conserved Th17 modules at time points \unit{2}{h} ($\alpha = 0.8$) and \unit{48}{h} ($\alpha=0.8$) that thoroughly encompass the biphasic Th17 differentiation process.
 This result can not be revealed by requiring full conservation ($\alpha = 1$) or by independent modules without requiring conservation ($\alpha = 0$).
-Likewise, \nexus, an alternative approach based on a stringent conservation model, is not able to capture the key regulatory program of the differentiation process.
+Likewise, \nexus{}, an alternative approach based on a stringent conservation model, is not able to capture the key regulatory program of the differentiation process.
 
 \paragraph{}
 A key characteristics of our model is its flexibility.
@@ -674,19 +973,19 @@ Indeed, the number of interactions between multiple species or time points incre
 It would requires the development of powerful algorithm engineering techniques.
 Interestingly, the complexity of our branch-and-cut modelization of connectivity remains linear on the number of graphs involved.
 
-\paragraph{}
-It could be argued that gene conservation alone does not suffice to guarantee transferability.
-Indeed, recent studies in network alignment showed that biobjective models that look for both gene and interaction conservations tend to discover slightly different structures between species.
-
-However, since we deliberately opted for a constraint based representation of the conservation ratio\footnote{Instead of the more natural but problematic option of having the ratio as a free parameter to optimize for through the objective function.}, the model that we present in \ref{sec:mip} can be easily extended.
-Even though we specifically used a solver technique that does not model edges in the two graphs for performance reasons, there exists state of the art techniques that explicitly represent the edges, and that solve the \mwcs{} problem with competitive running times still (see \cref{chap:state}).
-Using an explicit representation of the edges would allow for a very easy extension of our model.
-The interaction conservations would have to be explicitly represented in the inputs, for example with another bipartite graph linking edges in both graphs, and a conservation ratio constraint, similar to the one for genes, would be added to the integer model.
-
-Second, even though the mathematical model and the integer program are easy to modify, we decided to favor speed of execution in our current implementation.
-Indeed, the quality of most protein-protein interaction networks available is difficult to attest.
-Most of these networks are constructed using cross-species inferences, literature mining, and increasingly advanced techniques to statistically deduce protein interactions.
-We have found that filtering these networks for only the experimentally verified interactions results in most case in very sparse networks, which makes difficult any cross-species reasoning.
+%\paragraph{}
+%It could be argued that gene conservation alone does not suffice to guarantee transferability.
+%Indeed, recent studies in network alignment showed that biobjective models that look for both gene and interaction conservations tend to discover slightly different structures between species.
+%
+%However, since we deliberately opted for a constraint based representation of the conservation ratio\footnote{Instead of the more natural but problematic option of having the ratio as a free parameter to optimize for through the objective function.}, the model that we present in \ref{sec:mip} can be easily extended.
+%Even though we specifically used a solver technique that does not model edges in the two graphs for performance reasons, there exists state of the art techniques that explicitly represent the edges, and that solve the \mwcs{} problem with competitive running times still (see chapter \emph{state of the art}).
+%Using an explicit representation of the edges would allow for a very easy extension of our model.
+%The interaction conservations would have to be explicitly represented in the inputs, for example with another bipartite graph linking edges in both graphs, and a conservation ratio constraint, similar to the one for genes, would be added to the integer model.
+%
+%Second, even though the mathematical model and the integer program are easy to modify, we decided to favor speed of execution in our current implementation.
+%Indeed, the quality of most protein-protein interaction networks available is difficult to attest.
+%Most of these networks are constructed using cross-species inferences, literature mining, and increasingly advanced techniques to statistically deduce protein interactions.
+%We have found that filtering these networks for only the experimentally verified interactions results in most case in very sparse networks, which makes difficult any cross-species reasoning.
 
 \paragraph{}
 We presented a general model and its MIP program to solve any instance of the cross-species module discovery problem.

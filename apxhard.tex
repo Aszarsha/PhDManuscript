@@ -1,36 +1,39 @@
-\chapter{Tight hardness bounds for the \mwccs{} problem}
+\chapter[Tight hardness bounds for the \mwccs{} problem][\mwccs{}]{Tight hardness bounds for the \mwccs{} problem}
 \label{chap:hard}
 
 	In this chapter, we outline the frontier of complexity that characterizes the \textsc{Maximum-Weight Cross-Connected Subgraph} (\mwccs{}) problem.
 	We demonstrate that the bipartite relationship plays a major role in the separation between complexity classes, as do the types of input graphs.
-	Furthermore, we provide constructive proofs, with algorithmic solution that efficiently solve some instances of the problem in polynomial time.
+	Furthermore, we provide constructive proofs, and algorithmic solutions that efficiently solve some instances of the problem in polynomial time.
 
-	The difficulty of the problem is not only dependent on the characteristics of the two main input graphs, but also of the relationship between the nodes of those two graphs.
-	In \cite{hume2015approximation} we suggested that this characteristic is as important as those of the two graphs in defining the frontier of difficulty.
+	The difficulty of the problem is not only dependent on the characteristics of the two main input graphs, but also of the relationship between the nodes of these two graphs.
+	%In \cite{hume2015approximation} we suggested that this characteristic is as important as the two graphs in defining the frontier of difficulty.
 	We hypothesised that the problem might be polynomial-time solvable in some instances with a simpler relationship function.
 
-	In \cref{sec:apx} we demonstrate that the \mwccs{} problem is inapproximable\footnote{NP-hard to approximate.} up to any arbitrary factor $\sigma < 1.0014$, it is thus an APX-hard problem.
-	Exactly, we show that the APX-hardness holds for all inputs complex enough to represent the following cases:
+In \cref{sec:apx} we demonstrate that the \mwccs{} problem is inapproximable (NP-hard to approximate) up to any arbitrary factor $\sigma < 1.0014$, it is thus an APX-hard problem.
+	More precisely, we show that the APX-hardness holds for all inputs complex enough to represent the following cases:
 	\begin{enumerate}
-		\item one of the two graphs is a \emph{binary caterpillar tree}, the other a \emph{binary tree}, and the bipartite relationship is \emph{injective},
+		\item one of the two graphs is a \emph{binary caterpillar tree}\footnote{In our original publication \parencite{hume2015approximation} we have erroneously used the term \emph{comb graph}.}, the other a \emph{binary tree}, and the bipartite relationship is \emph{injective},
 		\item one of the two graphs is a \emph{binary tree}, the other a general \emph{graph}, and the bipartite relationship is \emph{bijective}.
 	\end{enumerate}
-	\Cref{subsec:apx-bt-cater} contains the first proof.
-	\Cref{subsec:apx-t-graph} contains the second proof for a tree and a general graph, and \cref{subsubsec:binary-tree} describe the scheme to extend the proof for a binary tree.
+	\Cref{subsec:apx-bt-cater} contains the first proof, and \cref{subsec:apx-bt-cater} contains the second.
+	%\Cref{subsec:apx-t-graph} contains the second proof.
+	%\Cref{subsec:apx-t-graph} contains the second proof for a tree and a general graph, and \cref{subsubsec:binary-tree} describe the scheme to extend the proof for a binary tree.
 
-	\Cref{sec:poly} is separated into two main subsections dedicated to polynomially solvable cases of the \mwccs{}, both using constructive algorithmic description and with sub-problem definition and reduction.
-	In \cite{hume2015approximation} we suggested that the problem might be solvable in polynomial time when both graphs are \emph{trees} and the relationship is \emph{bijective}; we give a proof for this conjecture in \cref{subsec:tree1o1}.
-	This is important in that it draws a clear complexity frontier, distinctly dependent on the bipartite relationship.
+	\Cref{sec:poly} is separated into two main subsections dedicated to polynomially solvable cases of the \mwccs{}.
+	Both these cases are first formally defined, and their complexity is analyzed by reduction and constructive algorithmic solutions are proposed.
+	%%%In \cite{hume2015approximation} we suggested that the problem might be solvable in polynomial time when both graphs are \emph{trees} and the relationship is \emph{bijective}; we give a proof for this conjecture in \cref{subsec:tree1o1}.
+	This draws a clear complexity frontier, dependent on the bipartite relationship.
 	Finally, in \cref{subsec:enumerable} we provide a general algorithm to solve \mwccs{}.
 	Doing so we introduce a new problem, \rbmwcs{}, to which \cref{sec:rbmwcs} is dedicated.
 	Given that one of the two graphs is polynomially enumerable, we provide an efficient reduction from an \mwccs{} instance to a polynomial number of \rbmwcs{} instances.
-	In this situation, \mwccs{} is thus as difficult as \rbmwcs{}: it is solvable in polynomial time when the second graph has a bounded treewidth\footnote{see \cref{subsec:enumerable} for the problem reduction and \cref{chap:rbmwcs} for the \rbmwcs{} hardness analysis.}.
+	In this case, \mwccs{} is as difficult as \rbmwcs{}: it is solvable in polynomial time when the second graph has a bounded treewidth.
+	The details for the problem reduction are in \cref{subsec:enumerable} and the \rbmwcs{} hardness analysis is in \cref{sec:rbmwcs}.
 
-	The exploration of the frontier of complexity is done in a similar fashion in the two contexts.
-	Adding constraints on one hand leads to a relaxation of some other on the other hand, in order to stay within the same category of difficulty.
-	In the hardness proof context, changing from an injective to a bijective mapping function requires that one of the two trees becomes a general graph for the problem to stay difficult.
-	In the polynomial-time algorithms context, requiring that one of the graph that was previously a binary tree becomes more general%\footnote{In our case, we know it to be solvable for bounded treewidth, but it might be for more general classes of graphs too.}
-	requires that the other becomes polynomially enumerable to stay solvable\footnote{In polynomial time.}.
+	The complexity is analyzed in a similar fashion in the two contexts.
+	Adding constraints to one of the graphs allows to relax some of the constraints for the other graph, in order to stay within the same category of difficulty.
+	In the context of the hardness proof, in order for the problem to stay difficult, the change from an injective to a bijective mapping function requires that one of the two trees become a general graph.
+	In the context of polynomial-time algorithms, requiring that one of the graph that was previously a binary tree becomes more general %\footnote{In our case, we know it to be solvable for bounded treewidth, but it might be for more general classes of graphs too.}
+	requires that the other becomes polynomially enumerable to stay solvable in polynomial time.
 	
 	\section{APX-hardness of the \mwccs{} problem}
 	\label{sec:apx}
@@ -38,17 +41,17 @@
 		In this section we prove the inapproximability of two specific cases of the \mwccs{} problem.
 		First, we prove that if the mapping between $G_1$ and $G_2$ is an injective function, if $G_1$ is a binary caterpillar tree, and if $G_2$ is a binary tree, \mwccs{} is APX-hard and can not be approximated within factor $1.0014$.
 		Then, we prove that if the mapping is a bijective function, the problem is as hard to approximate as when considering a binary tree and a graph.
-		These results in themselves shade some light on the role of the relationship function with respect to the difficulty of the problem.
+		These results in themselves illustrate the role of the mapping function with respect to the difficulty of the problem.
 
-		Both proofs consist in L-reductions from the APX-hard \msat{} problem (see \cref{par:m3sat}).
+		Both proofs consist in L-reductions from the APX-hard \msat{} problem (see chapter \emph{state of the art}).
 
 		%  In the next sections, we assume the following conventions: the variables are denoted by their indice $i$, $1 \leq i \leq n$, and we denote a valuation with the use of $+$ (resp. $-$) as the positive (resp. negative) valuation, followed by the indice of the variable.  We use $\circ$ as a shorcut for either one of the two valuations.  We note $N_{\circ,i}$ the number of clauses where the $\circ$ valuation of the $i$-th variable appears\footnote{we have $0 < N_{\circ,i} \leq 3$ since $F$ is a \cnf{} formula}.
 
-		\subsection{Injective relationship function, binary trees}
+		\subsection{Injective mapping, binary trees}
 		\label{subsec:apx-bt-cater}
 
 		\begin{proposition}\label{prop:apx-bt-cater}
-			The \mwccs{} problem for a binary caterpillar tree and a binary tree is APX-hard and not approximable within factor $1.0014$ even when the mapping $M$ is an injective function and a complete conservation (i.e. $\alpha = 1$) is required.
+			The \mwccs{} problem for a binary caterpillar tree and a binary tree is APX-hard and not approximable within factor $1.0014$ even when the mapping $M$ is an injective function.%and a complete conservation (i.e. $\alpha = 1$) is required.
 		\end{proposition}
 
 		We first describe how we build an instance of \mwccs{} corresponding to an instance of \msat{}. Given any instance $(C_q,V_n)$ of \msat{}, we build a binary caterpillar tree $G_1=(V_1,E_1)$ with weight function $w_1$, a binary tree $G_2=(V_2,E_2)$ with weight function $w_2$, and a mapping $M$ as follows.
@@ -88,7 +91,7 @@
 		\begin{figure}[ht]
     	 	 \centering
     	 	 \includegraphics[width=\textwidth]{apx_bt-cater}
-    	 	 \caption{XXX refaire avec TikZ si temps le permet XXX Illustration of the construction of $G_1$, $G_2$, and $M$, given $C_q = \{(x_1 \vee x_2 \vee \neg{}x_3), (\neg{}x_1 \vee x_2 \vee x_5), (\neg{}x_2 \vee x_3 \vee \neg{}x_4), (\neg{}x_3 \vee x_4 \vee \neg{}x_5)\}$. For readability, the mapping $M$ is not drawn but represented as labels located on the nodes: any pair of nodes (one in $G_1$ and one in $G_2$) of similar inner label are mapped in $M$.}
+    	 	 \caption[Illustration of the construction of $G_1$, $G_2$, and $M$, given $C_q$ (1)]{Illustration of the construction of $G_1$, $G_2$, and $M$, given $C_q = \{(x_1 \vee x_2 \vee \neg{}x_3), (\neg{}x_1 \vee x_2 \vee x_5), (\neg{}x_2 \vee x_3 \vee \neg{}x_4), (\neg{}x_3 \vee x_4 \vee \neg{}x_5)\}$. For readability, the mapping $M$ is not drawn but represented as labels located on the nodes: any pair of nodes (one in $G_1$ and one in $G_2$) of similar inner label are mapped in $M$.}
 			\label{fig:bt-cater}
 		\end{figure}
 
@@ -131,7 +134,7 @@
 		Finally, since both $G_1[V_1^*]$ and $G_2[V_2^*]$ have to be connected, each node in $\mathcal{C}_2$, say $c_j^k$, should be connected by a path to a node $x_i$ or $\overline{x_i}$, say $x_i$, for some $1\leq i \leq n$, in $G_2[V_2^*]$. By construction, this is the case if $x_i$ is the $k$-th literal of the clause $c_j$ for some $1\leq k \leq 3$. Thus, $\mathcal{A}$ is an assignment that satisfies any clause $c_j$ such that the clause node $c_j$ belongs to $V_1^*$. As already stated $|\mathcal{C}_1|=m$.
 		\end{proof}
 
-		The above reduction linearly preserves the approximation since the weights of optimal solutions of the problems correspond and there exists an assignment of $V_n$ satisfying at least $m$ clauses of $C_q$ if and only if there exists a solution to \mwccs{} of weight at least $m$. Hence, given an approximation to \mwccs{}, one can derive an algorithm for \msat{} with the same approximation ratio. Since \msat{}, $B\geq 3$, is APX-hard \cite{papadimitriou1991optimization} and \msat{} for $B=6$ is not approximable within factor $1.0014$ \cite{berman1999some}, so is \mwccs{}, which proves \cref{prop:apx-bt-cater}.
+		The above reduction linearly preserves the approximation since the weights of optimal solutions of the problems correspond and there exists an assignment of $V_n$ satisfying at least $m$ clauses of $C_q$ if and only if there exists a solution to \mwccs{} of weight at least $m$. Hence, given an approximation to \mwccs{}, one can derive an algorithm for \msat{} with the same approximation ratio. Since \msat{}, $B\geq 3$, is APX-hard \parencite{papadimitriou1991optimization} and \msat{} for $B=6$ is not approximable within factor $1.0014$ \parencite{berman1999some}, so is \mwccs{}, which proves \Cref{prop:apx-bt-cater}.
 
 		Let us now prove a similar result for \mwccs{} problem when the mapping is a bijective function.
 
@@ -140,7 +143,7 @@
 		\label{subsec:apx-t-graph}
 
 		\begin{proposition}\label{prop:apx-t-graph}
-  	  	  The \mwccs{} problem for a graph and a tree is APX-hard and not approximable within factor $1.0014$ even when the mapping is a bijective function and a complete conservation (i.e. $\alpha = 1$) is required.
+  	  	  The \mwccs{} problem for a graph and a tree is APX-hard and not approximable within factor $1.0014$ even when the mapping is a bijective function.% and a complete conservation (i.e. $\alpha = 1$) is required.
 		\end{proposition}
 
 		Given any instance $(C_q,V_n)$ of \msat{}, we build a graph $G_1=(V_1,E_1)$ with weight function $w_1$, a tree $G_2=(V_2,E_2)$ with weight function $w_2$ and a mapping $M$ as follows. The graph $G_1$ has the vertex set $V_1=\{r, l_i, x_i, \overline{x_i}, c_j,$ $ c^k_j ~\vert~ 1\leq i\leq n, 1\leq j \leq q, 1\leq k \leq 3\}$ and the edge set defined by the following equation.
@@ -172,7 +175,7 @@
     	 	 
     	 	 \centering
     	 	 \includegraphics[width=\textwidth]{apx_g-tree}
-    	 	 \caption{XXX refaire avec TikZ si temps le permet XXX Illustration of the construction of $G_1$, $G_2$, and $M$, given $C_q = \{(x_1 \vee x_2 \vee \neg{}x_3), (\neg{}x_1 \vee x_2 \vee x_5), (\neg{}x_2 \vee x_3 \vee \neg{}x_4), (\neg{}x_3 \vee x_4 \vee \neg{}x_5)\}$. For readability, the mapping $M$ is not drawn but deduced from the labels of the nodes; any pair of nodes (one in $G_1$ and one in $G_2$) of similar label are mapped in $M$.}\label{fig:g-tree}
+    	 	 \caption[Illustration of the construction of $G_1$, $G_2$, and $M$, given $C_q$ (2)]{Illustration of the construction of $G_1$, $G_2$, and $M$, given $C_q = \{(x_1 \vee x_2 \vee \neg{}x_3), (\neg{}x_1 \vee x_2 \vee x_5), (\neg{}x_2 \vee x_3 \vee \neg{}x_4), (\neg{}x_3 \vee x_4 \vee \neg{}x_5)\}$. For readability, the mapping $M$ is not drawn but deduced from the labels of the nodes; any pair of nodes (one in $G_1$ and one in $G_2$) of similar label are mapped in $M$.}\label{fig:g-tree}
     	 	 \end{figure}
    		
 		Let us prove that this construction is indeed an L-reduction from \msat{}. More precisely, we prove the following property.
@@ -203,236 +206,236 @@
 		Since both $G_1[V^*]$ and $G_2[V^*]$ have to be connected, any solution with $m>1$ will include node $r$ in $V^*$. Thus, for each node $c_j\in\mathcal{C}_1$ there should be a node of $\{c_j^k ~\vert~ 1\leq k\leq 3\}$ in $G_1[V^*]$ to connect $c_j$ to $r$. In $G_2[V^*]$, in order for nodes $r$ and $c_j^k$ to be connected, the corresponding literal node (that is $x_i$ or $\overline{x_i}$), say $x_i$ -- has to be kept in $V^*$. By construction, this is the case if $x_i$ is the $k$-th literal of clause $c_j$. Thus, $\mathcal{A}$ is an assignment that satisfies any clause $c_j$ such that the clause node $c_j$ belongs to $V^*$. As already stated $|\mathcal{C}_1|=m$.
 		\end{proof}
 
-		The above reduction linearly preserves the approximation and proves \cref{prop:apx-t-graph}.
+		The above reduction linearly preserves the approximation and proves \Cref{prop:apx-t-graph}.
 
-		\subsubsection{Binary tree and graph}
-		\label{subsubsec:binary-tree}
-
-		XXX refaire si temps le permet XXX
+%		\subsubsection{Binary tree and graph}
+%		\label{subsubsec:binary-tree}
+%
+%		XXX refaire si temps le permet XXX
 
 	\section{Polynomial-time cases for the \mwccs{} problem}
 	\label{sec:poly}
 
-		\subsection{Two bounded-degree trees and a bijective mapping}
-		\label{subsec:tree1o1}
-
-			Here we continue to explore the case with fixed $\alpha = 1$.
-			We have proved in \cref{subsec:apx-bt-cater} that for instances with two binary trees, and an injective mapping function, the problem is APX-hard.
-			We will now consider the case of two bounded-degree trees, $T_1 = (V_1, E_1)$ and $T_2 = (V_2, E_2)$, with a bijective relationship, or mapping function, $V_1\,M\,V_2$. Without loss of generality, lets now suppose that their respective degrees are $d_{T_1} = d_{T_2} = d$, and that $\norm{V_1} = \norm{V_2} = n$.
-
-%			The standard algorithms for \mwcs{} and its variants\footnote{Mainly cardinality-constrained, budget-constrained, and ratio-bounded, with a pseudo-polynomial algorithm for all of them exposed in the next chapter.} use bottom-up, usually dynamic-programming, approaches.
-%			Given an unrooted tree $T$, root $T$ in one of its node to direct the edges.
-%			Then, compute recursively the maximum weight of the subtrees that unconditionally includes their root.
-
-%			It would be a good characteristic of our algorithm to advance in a similar fashion, recursively solving subproblems, and progressing in both trees in locked step.
-			Since $\alpha=1$, a node can only be selected if its counterpart is also selected.
-			However, note that a node in one of the trees %\footnote{With any arbitrary node as its root.}
-			can have its counterpart at a completely different depth in the other tree %\footnote{Also with any arbitrary node as its root.}
-			 (see \cref{fig:childReqParent}).
-			Consequently, adding a child node might require the addition of a parent by mutual requirement between the two trees and the mapping function (see \cref{fig:childReqParent}).
-			This exhibit the main difficulty with this problem: the non-isomorphic mapping function makes it impossible to use the usual local dynamic programming scheme to solve the \mwcs{} problem and its variants on trees.
-
-			\begin{figure}[ht]
-				\centering
-            \begin{tikzpicture}[level/.style={sibling distance=10em/#1},
-              every node/.style = {shape=circle, draw, align=center}]]
-              \node {R}
-                child { node {A}
-                  child { node {\phantom{N}} }
-                  child { node {\phantom{N}} }
-                }
-                child { node {C}
-                  child { node {\phantom{N}} }
-                  child { node {B} }
-                };
-            \end{tikzpicture}
-            \qquad
-            \begin{tikzpicture}[level/.style={sibling distance=10em/#1},
-              every node/.style = {shape=circle, draw, align=center}]]
-              \node {r}
-                child { node {b}
-                  child { node {a} }
-                  child { node {c} }
-                }
-                child { node {\phantom{N}}
-                  child { node {\phantom{N}} }
-                  child { node {\phantom{N}} }
-                };
-            \end{tikzpicture}
-
-%				\includegraphics[width=\textwidth,height=0.3\textwidth]{childReqParent.png}
-				\caption[Caption for LOF]{Nodes labeled with the same letter are counterpart of one another.
-				
-				When starting from an empty solution\protect\footnotemark, the inclusion of node $A$ requires only the inclusion of $a$. However when starting from the root nodes, the inclusion of node $A$ requires the inclusion of node $a$, which recursively requires the inclusions of $b$, $B$, $C$, and $c$.
-			
-				A local dynamic programming approach is impossible since the context is important.}
-				\label{fig:childReqParent}
-			\end{figure}
-
-			In this section, we introduce a \emph{functional dynamic programming} approach for this setup that solve the \mwccs{} problem in polynomial time parameterized on the degree of the trees. A functional dynamic programming approach is a \emph{top-down} dynamic programming technique, that is recursive and using subproblem overlaps, that uses a \emph{memoization} scheme to store intermediate results instead of the usual tabular approach.
-
-			Our algorithm is composed of two main operations.
-			$\text{ComputeDecisionTree}$ is the main functionnal dynamic programming procedure and finds the optimal solution to the problem given two trees and a root for one of them.
-			$\text{ComputeDecisionTree}$ calls upon $\text{ConstructRequiredSet}$ to maintain the connectivity and matching constraints of the candidate solution.
-			%Now the complete operations might seem unnecessarily complex for now, but will become self-explanatory in the end.
-
-			\footnotetext{As is the case with regular dynamic programming, which depend only on local subproblems.}
-
-			\paragraph{$\text{ConstructRequiredSet}$:}
-			Informally, $\text{ConstructRequiredSet}$ takes as input all the nodes that have been included up intil now, from both $T_1$ and $T_2$, and add into those sets all nodes that are required to be added if $u$ is included to keep 1) connectivity and 2) perfect matching (see \cref{fig:childReqParent}).
-
-			Adding a node $u \in V_1$ from $T_1$ to a candidate solution\footnote{At least one of the neighbors of $u$ is in the candidate solution, or the candidate solution is empty. That is, its addition leaves the candidate solution connected.} requires the unconditional inclusion of its counterpart $v \in V_2$ from $T_2$ to the candidate solution.
-			In turn, the addition of $v$ requires the addition of all nodes from $T_2$ that are necessary for the candidate solution to remain connected: the (possibly empty) shortest path $v_0 v_1 \ldots v_i$ between $v$ and, if one exists, its closest node from $T_2$ already in the solution.
-			Recursively, this requires the addition of all counterparts of the nodes $v_0$, $v_1$, $\ldots$, $v_i$ to the candidate solution, and the nodes required for the candidate solution to remain connected.
-			This recursion continues until no more nodes are required to be included to conserve connectivity.
-
-			It is formally defined as follows.
-			Given two sets $S_1 \subseteq V_1$ and $S_2 \subseteq V_2$ of nodes already selected, and a node $u \in V_1 \setminus S_1$ such that $u$ is a neighbor of a node in $S_1$ ($v \in V_2$ its counterpart).
-			We define a double recursion procedure over $V_1$ and $V_2$.
-			Add $u$ to $S_1$; then, find the shortest path from its counterpart $v$ to any node of $S_2$.
-			Add all nodes that pertain to this shortest path to $S_2$ (including $v$), and recursively find all shortest paths from their counterparts to the nodes of $S_1$.
-			%Note that since the graphs are trees, the order which is used to call the procedure on all these nodes can be arbitrary.
-			Continue until no more nodes need to be added.
-
-			\begin{proposition}\label{prop:constructFuncConnected}
-				The induced graphs $T_1[S_1]$ and $T_2[S_2]$ obtained as results of $\text{ConstructRequiredSet}$ are connected.
-			\end{proposition}
-			\begin{proof}
-				Indeed, since we recursively add nodes with their shortest path to already selected nodes, there exists a path connecting every pairs of nodes of $S_1$ and of $S_2$.
-			\end{proof}
-
-			\begin{proposition}\label{prop:constructFuncQuadratic}
-				$\text{ConstructRequiredSet}$ is a quadratic operation in the worst case.
-			\end{proposition}
-			\begin{proof}
-				The shortest path toward a set of nodes in a tree is equivalent to the minimum sum subsequence problem and can be solved in linear time using a dynamic programming approach.
-				We recursively add up to $O(n)$ nodes (all).
-				Hence the resulting complexity.
-			\end{proof}
-
-			\paragraph{$\text{ComputeDecisionTree}$:}
-			The main procedure, $\text{ComputeDecisionTree}$,  is a recursive decision tree traversal of $T_1$ that uses the $\text{ConstructRequiredSet}$ operation.
-%			This recursive procedure, $\text{ComputeDecisionTree}$ is formally defined as follows.
-%			Given two sets $S^u_1$ and $S^u_2$ of connected nodes in $V_1$ and $V_2$ respectively, and a node $u$: the last selected node in the decision tree.
-%			Lets define $u^i$ the $i$-th children of $u$, and $C_u = \bigcup\limits_i{u^i}$ the set of these children. %, and $C = C_u \setminus S_1$ the children of $u$ that where not added to $S_1$ in any of the previous decisions.
-%			%If all children of $u$ have been recursively added at the previous step ($C = \emptyset$), end this branch of the decision tree.
-%			%If $u$ has not children ($C = \emptyset$), end this branch of the decision tree.
-%			For all nodes $u^i \in C_u$, if any:
-%			\begin{enumerate}
-%				\item call the $\text{ConstructRequiredSet}$ procedure with $S^u_1$, $S^u_2$, and $u^i$, which will return $S^{u_i}_1$ and $S^{u_i}_2$, and
-%				\item recursively expend the decision tree by calling $\text{ComputeDecisionTree}$ with $S^{u_i}_1$, $S^{u_i}_2$, and $u^i$.
-%			\end{enumerate}
-%			We then compute a score $s(S_1, S_2, u)$ for this node (defined by the selection of $u$ in the decision tree) as follows.
-			It is formally defined as follows.
-			Given $T_1$, $T_2$, and a node $u \in V_1$, this function returns the set $S^u_1$ and $S^u_2$: the best selection of nodes, respectively from $T_1$ and $T_2$, when optimizing in the subtree rooted in $u$ and which includes $u$.
-			Note that $S^u_1$ might contain nodes that are parents to $u$, as a requirement for the matching and connectivity constraints.
-			Lets define $u_i$ the $i$-th children of $u$, and $C^u = \bigcup\limits_i{\{u_i\}}$ the set of these children. %, and $C = C_u \setminus S_1$ the children of $u$ that where not added to $S_1$ in any of the previous decisions.
-			%If all children of $u$ have been recursively added at the previous step ($C = \emptyset$), end this branch of the decision tree.
-			%If $u$ has not children ($C = \emptyset$), end this branch of the decision tree.
-			For all nodes $u_i \in C^u$, if any:
-			\begin{enumerate}
-				\item recursively call $\text{ComputeDecisionTree}$ with $u_i$, which will return the sets $S^{u_i}_1$ and $S^{u_i}_2$, then
-				\item call the $\text{ConstructRequiredSet}$ procedure with $S^{u_i}_1$, $S^{u_i}_2$, and $u$, which will return $\accentset{\circ}{S^{u_i}_1}$ and $\accentset{\circ}{S^{u_i}_2}$.
-			\end{enumerate} 
-			Then compute a score $s(u)$, which correspond to the optimal combination of children such that their inclusion maximizes the local sum of weights.
-			This score only consider the subtree rooted in $u$ and including $u$ in a typical dynamic programming approach.
-
-			Formally, the computation of this score is as follows.
-			For notation sake, lets define $\mathcal{P}^u = \mathcal{P}\left({C^u}\right)$: the \emph{power set} containing all the combinations of children of $u$; and $\mathcal{P}^u_k$ the $k$-th element of this set.
-			Lets also define $S^{\mathcal{P}^u_k} = \bigcup\limits_{u^i \in \mathcal{P}^u_k}{\accentset{\circ}{S^{u_i}_1} \cup \accentset{\circ}{S^{u_i}_2}}$: the union of the optimal nodes in the $k$-th combination of children\footnote{Note that in general, this union is certainly not optimal. Unless there are multiple optimal solutions, only one combination of the children maximizes the score, and possibly the empty one.}, including $u$.
-			To simplicity notation, we further define $S^{\mathcal{P}^u_0}$, with the $0$-th combination being the usual empty set\footnote{Here of children.}, as the set $\{u, v\}$: if no children are selected, only the current node and its counterpart are part of the solution, which is a connected and matched solution by definition.
-			Finally, we have:
-%			\[
-%				w(S^{d_i}) = w(n_i) + \max\left(0, w\left(S^{{\langle r\rangle}_{d_i}}\right), w\left(S^{{\langle r\rangle}_{d_i}}\right), w\left(S^{{\langle l\rangle}_{d_i}} \cup S^{{\langle r\rangle}_{d_i}}\right)\right)
-%			\]
-%			\[
-%			s(u) = w(u) + \max\left(\begin{array}{c}
-%				0,\\
-%				w\left(S^{{\langle \text{left}\rangle}_{d_i}}\right),\\
-%				w\left(S^{{\langle \text{right}\rangle}_{d_i}}\right),\\
-%				w\left(S^{{\langle \text{left}\rangle}_{d_i}} \cup S^{{\langle \text{right}\rangle}_{d_i}}\right)
-%			\end{array}\right)
-%			\]
-%			\begin{align*}
-%				s(u)
-%					& = \sum\limits_{n \in S^u}{w(n)} + \max\limits_{k}{\left(0, \sum\limits_{n \in S^{\mathcal{P}^u_k} \setminus S^u}{w(n)}\right)} \\
-%					& = \max\limits_{k}{\left(\sum\limits_{n \in S^u}{w(n)}, \sum\limits_{n \in S^{\mathcal{P}^u_k}}{w(n)}\right)}
-%			\end{align*}
-			\[
-				s(u) = \max\limits_{k}{\sum\limits_{n \in S^{\mathcal{P}^u_k}}{w\left(n\right)}}
-			\]
-
-			Computing the optimal combination of children, required for the $\max$ function, is not an easy problem.
-			It looks similar to the \textsc{weighted maximum coverage} problem \parencite{hochbaum1996approximation}, relaxed both with possibly negative weights, and with unconstrained number of sets.
-			It also looks quite similar to the \textsc{set-union knapsack} problem \parencite{goldschmidt1994note}, but again with real-valued weights and without budget constraint.
-			Both are sensibly related and difficult, NP-hard problems~\parencites{hochbaum1996approximation,cohen2008generalized}.
-			However, since we are working with bounded-degree trees, the number of combinations remains (parameterized-)constant. The overall algorithm is thus in FPT (Fixed-Parameter Tractable), see \cref{prop:decisionTreeComplexity} for proof.
-
-			\begin{proposition}
-				$\text{ComputeDecisionTree}$ is a parameterized complexity algorithm which requires at most $O(2^d n^2 + n^3)$ steps for $d$-ary trees.
-				\label{prop:decisionTreeComplexity}
-			\end{proposition}
-			\begin{proof}
-				The recursion tree closely follows the topology of $T_1$, and contains at most $O(n)$ calls.
-				At each step we use the $\text{ConstructRequiredSet}$ procedure, which is a quadratic time operation.
-				We also compute the score, which itself requires to compute a set union operation for each combination of children.
-				There are at worst $O(2^d)$ combination of children (the cardinality of the power set), and set union is at worst an $O(n)$ operation with a bitvector representation of the sets.
-				Hence the resulting number of steps.
-			\end{proof}
-
-%			\paragraph{}
-%			Overall, note that this procedure construct increasingly inclusive set of required nodes $S_1$ and $S_2$.
-%			This is expected, since recursive calls can only add nodes to the solution in order to maintain the two connectivity and matching contraints after each decision.
-%			However, it effectively defines an environment into which the recursive $\text{ComputeDecisionTree}$ operate, implicitly defined by the initial node and the set of choices made up until the current node.
-%
-%			
-%
-%			\begin{figure}[ht]
-%				\centering
-%				\includegraphics[width=\textwidth,height=0.3\textwidth]{DecisionTreeWithScores.png}
-%				\label{fig:foo}
-%			\end{figure}
-%
-%			We thus need to iterate this decision tree procedure for all pairs $u,v \in V_1\times V_2$.
-
-			\begin{proposition}
-				One of the recursive calls of $\text{ComputeDecisionTree}$ contains the optimal solution to the global problem.
-			\end{proposition}
-			\begin{proof}
-				Even though two subtrees could actually have the exact same solution, since parent nodes can be included for matching and connectivity constraint reasons, it should be clear from the standard tree traversal that the whole tree $T_1$ is considered and that all its subtrees (that respect the constraints) are evaluated.
-				To see that the optimal solution found by this procedure, in $T_1$, is also the optimal in regard to $T_2$, note that any given subtree of $T_1$, that is valid under the constraints, have one and only one counterpart subtree in $T_2$.
-				Indeed, since the matching is a bipartite function, each node have one and only one counterpart; any subtree of size $m$ in $T_1$ have one and only one counterpart subtree of size $m$ in $T_2$, the one that contains all counterpart nodes.
-				Finally, since all possible subtrees of $T_1$ (that respect the constraints) are considered, it must be that all possible subtrees of $T_2$ are also considered by this procedure.
-			\end{proof}
-
-			The optimum is in the recursive call with the highest total score, the optimal objective, and the optimal solution is the corresponding set of nodes $S^u$.
-
-%			\begin{proposition}\label{prop:totalComplex}
-%				The overall algorithm to compute the optimal solution is an $O(n^3)$ running time algorithm.
-%			\end{proposition}
-%			\begin{proof}
-%				Indeed, since the nodes are on a one to one mapping, there exists exactly $n = \norm{V_1} = \norm{V_2}$ pairs of nodes $u,v \in V_1\times V_2$.
-%				For each such pair we call $\text{ComputeDecisionTree}$ which is an $O(n^2)$ operation.
-%
-%				In the end, the optimal solution is in one of the $O(n^3)$ decision tree nodes.
-%
-%				Hence the total running time.
-%			\end{proof}
-
+%%%		\subsection{Two bounded-degree trees and a bijective mapping}
+%%%		\label{subsec:tree1o1}
+%%%
+%%%			We have proved in \cref{subsec:apx-bt-cater} that for instances with two binary trees, and an injective mapping function, the problem is APX-hard.
+%%%			We will now consider the case of two bounded-degree trees, $T_1 = (V_1, E_1)$ and $T_2 = (V_2, E_2)$, with a bijective relationship, or mapping function, $V_1\,M\,V_2$. Without loss of generality, lets now suppose that their respective degrees are $d_{T_1} = d_{T_2} = d$, and that $\norm{V_1} = \norm{V_2} = n$.
+%%%
+%%%%			The standard algorithms for \mwcs{} and its variants\footnote{Mainly cardinality-constrained, budget-constrained, and ratio-bounded, with a pseudo-polynomial algorithm for all of them exposed in the next chapter.} use bottom-up, usually dynamic-programming, approaches.
+%%%%			Given an unrooted tree $T$, root $T$ in one of its node to direct the edges.
+%%%%			Then, compute recursively the maximum weight of the subtrees that unconditionally includes their root.
+%%%
+%%%%			It would be a good characteristic of our algorithm to advance in a similar fashion, recursively solving subproblems, and progressing in both trees in locked step.
+%%%			Since $\alpha=1$, a node can only be selected if its counterpart is also selected.
+%%%			However, note that a node in one of the trees %\footnote{With any arbitrary node as its root.}
+%%%			can have its counterpart at a completely different depth in the other tree %\footnote{Also with any arbitrary node as its root.}
+%%%			 (see \cref{fig:childReqParent}).
+%%%			Consequently, adding a child node might require the addition of a parent by mutual requirement between the two trees and the mapping function (see \cref{fig:childReqParent}).
+%%%			This exhibit the main difficulty with this problem: the non-isomorphic mapping function makes it impossible to use the usual local dynamic programming scheme to solve the \mwcs{} problem and its variants on trees.
+%%%
+%%%			\begin{figure}[ht]
+%%%				\centering
+%%%            \begin{tikzpicture}[level/.style={sibling distance=9em/#1},
+%%%              every node/.style = {shape=circle, draw, align=center, minimum size=2.3em}]]
+%%%              \node {R}
+%%%                child { node {A}
+%%%                  child { node {\phantom{N}} }
+%%%                  child { node {\phantom{N}} }
+%%%                }
+%%%                child { node {C}
+%%%                  child { node {\phantom{N}} }
+%%%                  child { node {B} }
+%%%                };
+%%%            \end{tikzpicture}
+%%%            \qquad
+%%%            \begin{tikzpicture}[level/.style={sibling distance=9em/#1},
+%%%              every node/.style = {shape=circle, draw, align=center, minimum size=2.3em}]]
+%%%              \node {r}
+%%%                child { node {b}
+%%%                  child { node {a} }
+%%%                  child { node {c} }
+%%%                }
+%%%                child { node {\phantom{N}}
+%%%                  child { node {\phantom{N}} }
+%%%                  child { node {\phantom{N}} }
+%%%                };
+%%%            \end{tikzpicture}
+%%%
+%%%%				\includegraphics[width=\textwidth,height=0.3\textwidth]{childReqParent.png}
+%%%				\caption[Nodes labeled with the same letter are counterpart of one another]{Nodes labeled with the same letter are counterpart of one another.
+%%%				When starting from an empty solution\protect\footnotemark, the inclusion of node $A$ requires only the inclusion of $a$. However when starting from the root nodes, the inclusion of node $A$ requires the inclusion of node $a$, which recursively requires the inclusions of $b$, $B$, $C$, and $c$.
+%%%				A local dynamic programming approach is impossible since the context is important.}
+%%%				\label{fig:childReqParent}
+%%%			\end{figure}
+%%%
+%%%			In this section, we introduce a \emph{functional dynamic programming} approach for this setup that solve the \mwccs{} problem in polynomial time parameterized on the degree of the trees. A functional dynamic programming approach is a \emph{top-down} dynamic programming technique, that is recursive and using subproblem overlaps, that uses a \emph{memoization} scheme to store intermediate results instead of the usual tabular approach.
+%%%
+%%%			Our algorithm is composed of two main operations.
+%%%			$\text{ComputeDecisionTree}$ is the main functionnal dynamic programming procedure and finds the optimal solution to the problem given two trees and a root for one of them.
+%%%			$\text{ComputeDecisionTree}$ calls upon $\text{ConstructRequiredSet}$ to maintain the connectivity and matching constraints of the candidate solution.
+%%%			%Now the complete operations might seem unnecessarily complex for now, but will become self-explanatory in the end.
+%%%
+%%%			\footnotetext{As is the case with regular dynamic programming, which depend only on local subproblems.}
+%%%
+%%%			\paragraph{$\text{ConstructRequiredSet}$:}
+%%%			Informally, $\text{ConstructRequiredSet}$ takes as input all the nodes that have been included up intil now, from both $T_1$ and $T_2$, and add into those sets all nodes that are required to be added if $u$ is included to keep 1) connectivity and 2) perfect matching (see \cref{fig:childReqParent}).
+%%%
+%%%			Adding a node $u \in V_1$ from $T_1$ to a candidate solution\footnote{At least one of the neighbors of $u$ is in the candidate solution, or the candidate solution is empty. That is, its addition leaves the candidate solution connected.} requires the unconditional inclusion of its counterpart $v \in V_2$ from $T_2$ to the candidate solution.
+%%%			In turn, the addition of $v$ requires the addition of all nodes from $T_2$ that are necessary for the candidate solution to remain connected: the (possibly empty) shortest path $v_0 v_1 \ldots v_i$ between $v$ and, if one exists, its closest node from $T_2$ already in the solution.
+%%%			Recursively, this requires the addition of all counterparts of the nodes $v_0$, $v_1$, $\ldots$, $v_i$ to the candidate solution, and the nodes required for the candidate solution to remain connected.
+%%%			This recursion continues until no more nodes are required to be included to conserve connectivity.
+%%%
+%%%			It is formally defined as follows.
+%%%			Given two sets $S_1 \subseteq V_1$ and $S_2 \subseteq V_2$ of nodes already selected, and a node $u \in V_1 \setminus S_1$ such that $u$ is a neighbor of a node in $S_1$ ($v \in V_2$ its counterpart).
+%%%			We define a double recursion procedure over $V_1$ and $V_2$.
+%%%			Add $u$ to $S_1$; then, find the shortest path from its counterpart $v$ to any node of $S_2$.
+%%%			Add all nodes that pertain to this shortest path to $S_2$ (including $v$), and recursively find all shortest paths from their counterparts to the nodes of $S_1$.
+%%%			%Note that since the graphs are trees, the order which is used to call the procedure on all these nodes can be arbitrary.
+%%%			Continue until no more nodes need to be added.
+%%%
+%%%			\begin{proposition}\label{prop:constructFuncConnected}
+%%%				The induced graphs $T_1[S_1]$ and $T_2[S_2]$ obtained as results of $\text{ConstructRequiredSet}$ are connected.
+%%%			\end{proposition}
+%%%			\begin{proof}
+%%%				Indeed, since we recursively add nodes with their shortest path to already selected nodes, there exists a path connecting every pairs of nodes of $S_1$ and of $S_2$.
+%%%			\end{proof}
+%%%
+%%%			\begin{proposition}\label{prop:constructFuncQuadratic}
+%%%				$\text{ConstructRequiredSet}$ is a quadratic operation in the worst case.
+%%%			\end{proposition}
+%%%			\begin{proof}
+%%%				The shortest path toward a set of nodes in a tree is equivalent to the minimum sum subsequence problem and can be solved in linear time using a dynamic programming approach.
+%%%				We recursively add up to $O(n)$ nodes (all).
+%%%				Hence the resulting complexity.
+%%%			\end{proof}
+%%%
+%%%			\paragraph{$\text{ComputeDecisionTree}$:}
+%%%			The main procedure, $\text{ComputeDecisionTree}$,  is a recursive decision tree traversal of $T_1$ that uses the $\text{ConstructRequiredSet}$ operation.
+%%%%			This recursive procedure, $\text{ComputeDecisionTree}$ is formally defined as follows.
+%%%%			Given two sets $S^u_1$ and $S^u_2$ of connected nodes in $V_1$ and $V_2$ respectively, and a node $u$: the last selected node in the decision tree.
+%%%%			Lets define $u^i$ the $i$-th children of $u$, and $C_u = \bigcup\limits_i{u^i}$ the set of these children. %, and $C = C_u \setminus S_1$ the children of $u$ that where not added to $S_1$ in any of the previous decisions.
+%%%%			%If all children of $u$ have been recursively added at the previous step ($C = \emptyset$), end this branch of the decision tree.
+%%%%			%If $u$ has not children ($C = \emptyset$), end this branch of the decision tree.
+%%%%			For all nodes $u^i \in C_u$, if any:
+%%%%			\begin{enumerate}
+%%%%				\item call the $\text{ConstructRequiredSet}$ procedure with $S^u_1$, $S^u_2$, and $u^i$, which will return $S^{u_i}_1$ and $S^{u_i}_2$, and
+%%%%				\item recursively expend the decision tree by calling $\text{ComputeDecisionTree}$ with $S^{u_i}_1$, $S^{u_i}_2$, and $u^i$.
+%%%%			\end{enumerate}
+%%%%			We then compute a score $s(S_1, S_2, u)$ for this node (defined by the selection of $u$ in the decision tree) as follows.
+%%%			It is formally defined as follows.
+%%%			Given $T_1$, $T_2$, and a node $u \in V_1$, this function returns the set $S^u_1$ and $S^u_2$: the best selection of nodes, respectively from $T_1$ and $T_2$, when optimizing in the subtree rooted in $u$ and which includes $u$.
+%%%			Note that $S^u_1$ might contain nodes that are parents to $u$, as a requirement for the matching and connectivity constraints.
+%%%			Lets define $u_i$ the $i$-th children of $u$, and $C^u = \bigcup\limits_i{\{u_i\}}$ the set of these children. %, and $C = C_u \setminus S_1$ the children of $u$ that where not added to $S_1$ in any of the previous decisions.
+%%%			%If all children of $u$ have been recursively added at the previous step ($C = \emptyset$), end this branch of the decision tree.
+%%%			%If $u$ has not children ($C = \emptyset$), end this branch of the decision tree.
+%%%			For all nodes $u_i \in C^u$, if any:
+%%%			\begin{enumerate}
+%%%				\item recursively call $\text{ComputeDecisionTree}$ with $u_i$, which will return the sets $S^{u_i}_1$ and $S^{u_i}_2$, then
+%%%				\item call the $\text{ConstructRequiredSet}$ procedure with $S^{u_i}_1$, $S^{u_i}_2$, and $u$, which will return $\accentset{\circ}{S^{u_i}_1}$ and $\accentset{\circ}{S^{u_i}_2}$.
+%%%			\end{enumerate} 
+%%%			Then compute a score $s(u)$, which correspond to the optimal combination of children such that their inclusion maximizes the local sum of weights.
+%%%			This score only consider the subtree rooted in $u$ and including $u$ in a typical dynamic programming approach.
+%%%
+%%%			Formally, the computation of this score is as follows.
+%%%			For notation sake, lets define $\mathcal{P}^u = \mathcal{P}\left({C^u}\right)$: the \emph{power set} containing all the combinations of children of $u$; and $\mathcal{P}^u_k$ the $k$-th element of this set.
+%%%			Lets also define $S^{\mathcal{P}^u_k} = \bigcup\limits_{u^i \in \mathcal{P}^u_k}{\accentset{\circ}{S^{u_i}_1} \cup \accentset{\circ}{S^{u_i}_2}}$: the union of the optimal nodes in the $k$-th combination of children\footnote{Note that in general, this union is certainly not optimal. Unless there are multiple optimal solutions, only one combination of the children maximizes the score, and possibly the empty one.}, including $u$.
+%%%			To simplicity notation, we further define $S^{\mathcal{P}^u_0}$, with the $0$-th combination being the usual empty set\footnote{Here of children.}, as the set $\{u, v\}$: if no children are selected, only the current node and its counterpart are part of the solution, which is a connected and matched solution by definition.
+%%%			Finally, we have:
+%%%%			\[
+%%%%				w(S^{d_i}) = w(n_i) + \max\left(0, w\left(S^{{\langle r\rangle}_{d_i}}\right), w\left(S^{{\langle r\rangle}_{d_i}}\right), w\left(S^{{\langle l\rangle}_{d_i}} \cup S^{{\langle r\rangle}_{d_i}}\right)\right)
+%%%%			\]
+%%%%			\[
+%%%%			s(u) = w(u) + \max\left(\begin{array}{c}
+%%%%				0,\\
+%%%%				w\left(S^{{\langle \text{left}\rangle}_{d_i}}\right),\\
+%%%%				w\left(S^{{\langle \text{right}\rangle}_{d_i}}\right),\\
+%%%%				w\left(S^{{\langle \text{left}\rangle}_{d_i}} \cup S^{{\langle \text{right}\rangle}_{d_i}}\right)
+%%%%			\end{array}\right)
+%%%%			\]
+%%%%			\begin{align*}
+%%%%				s(u)
+%%%%					& = \sum\limits_{n \in S^u}{w(n)} + \max\limits_{k}{\left(0, \sum\limits_{n \in S^{\mathcal{P}^u_k} \setminus S^u}{w(n)}\right)} \\
+%%%%					& = \max\limits_{k}{\left(\sum\limits_{n \in S^u}{w(n)}, \sum\limits_{n \in S^{\mathcal{P}^u_k}}{w(n)}\right)}
+%%%%			\end{align*}
+%%%			\[
+%%%				s(u) = \max\limits_{k}{\sum\limits_{n \in S^{\mathcal{P}^u_k}}{w\left(n\right)}}
+%%%			\]
+%%%
+%%%			Computing the optimal combination of children, required for the $\max$ function, is not an easy problem.
+%%%			It looks similar to the \textsc{weighted maximum coverage} problem \parencite{hochbaum1996approximation}, relaxed both with possibly negative weights, and with unconstrained number of sets.
+%%%			It also looks quite similar to the \textsc{set-union knapsack} problem \parencite{goldschmidt1994note}, but again with real-valued weights and without budget constraint.
+%%%			Both are sensibly related and difficult, NP-hard problems~\parencites{hochbaum1996approximation,cohen2008generalized}.
+%%%			However, since we are working with bounded-degree trees, the number of combinations remains (parameterized-)constant. The overall algorithm is thus in FPT (Fixed-Parameter Tractable), see \cref{prop:decisionTreeComplexity} for proof.
+%%%
+%%%			\begin{proposition}
+%%%				$\text{ComputeDecisionTree}$ is a parameterized complexity algorithm which requires at most $O(2^d n^2 + n^3)$ steps for $d$-ary trees.
+%%%				\label{prop:decisionTreeComplexity}
+%%%			\end{proposition}
+%%%			\begin{proof}
+%%%				The recursion tree closely follows the topology of $T_1$, and contains at most $O(n)$ calls.
+%%%				At each step we use the $\text{ConstructRequiredSet}$ procedure, which is a quadratic time operation.
+%%%				We also compute the score, which itself requires to compute a set union operation for each combination of children.
+%%%				There are at worst $O(2^d)$ combination of children (the cardinality of the power set), and set union is at worst an $O(n)$ operation with a bitvector representation of the sets.
+%%%				Hence the resulting number of steps.
+%%%			\end{proof}
+%%%
+%%%%			\paragraph{}
+%%%%			Overall, note that this procedure construct increasingly inclusive set of required nodes $S_1$ and $S_2$.
+%%%%			This is expected, since recursive calls can only add nodes to the solution in order to maintain the two connectivity and matching contraints after each decision.
+%%%%			However, it effectively defines an environment into which the recursive $\text{ComputeDecisionTree}$ operate, implicitly defined by the initial node and the set of choices made up until the current node.
+%%%%
+%%%%			
+%%%%
+%%%%			\begin{figure}[ht]
+%%%%				\centering
+%%%%				\includegraphics[width=\textwidth,height=0.3\textwidth]{DecisionTreeWithScores.png}
+%%%%				\label{fig:foo}
+%%%%			\end{figure}
+%%%%
+%%%%			We thus need to iterate this decision tree procedure for all pairs $u,v \in V_1\times V_2$.
+%%%
+%%%			\begin{proposition}
+%%%				One of the recursive calls of $\text{ComputeDecisionTree}$ contains the optimal solution to the global problem.
+%%%			\end{proposition}
+%%%			\begin{proof}
+%%%				Even though two subtrees could actually have the exact same solution, since parent nodes can be included for matching and connectivity constraint reasons, it should be clear from the standard tree traversal that the whole tree $T_1$ is considered and that all its subtrees (that respect the constraints) are evaluated.
+%%%				To see that the optimal solution found by this procedure, in $T_1$, is also the optimal in regard to $T_2$, note that any given subtree of $T_1$, that is valid under the constraints, have one and only one counterpart subtree in $T_2$.
+%%%				Indeed, since the matching is a bipartite function, each node have one and only one counterpart; any subtree of size $m$ in $T_1$ have one and only one counterpart subtree of size $m$ in $T_2$, the one that contains all counterpart nodes.
+%%%				Finally, since all possible subtrees of $T_1$ (that respect the constraints) are considered, it must be that all possible subtrees of $T_2$ are also considered by this procedure.
+%%%			\end{proof}
+%%%
+%%%			The optimum is in the recursive call with the highest total score, the optimal objective, and the optimal solution is the corresponding set of nodes $S^u$.
+%%%
+%%%%			\begin{proposition}\label{prop:totalComplex}
+%%%%				The overall algorithm to compute the optimal solution is an $O(n^3)$ running time algorithm.
+%%%%			\end{proposition}
+%%%%			\begin{proof}
+%%%%				Indeed, since the nodes are on a one to one mapping, there exists exactly $n = \norm{V_1} = \norm{V_2}$ pairs of nodes $u,v \in V_1\times V_2$.
+%%%%				For each such pair we call $\text{ComputeDecisionTree}$ which is an $O(n^2)$ operation.
+%%%%
+%%%%				In the end, the optimal solution is in one of the $O(n^3)$ decision tree nodes.
+%%%%
+%%%%				Hence the total running time.
+%%%%			\end{proof}
+%%%
 		\subsection{Polynomial-time scheme for some inputs}
 		\label{subsec:enumerable}
 
-			Here we consider the general version of the \mwccs{} problem where $\alpha$ is given as input rather than being fixed.
-			In addition, we further relax the constraint on the relationship function, which can be any partial injective function.
+			Notice that in the previous sections the conservation constraint $\alpha$ for the solution, that defines which fraction of nodes has to be kept, has been strict; that is $\alpha = 1$.
+			Here we consider where $\alpha \in [0,1]$.
+			In addition, we further relax the constraint on the mapping function, which can be any partial injective function.
 			That is, any element of $V_1$ can have at most one image in $V_2$ (the elements of $V_2$ can have 0, 1, or more antecedents).
 			Finally, we suppose that there is a polynomial number of connected induced subgraphs of $G_1$.
 
-			We consider as many candidate solution as there are connected subgraphs of $G_1$, and for each one of them we try to find the best corresponding subgraph in $G_2$.
+			We consider as many candidate solutions as there are connected subgraphs of $G_1$, and for each one of them we try to find the best corresponding subgraph in $G_2$.
 			The best corresponding subgraph in $G_2$ is the subgraph that maximizes the total weight of the candidate solution and such that at least an $\alpha$-fraction of the nodes of $G_1$ and $G_2$ in the solution are $M$-related.
-			For a given subgraph of $G_1$, the sum of its nodes' weight is fixed, hence maximizing the total weight of the candidate solution is equivalent to finding the optimal solution in $G_2$ where the $\alpha$-fraction constraint holds.
+			For a given subgraph of $G_1$, the sum of the weights of its nodes is fixed.
+			Hence maximizing the total weight of the candidate solution is equivalent to finding the optimal solution in $G_2$ where the $\alpha$-fraction constraint holds.
 
 			To solve this problem, we introduce a new problem, the \textsc{ratio-bounded maximum-weight connected subgraph} (\rbmwcs) problem.
-			Informally, it consists in a variant of the \mwcs{} problem where an additional contribution function is associated to each node and where an additional ratio constraint is introduced\footnote{not unlike the \emph{budget-constrained} variant of the \mwcs{} problem}, formally defined in \cref{subsubsec:foo}.
+			Informally, it consists in a variant of the \mwcs{} problem where an additional contribution function is associated to each node and where an additional ratio constraint is introduced, not unlike the \emph{budget-constrained} variant of the \mwcs{} problem.
+			This new problem is formally defined in \cref{sec:rbmwcs}.
 
 			The reduction to this new subproblem is as follows.
 			The contribution function needs to \emph{encode} the relationship function between the nodes of both $G_1$ and $G_2$.
@@ -558,26 +561,30 @@
 
 	\section{Related questions and further work}
 
-		In this contribution we provide the first deep complexity analysis of the \mwccs{} problem, but there still remains a fair number interesting problems and questions.
+		In this contribution we provide the first deep complexity analysis of the \mwccs{} problem.
+		A fair number of interesting problems and questions still remains.
 
 		First of all, generalizing the problem to more than two graphs is of practical interest.
-		It seem that the most general expression of the problem is to have a, possibly empty, mapping function between each graph.
-		However, as we've shown throughout this chapter, the mapping function is a most important factor in the complexity of the problem.
-		It is expected that the FPT algorithm for $d$-ary trees would remain in such complexity category when generalized to $k$ trees and $\frac{k(k+1)}{2}$ bijective mappings, but formal proof remains to be done.
-		By generality of the problems, the hardness results for two graph will hold with more graphs.
-		However it is unclear whether the polynomial-time solvable cases would remain so, and if that is the case with which polynomial exponent.
+		We hypothesize that the most general expression of the problem is to have a, possibly empty, mapping function between each graph.
+		However, as we have shown throughout this chapter, the mapping function is an important factor for the complexity of the problem.
+%%%	It is expected that the FPT algorithm for $d$-ary trees will remain within the parameterized polynomial time category when generalized to $k$ trees and $\frac{k(k+1)}{2}$ bijective mappings, but formal proof remains to be done.
+		Since the \mwccs{} problem is APX-hard for two graphs, the hardness results should hold for $k > 2$ graphs.
+		However it is unclear whether the polynomial-time solvable cases would remain so, and if that is the case what would be the polynomial exponent.
 
-		Studying the effects of a relaxation of the connectivity constraints in \mwccs{} would be quite interesting.
+		Another interesting avenue is to study the effects of a relaxation of the connectivity contraints in \mwccs{}.
 		The problem would then become similar to the \textsc{set-union knapsack}, with a bipartite partition of the sets, and where the maximum weight becomes a moving target ($\alpha$-ratio).
 
-		In \cref{subsec:enumerable} we effectively presented a reduction from some instances of \mwccs{} to instances of \rbmwcs{}.
-		There exists trivial reduction from \rbmwcs{} to \mwccs{}.
-		However, whether \mwccs{} is more general than \rbmwcs{} and can encode any of its instances remains an open question.
+		In \cref{subsec:enumerable} we presented a reduction from some instances of \mwccs{} to instances of \rbmwcs{}.
+		For some classes of input, their exists trivial reductions from \rbmwcs{} to \mwccs{}.
+		However, the question whether \mwccs{} is more general than \rbmwcs{} and can thus encode any of \rbmwcs{} instances remains open.
 
-		Interestingly, analyses of the links between \rbmwcs{} and the variants of \mwcs{}, such as the budget constraint one, is an already ongoing direction of research.
-		Indeed, the ratio constraint $\sum\limits_{v \in V^*}{c(v)} + C \geq \alpha\times\card{V^*}$ of the \rbmwcs{} problem is a generalization of the costs constraint $\sum\limits_{v \in V^*}{\text{cost}(v)} \leq B$ of the \bcmwcs{} problem\footnote{Observe that $\sum\limits_{v \in V^*}{c(v)} + C \geq \alpha\times\card{V^*} \Leftrightarrow \sum_{v \in V^*} (c(v) - \alpha) \geq -C$.}.
-		Since \rbmwcs{} is effectively a more general variant than the \textsc{budgeted \mwcs{}} problem, which is itself a more general variant of the \textsc{cardinality-constrained \mwcs{}} problem, itself a more general variant of \mwcs{}, all algorithms that apply to \rbmwcs{} also apply to the others.
+		Interestingly, analyses of the relationship between \rbmwcs{} and the variants of \mwcs{}, such as the \textsc{budget constrained} problem, is an already ongoing direction of our research.
+		Indeed, the ratio constraint $\sum\limits_{v \in V^*}{c(v)} + C \geq \alpha\times\card{V^*}$ of the \rbmwcs{} problem is a generalization of the costs constraint $\sum\limits_{v \in V^*}{\text{cost}(v)} \leq B$ of the \bcmwcs{} problem. %\footnote{Observe that $\sum\limits_{v \in V^*}{c(v)} + C \geq \alpha\times\card{V^*} \Leftrightarrow \sum_{v \in V^*} (c(v) - \alpha) \geq -C$.}.
+		Since \rbmwcs{} $\supset$ \textsc{budget constrained \mwcs{}} $\supset$ \textsc{$k$-cardinality \mwcs{}} $\supset$ \mwcs{}, all algorithms that apply to \rbmwcs{} also apply to the other problems.
 
-		Going in this direction, instead of the \emph{integer partition} enumeration scheme used in \cref{prop:boundedDegreeTreesRBMWCS}, we can probably use a tabular dynamic programming approach quite similar to \textsc{knapsack} where the weights are actually contributions.
+		Going in this direction, instead of the \emph{integer partition} enumeration scheme used in \cref{prop:boundedDegreeTreesRBMWCS}, we can probably use a tabular dynamic programming approach quite similar to \textsc{knapsack} where the weights are the contributions.
 		It would effectively remove the degree bound for the trees and make the algorithm pseudo-polynomial.
-		Finally, preliminary results suggest that this dynamic programming solution to the subproblems of \rbmwcs{} could actually be introduced in the algorithm that \textcite{bateni2011prize} introduced, making a pseudo-polynomial algorithm for \rbmwcs{} for all graphs up to bounded-treewidth.
+
+		%Finally, preliminary results suggest that this dynamic programming solution to the subproblems of \rbmwcs{} could actually be introduced in the algorithm that \textcite{bateni2011prize} introduced, making a pseudo-polynomial algorithm for \rbmwcs{} for all graphs up to bounded-treewidth.
+		Finally, we have started work on an improvement to the algorithm introduced by \textcite{bateni2011prize} that solves the \mwcs{} problem in polynomial time for all graphs up to bounded tree-width.
+		Introducing \textsc{knapsack} for the contributions in \textcite{bateni2011prize}'s algorithm should provide a solution for \rbmwcs{} in pseudo-polynomial time for this same category of graphs.

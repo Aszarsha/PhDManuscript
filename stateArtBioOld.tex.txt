@@ -1,0 +1,73 @@
+\section{Genes detection, genes selection}
+
+	A gene, in itself, is but a sequence located at a specific region on the DNA of an organism.
+	XXX we don't measure the transcription reaction / RNA polymeration directly XXX.
+	The ability to measuring gene expression levels requires first and foremost the capacity to measure their byproducts.
+	\Cref{subsec:measuregenes} treat of the measurement techniques of those genes byproducts.
+	XXX... the ability to measure the transcriptome state of a cell dramatically changed the analysis of biolomecular processes, and provided the ... XXX
+	In \cref{subsec:diffanalysis} we present the most important methods that are based on this ability to measure the state of a cell at its biomolecular level.
+
+	\subsection{Measuring genes expression}
+	\label{subsec:measuregenes}
+
+	In 1956, \textcite{berson1956insulin}, for which Rosalyn S. Yalow receiced multiple awards including the Nobel Prize of Medicine in 1977 \parencite{SJI:SJI21}, introduced the radioimmunoassay (RIA) technique.
+	At the time they used their technique to measure the rate of insulin metabolic \emph{in vitro} degradation using the radioactively-labeled insulin-I$^{131}$ as a competitive proxy.
+	There were techniques that allowed to test for the presence of a specific analyte, but the novelty in their approch is that it allowed them to take quantitative measurements of the biomolecules.
+
+	XXX Talk about enzyme-linked immunosorbent assay (ELISA) XXX
+
+	XXX However those methods are not multiplexable (measure up to million of analytes) -> limit the analysis of whole cells.
+	Introduce microarrays and seq. XXX
+
+	\subsubsection{Microarrays}
+
+	In the last two decades, the large adoption of \emph{microarray} technologies have dramatically changed the landscape of biology and biomedical research.
+	Microarray technologies are high-throughput screening methods for biological material, that allow experimenters to assay the amount the quantity of a specific material on a large scale.
+	Where previous assey methods were rate limited, non-parallelizable and seldom multiplexable\footnote{Some are considered low-plex (in the order of ten analytes) or mid-plex (in the order of hendred or thousands of analytes), which is not enough to capture the whole transcriptome state of a cell.}, modern microarrays allows for many multiple materials to be screened for and quantified in parallel.
+	Previous methods also usually involved human interaction and only enabled to screen for a small number of targets, whereas microarray are typically the size of a microscope slide yet allow to screen up to or more than ten thousand different targets\footnote{The very first microarray introduced were screening for a maximum of 400 antigens \parencite{chang1983binding}.} \parencites{smyth2005use}{sealfon2011rna}, are more sensitive, and can be automated.
+	This ability to quantify many molecular targets in parallel led to a whole new level of understanding of complex biological processes.
+
+	There exists many different kinds of microarray, for different biological material, some screening for very specific molecules, and some much more general in their targets.
+	Amino-acid sequences microarray are an important kind of microarray; and the first to be introduced.
+	\Textcite{chang1983binding} realised that he could create a bidimensional array of sequence probes that allows him to screen for antigens by assessing the capture of target antigens inside antibodies controlled spots.
+	This allowed him to detect the recognized antibodies of antigens bearing cells\footnote{Its \emph{allotype}.}, and more importantly to quantify the proportion and types of many different kinds of those cells in a sample of mixed population in parallel.
+	He latter developed the microarray concept in a series of patents \parencites{chang1986matrix}{chang1989immunoassay}{chang1992antibody} which led to a whole new industry.
+
+	XXX Talk briefly about RNA expression microarrays (REM) ??? XXX
+
+	But by far the most widely used type of microarray is the \emph{DNA microarray}\footnote{Also known as \emph{DNA chip}.} that screen for both DNA or RNA sequences \parencite{sealfon2011rna}.
+	They evolved from \emph{DNA blotting}\footnote{Also known as \emph{Southern blotting}.} techniques introduced by \textcite{southern1975detection}, where DNA fragments are first separated then selectively hybridized by probes\footnote{Which is the opposite operation of microarrays where the probes are fixed and the screened for medium is applied on the chip.}.
+	Two decades ago, \textcite{schena1995quantitative} used robotic printing to prepare microarrays plates with PCR amplified complementary DNA (\emph{cDNA}) probes\footnote{\label{ft:invterm}Note that they use the opposite of the usual terminilogy in their paper: the targets are on the plate and it is the probes that are made fluorescent and are hybridized.} sequences from \emph{Arabidopsis thaliana}.
+	They then hybridized fluorescent targets\footref{ft:invterm} made from reverse transcription of \emph{Arabidopsis}' mRNA at high stringency.
+	Using high-precision laser to excite the hybridized fluorescent markers, they used those microarrays for quantitatively measuring the levels of the corresponding genes' \emph{mRNA}.
+
+	This technology has been for a long time the gold standard to capture the state of a cell.
+	Indeed, it is a cost-efficient and fast method to assess genes expression levels \emph{at genome wide resolution}.
+	It allowed the accumulation of large-scale experimental data, which led to a lot of research aimed at understanding the complex biomolecular mechanisms of organisms.
+	As soon as 2000, Booth et al. said of DNA microarrays that they were "\emph{hailed as the ultimate experimental tool for research, drug discovery and diagnostics}" \parencite{booth2000application}.
+
+	However, DNA microarray technologies are not a panacea, and they present quite a few technical challenges in themselves.
+
+	- image processing and classif. (review image for cDNA: \parencite{karun2015review}),\\
+	- denoising/normalization \parencite{kreil2005tutorial}, \\
+	- significance (\parencite{steinhoff2006normalization} for an overview), \\
+	- quality control \parencite{wang2001quantitative},\\
+	- quantitative accuracy,\\
+	- probe replication \parencites{black2002calculation}{smyth2005use},\\
+	- preparation of the target sample and PCR \\
+	* \textcite{maruyama2014gene} for modern processes and statistical preparations of data
+	... ? XXX
+
+	\subsubsection{Sequencing}
+
+	\Textcite{marioni2008rna} showed that RNA-seq is more accurate than expression microarrays when larger differences in gene expression levels are present. \Textcite{fu2009estimating} reproced the results with proteomics controls.
+
+		\begin{itemize}
+			\item Introduce sequencing similarly to microarray, which...
+			\item ... leads to Next-gen DNA- and RNA-sequencing
+			\item
+		\end{itemize}
+
+		Gene significant differential expression calling: \parencite{robinson2010edger}.
+
+		Review of gene expression profiling with RNA-seq: \parencite{rapaport2013comprehensive}.

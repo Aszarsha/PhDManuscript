@@ -1,0 +1,221 @@
+\setcounter{table}{0}
+\setlength{\columnsep}{0.8cm}
+\begin{center}
+\begin{table*}
+\begin{adjustwidth}{-1.2cm}{-1.2cm}
+\begin{multicols*}{3}
+\begin{center}
+\scriptsize
+\setbox\ltmcbox\vbox{
+\makeatletter\col@number\@ne
+\begin{longtable}{ c | c }
+\textbf{Mouse} & \textbf{Human} \\
+\hline \
+{\textcolor{red}{Napsa} (-3.86)} & {\textcolor{blue}{NAPSA} (32.07)}\\
+{\textcolor{blue}{Il9} (5.03)} & {\textcolor{blue}{IL9} (22.36)}\\
+{\textcolor{blue}{Il21} (32.07)} & {\textcolor{red}{IL21} (-4.97)}\\
+{\textcolor{blue}{Cd70} (7.24)} & {\textcolor{blue}{CD70} (19.85)}\\
+{\textcolor{blue}{Cysltr1} (22.36)} & {\textcolor{blue}{CYSLTR1} (0.30)}\\
+{\textcolor{blue}{Il17a} (27.88)} & {\textcolor{red}{IL17A} (-5.46)}\\
+{\textcolor{blue}{Fbxo15} (3.11)} & {\textcolor{blue}{FBXO15} (18.26)}\\
+{\textcolor{blue}{Wisp1} (24.44)} & {\textcolor{red}{WISP1} (-4.63)}\\
+{\textcolor{blue}{Slamf6} (22.16)} & {\textcolor{red}{SLAMF6} (-5.38)}\\
+{\textcolor{blue}{Rbpj} (14.79)} & {\textcolor{blue}{RBPJ} (0.04)}\\
+{\textcolor{blue}{Il24} (17.69)} & {\textcolor{red}{IL24} (-3.66)}\\
+{\textcolor{blue}{Emp1} (16.64)} & {\textcolor{red}{EMP1} (-2.83)}\\
+{\textcolor{red}{Chn1} (-5.02)} & {\textcolor{blue}{CHN1} (18.50)}\\
+{\textcolor{blue}{Egln3} (14.50)} & {\textcolor{red}{EGLN3} (-1.79)}\\
+{\textcolor{blue}{Ccl20} (9.84)} & {\textcolor{blue}{CCL20} (2.50)}\\
+{\textcolor{blue}{Aqp3} (17.54)} & {\textcolor{red}{AQP3} (-5.38)}\\
+{\textcolor{blue}{Vdr} (2.22)} & {\textcolor{blue}{VDR} (9.74)}\\
+{\textcolor{red}{Apod} (-4.84)} & {\textcolor{blue}{APOD} (16.41)}\\
+{\textcolor{blue}{Pdpn} (16.86)} & {\textcolor{red}{PDPN} (-5.29)}\\
+{\textcolor{red}{Ahcyl2} (-3.39)} & {\textcolor{blue}{AHCYL2} (14.79)}\\
+{\textcolor{blue}{Sgk1} (4.04)} & {\textcolor{blue}{SGK1} (5.55)}\\
+{\textcolor{blue}{Lgals1} (12.94)} & {\textcolor{red}{LGALS1} (-3.52)}\\
+{\textcolor{blue}{Lpxn} (14.49)} & {\textcolor{red}{LPXN} (-5.30)}\\
+{\textcolor{blue}{Anxa2} (8.87)} & {\textcolor{red}{ANXA2} (-0.12)}\\
+{\textcolor{red}{Loxl3} (-4.22)} & {\textcolor{blue}{LOXL3} (12.94)}\\
+{\textcolor{red}{Tnfrsf25} (-0.02)} & {\textcolor{blue}{TNFRSF25} (7.75)}\\
+{\textcolor{blue}{Arhgef3} (4.10)} & {\textcolor{blue}{ARHGEF3} (2.72)}\\
+{\textcolor{blue}{Basp1} (5.83)} & {\textcolor{blue}{BASP1} (0.89)}\\
+{\textcolor{blue}{Gata3} (1.19)} & {\textcolor{blue}{GATA3} (5.24)}\\
+{\textcolor{red}{Fut7} (-1.83)} & {\textcolor{blue}{FUT7} (7.58)}\\
+{\textcolor{blue}{Furin} (4.28)} & {\textcolor{blue}{FURIN} (1.46)}\\
+{\textcolor{red}{Ryr1} (-4.25)} & {\textcolor{blue}{RYR1} (8.54)}\\
+{\textcolor{red}{Axin2} (-4.95)} & {\textcolor{blue}{AXIN2} (7.83)}\\
+{\textcolor{blue}{Tnfrsf13b} (6.13)} & {\textcolor{red}{TNFRSF13B} (-3.57)}\\
+{\textcolor{blue}{Tnfsf8} (1.41)} & {\textcolor{blue}{TNFSF8} (1.04)}\\
+{\textcolor{red}{Il2rb} (-3.52)} & {\textcolor{blue}{IL2RB} (5.91)}\\
+{\textcolor{blue}{Fasl} (7.75)} & {\textcolor{red}{FASLG} (-5.37)}\\
+{\textcolor{blue}{Anxa3} (7.83)} & {\textcolor{red}{ANXA3} (-5.48)}\\
+{\textcolor{red}{Jun} (-2.95)} & {\textcolor{blue}{JUN} (5.14)}\\
+{\textcolor{blue}{Sdcbp2} (5.24)} & {\textcolor{red}{SDCBP2} (-3.21)}\\
+{\textcolor{red}{Klrd1} (-1.64)} & {\textcolor{blue}{KLRD1} (3.51)}\\
+{\textcolor{red}{Uchl1} (-5.07)} & {\textcolor{blue}{UCHL1} (6.91)}\\
+{\textcolor{blue}{Rps6ka4} (0.22)} & {\textcolor{blue}{RPS6KA4} (1.34)}\\
+{\textcolor{blue}{Ifng} (1.77)} & {\textcolor{red}{IFNG} (-0.32)}\\
+{\textcolor{blue}{S100a6} (2.72)} & {\textcolor{red}{S100A6} (-1.60)}\\
+{\textcolor{red}{Pfkfb3} (-5.16)} & {\textcolor{blue}{PFKFB3} (6.07)}\\
+{\textcolor{red}{Rdx} (-3.21)} & {\textcolor{blue}{RDX} (4.10)}\\
+{\textcolor{red}{Palld} (-4.63)} & {\textcolor{blue}{PALLD} (5.31)}\\
+{\textcolor{red}{Gbp2} (-1.37)} & {\textcolor{blue}{GBP2} (2.04)}\\
+{\textcolor{red}{Sftpd} (-5.12)} & {\textcolor{blue}{SFTPD} (5.71)}\\
+{\textcolor{blue}{Asap1} (4.97)} & {\textcolor{red}{ASAP1} (-4.42)}\\
+{\textcolor{red}{Col15a1} (-4.82)} & {\textcolor{blue}{COL15A1} (5.34)}\\
+{\textcolor{blue}{Casp1} (0.03)} & {\textcolor{blue}{CASP1} (0.48)}\\
+{\textcolor{red}{Chst3} (-5.14)} & {\textcolor{blue}{CHST3} (5.61)}\\
+{\textcolor{blue}{Arid5a} (5.34)} & {\textcolor{red}{ARID5A} (-4.90)}\\
+{\textcolor{red}{Lif} (-2.49)} & {\textcolor{blue}{LIF} (2.92)}\\
+{\textcolor{red}{Thbs1} (-4.55)} & {\textcolor{blue}{THBS1} (4.87)}\\
+{\textcolor{red}{Fam174b} (-3.95)} & {\textcolor{blue}{FAM174B} (4.09)}\\
+{\textcolor{blue}{Ptprj} (5.47)} & {\textcolor{red}{PTPRJ} (-5.43)}\\
+{\textcolor{red}{Syp} (-3.59)} & {\textcolor{blue}{SYP} (3.45)}\\
+{\textcolor{blue}{Trat1} (5.14)} & {\textcolor{red}{TRAT1} (-5.35)}\\
+{\textcolor{red}{Tnfrsf12a} (-4.23)} & {\textcolor{blue}{TNFRSF12A} (3.90)}\\
+{\textcolor{blue}{Id2} (5.02)} & {\textcolor{red}{ID2} (-5.38)}\\
+{\textcolor{blue}{Armcx2} (4.41)} & {\textcolor{red}{ARMCX2} (-4.95)}\\
+{\textcolor{blue}{Cyp11a1} (2.69)} & {\textcolor{red}{CYP11A1} (-3.46)}\\
+{\textcolor{blue}{Itga3} (2.81)} & {\textcolor{red}{ITGA3} (-3.60)}\\
+{\textcolor{red}{Batf3} (-2.57)} & {\textcolor{blue}{BATF3} (1.64)}\\
+{\textcolor{red}{Pmepa1} (-2.08)} & {\textcolor{blue}{PMEPA1} (0.89)}\\
+{\textcolor{blue}{Ctla4} (1.49)} & {\textcolor{red}{CTLA4} (-2.69)}\\
+{\textcolor{red}{Anxa1} (-4.66)} & {\textcolor{blue}{ANXA1} (3.43)}\\
+{\textcolor{blue}{Skil} (2.30)} & {\textcolor{red}{SKIL} (-3.67)}\\
+{\textcolor{blue}{Ripk2} (0.25)} & {\textcolor{red}{RIPK2} (-1.64)}\\
+{\textcolor{red}{Ino80c} (-3.62)} & {\textcolor{blue}{INO80C} (2.22)}\\
+{\textcolor{blue}{Stap1} (3.19)} & {\textcolor{red}{STAP1} (-4.67)}\\
+{\textcolor{blue}{Tnip2} (0.48)} & {\textcolor{red}{TNIP2} (-1.99)}\\
+{\textcolor{red}{Smad3} (-3.58)} & {\textcolor{blue}{SMAD3} (1.95)}\\
+{\textcolor{red}{Sept11} (-5.00)} & {\textcolor{blue}{SEPT11} (3.21)}\\
+{\textcolor{red}{Tnfrsf14} (-3.50)} & {\textcolor{blue}{TNFRSF14} (1.70)}\\
+{\textcolor{red}{Ntrk3} (-5.01)} & {\textcolor{blue}{NTRK3} (3.19)}\\
+{\textcolor{blue}{Ctnna1} (3.21)} & {\textcolor{red}{CTNNA1} (-5.04)}\\
+{\textcolor{blue}{Taf7} (3.41)} & {\textcolor{red}{TAF7} (-5.28)}\\
+{\textcolor{blue}{Ripk3} (1.93)} & {\textcolor{red}{RIPK3} (-4.05)}\\
+{\textcolor{red}{Ddit4} (-2.48)} & {\textcolor{blue}{DDIT4} (0.31)}\\
+{\textcolor{blue}{Anxa4} (3.28)} & {\textcolor{red}{ANXA4} (-5.53)}\\
+{\textcolor{blue}{Id3} (0.38)} & {\textcolor{red}{ID3} (-2.65)}\\
+{\textcolor{red}{Foxo1} (-2.09)} & {\textcolor{red}{FOXO1} (-0.28)}\\
+{\textcolor{red}{Map3k1} (-0.93)} & {\textcolor{red}{MAP3K1} (-1.47)}\\
+{\textcolor{blue}{Rorc} (2.25)} & {\textcolor{red}{RORC} (-4.79)}\\
+{\textcolor{blue}{Cndp2} (1.21)} & {\textcolor{red}{CNDP2} (-3.76)}\\
+{\textcolor{blue}{Il2ra} (1.95)} & {\textcolor{red}{IL2RA} (-4.53)}\\
+{\textcolor{red}{Cxcr3} (-2.88)} & {\textcolor{blue}{CXCR3} (0.29)}\\
+{\textcolor{blue}{Ppp3ca} (1.84)} & {\textcolor{red}{PPP3CA} (-4.64)}\\
+{\textcolor{red}{Setdb1} (-3.16)} & {\textcolor{blue}{SETDB1} (0.31)}\\
+{\textcolor{blue}{Pou2f2} (2.50)} & {\textcolor{red}{POU2F2} (-5.48)}\\
+{\textcolor{blue}{Lpp} (0.89)} & {\textcolor{red}{LPP} (-4.05)}\\
+{\textcolor{blue}{Sh3kbp1} (1.09)} & {\textcolor{red}{SH3KBP1} (-4.29)}\\
+{\textcolor{blue}{Bcl3} (2.19)} & {\textcolor{red}{BCL3} (-5.51)}\\
+{\textcolor{blue}{Irf8} (1.29)} & {\textcolor{red}{IRF8} (-5.04)}\\
+{\textcolor{blue}{Fes} (1.03)} & {\textcolor{red}{FES} (-4.82)}\\
+{\textcolor{red}{Runx1} (-5.09)} & {\textcolor{blue}{RUNX1} (1.29)}\\
+{\textcolor{red}{Kit} (-5.24)} & {\textcolor{blue}{KIT} (1.41)}\\
+{\textcolor{red}{Ptpn14} (-4.47)} & {\textcolor{blue}{PTPN14} (0.58)}\\
+{\textcolor{red}{Fnbp1} (-5.10)} & {\textcolor{blue}{FNBP1} (1.09)}\\
+{\textcolor{blue}{Rel} (1.20)} & {\textcolor{red}{REL} (-5.37)}\\
+{\textcolor{blue}{Ralb} (0.98)} & {\textcolor{red}{RALB} (-5.21)}\\
+{\textcolor{red}{Sirt1} (-4.83)} & {\textcolor{blue}{SIRT1} (0.60)}\\
+{\textcolor{red}{Ska1} (-5.08)} & {\textcolor{blue}{SKA1} (0.66)}\\
+{\textcolor{red}{Cltb} (-5.23)} & {\textcolor{blue}{CLTB} (0.76)}\\
+{\textcolor{blue}{Penk} (0.66)} & {\textcolor{red}{PENK} (-5.23)}\\
+{\textcolor{red}{Csf2} (-1.22)} & {\textcolor{red}{CSF2} (-3.46)}\\
+{\textcolor{blue}{Ptpn11} (0.12)} & {\textcolor{red}{PTPN11} (-4.91)}\\
+{\textcolor{blue}{Vim} (0.10)} & {\textcolor{red}{VIM} (-5.10)}\\
+{\textcolor{blue}{Prkca} (0.24)} & {\textcolor{red}{PRKCA} (-5.36)}\\
+{\textcolor{red}{Gpc6} (-4.26)} & {\textcolor{red}{GPC6} (-1.59)}\\
+{\textcolor{red}{Ripk1} (-0.81)} & {\textcolor{red}{RIPK1} (-5.60)}\\
+{\textcolor{red}{Calm2} (-2.76)} & {\textcolor{red}{CALM2} (-4.28)}\\
+{\textcolor{red}{Snai1} (-5.08)} & {\textcolor{red}{SNAI1} (-2.21)}\\
+{\textcolor{red}{Fbxo25} (-4.90)} & {\textcolor{red}{FBXO25} (-2.49)}\\
+{\textcolor{red}{Stat3} (-3.22)} & {\textcolor{red}{STAT3} (-4.60)}\\
+{\textcolor{red}{Epor} (-5.17)} & {\textcolor{red}{EPOR} (-3.07)}\\
+{\textcolor{red}{Rac3} (-4.44)} & {\textcolor{red}{RAC3} (-3.86)}\\
+{\textcolor{red}{B2m} (-4.57)} & {\textcolor{red}{B2M} (-4.45)}\\
+{\textcolor{red}{Os9} (-5.20)} & {\textcolor{red}{OS9} (-4.11)}\\
+{\textcolor{red}{Tnfsf13b} (-4.10)} & {\textcolor{red}{TNFSF13B} (-5.24)}\\
+{\textcolor{red}{Trpc3} (-4.28)} & {\textcolor{red}{TRPC3} (-5.21)}\\
+{\textcolor{red}{Dcn} (-4.39)} & {\textcolor{red}{DCN} (-5.27)}\\
+{\textcolor{red}{Ar} (-4.20)} & {\textcolor{red}{AR} (-5.67)}\\
+{\textcolor{red}{Myog} (-5.25)} & {\textcolor{red}{MYOG} (-5.01)}\\
+{\textcolor{red}{Cd4} (-4.94)} & {\textcolor{red}{CD4} (-5.53)}\\
+{\textcolor{red}{Hamp} (-5.21)} & {\textcolor{red}{HAMP} (-5.53)}\\
+{\textcolor{blue}{Gap43} (22.44)} & \\
+{\textcolor{blue}{Nts} (18.50)} & \\
+{\textcolor{blue}{Inhba} (13.50)} & \\
+{\textcolor{blue}{Tec} (10.10)} & \\
+{\textcolor{blue}{Serpine2} (9.94)} & \\
+{\textcolor{blue}{Lrmp} (9.92)} & \\
+{\textcolor{blue}{Eno3} (9.74)} & \\
+{\textcolor{blue}{Serpinc1} (9.69)} & \\
+{\textcolor{blue}{Fap} (9.64)} & \\
+{\textcolor{blue}{Ifih1} (8.54)} & \\
+{\textcolor{blue}{Tspan6} (8.41)} & \\
+{\textcolor{blue}{Smox} (6.91)} & \\
+{\textcolor{blue}{Ppap2a} (6.35)} & \\
+{\textcolor{blue}{Piwil2} (6.11)} & \\
+{\textcolor{blue}{Cd274} (5.61)} & \\
+{\textcolor{blue}{Ermp1} (5.31)} & \\
+{\textcolor{blue}{Tgm2} (5.21)} & \\
+{\textcolor{blue}{Srgn} (4.72)} & \\
+{\textcolor{blue}{Serpinb6b} (4.53)} & \\
+{\textcolor{blue}{Mxi1} (4.39)} & \\
+{\textcolor{blue}{Dnmt3a} (4.32)} & \\
+{\textcolor{blue}{Nsg2} (3.71)} & \\
+{\textcolor{blue}{Igfbp7} (3.45)} & \\
+{\textcolor{blue}{Gpr65} (3.30)} & \\
+{\textcolor{blue}{Pdcd1lg2} (3.01)} & \\
+{\textcolor{blue}{Rrad} (2.97)} & \\
+{\textcolor{blue}{Socs3} (1.90)} & \\
+{\textcolor{blue}{Mt2} (1.31)} & \\
+{\textcolor{blue}{Pkp4} (1.12)} & \\
+{\textcolor{blue}{Gem} (0.37)} & \\
+{\textcolor{blue}{Prickle1} (0.30)} & \\
+{\textcolor{red}{Prnp} (-1.10)} & \\
+{\textcolor{red}{Ywhaz} (-3.30)} & \\
+{\textcolor{blue}{\textbf{Timp1}} (18.48)} & \\
+{\textcolor{blue}{\textbf{Ifi203}} (18.26)} & \\
+{\textcolor{blue}{\textbf{Ctla2b}} (10.18)} & \\
+{\textcolor{blue}{\textbf{Ctla2a}} (6.54)} & \\
+{\textcolor{blue}{\textbf{Il3}} (1.86)} & \\
+ & {\textcolor{blue}{PTHLH} (24.44)} \\
+ & {\textcolor{blue}{TMPRSS6} (16.86)} \\
+ & {\textcolor{blue}{COL6A3} (16.64)} \\
+ & {\textcolor{blue}{IL23R} (14.50)} \\
+ & {\textcolor{blue}{PTK2} (11.74)} \\
+ & {\textcolor{blue}{EXOC3} (10.18)} \\
+ & {\textcolor{blue}{BCAR3} (9.84)} \\
+ & {\textcolor{blue}{IL17F} (8.67)} \\
+ & {\textcolor{blue}{PTGIR} (6.95)} \\
+ & {\textcolor{blue}{ITGB7} (6.54)} \\
+ & {\textcolor{blue}{COL6A1} (5.47)} \\
+ & {\textcolor{blue}{TNS3} (5.20)} \\
+ & {\textcolor{blue}{LMNA} (4.70)} \\
+ & {\textcolor{blue}{NCALD} (4.41)} \\
+ & {\textcolor{blue}{EVL} (4.28)} \\
+ & {\textcolor{blue}{BTLA} (3.41)} \\
+ & {\textcolor{blue}{FNBP1L} (1.93)} \\
+ & {\textcolor{blue}{SOS1} (1.84)} \\
+ & {\textcolor{blue}{EXOC2} (1.19)} \\
+ & {\textcolor{blue}{NOTCH1} (0.23)} \\
+ & {\textcolor{blue}{FYN} (0.08)} \\
+ & {\textcolor{blue}{\textbf{CD1A}} (27.88)} \\
+ & {\textcolor{blue}{\textbf{CLECL1}} (22.16)} \\
+ & {\textcolor{blue}{\textbf{CD1C}} (18.48)} \\
+ & {\textcolor{blue}{\textbf{CD1B}} (14.49)} \\
+ & {\textcolor{blue}{\textbf{CTSL1}} (13.50)} \\
+ & {\textcolor{blue}{\textbf{TBL1X}} (4.04)} \\
+
+\end{longtable}
+\unskip
+\unpenalty
+\unpenalty}
+\unvbox\ltmcbox
+\end{center}
+\end{multicols*}
+\caption{Timepoint \unit{48}{h}, $\alpha = 0.8$, FDR = 0.1}
+\label{fig:table48h}
+\end{adjustwidth}
+\end{table*}
+\end{center}

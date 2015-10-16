@@ -1,0 +1,119 @@
+\setcounter{table}{-1}
+\begin{center}
+\begin{table*}
+\begin{multicols*}{2}
+\begin{center}
+\footnotesize
+\setbox\ltmcbox\vbox{
+\makeatletter\col@number\@ne
+\begin{longtable}{ c | c }
+\textbf{Mouse} & \textbf{Human} \\
+\hline \
+{\textcolor{blue}{Batf} (8.29)} & {\textcolor{blue}{BATF} (13.90)}\\
+{\textcolor{blue}{Stat3} (4.22)} & {\textcolor{blue}{STAT3} (8.81)}\\
+{\textcolor{blue}{Rapgef6} (5.67)} & {\textcolor{blue}{RAPGEF6} (6.68)}\\
+{\textcolor{blue}{Stat1} (4.07)} & {\textcolor{blue}{STAT1} (7.95)}\\
+{\textcolor{red}{Rec8} (-2.85)} & {\textcolor{blue}{REC8} (11.56)}\\
+{\textcolor{blue}{Rsad2} (0.44)} & {\textcolor{blue}{RSAD2} (7.99)}\\
+{\textcolor{red}{Cish} (-0.08)} & {\textcolor{blue}{CISH} (8.04)}\\
+{\textcolor{blue}{Tnip2} (0.53)} & {\textcolor{blue}{TNIP2} (6.04)}\\
+{\textcolor{blue}{Ifi35} (6.68)} & {\textcolor{red}{IFI35} (-0.44)}\\
+{\textcolor{blue}{Irf9} (1.07)} & {\textcolor{blue}{IRF9} (4.89)}\\
+{\textcolor{blue}{Gbp2} (3.85)} & {\textcolor{blue}{GBP2} (1.21)}\\
+{\textcolor{blue}{Parp9} (7.95)} & {\textcolor{red}{PARP9} (-2.98)}\\
+{\textcolor{red}{Tnfrsf10b} (-3.47)} & {\textcolor{blue}{TNFRSF10D} (7.99)}\\
+{\textcolor{red}{Trim21} (-3.08)} & {\textcolor{blue}{TRIM21} (7.58)}\\
+{\textcolor{blue}{Etv6} (7.90)} & {\textcolor{red}{ETV6} (-3.54)}\\
+{\textcolor{red}{Stat2} (-1.88)} & {\textcolor{blue}{STAT2} (6.21)}\\
+{\textcolor{blue}{Bcl3} (4.82)} & {\textcolor{red}{BCL3} (-0.88)}\\
+{\textcolor{red}{Tmem173} (-0.15)} & {\textcolor{blue}{TMEM173} (3.96)}\\
+{\textcolor{blue}{Dhx58} (3.96)} & {\textcolor{red}{DHX58} (-0.20)}\\
+{\textcolor{blue}{Fas} (7.58)} & {\textcolor{red}{FAS} (-4.21)}\\
+{\textcolor{blue}{Myd88} (1.11)} & {\textcolor{blue}{MYD88} (2.15)}\\
+{\textcolor{red}{Trim25} (-0.96)} & {\textcolor{blue}{TRIM25} (4.22)}\\
+{\textcolor{red}{Socs1} (-2.82)} & {\textcolor{blue}{SOCS1} (5.96)}\\
+{\textcolor{red}{Ubr1} (-3.27)} & {\textcolor{blue}{UBR1} (6.15)}\\
+{\textcolor{blue}{Lgals3bp} (6.52)} & {\textcolor{red}{LGALS3BP} (-3.64)}\\
+{\textcolor{red}{Trafd1} (-2.87)} & {\textcolor{blue}{TRAFD1} (5.67)}\\
+{\textcolor{red}{Ikzf4} (-3.34)} & {\textcolor{blue}{IKZF4} (6.14)}\\
+{\textcolor{blue}{BC006779} (1.85)} & {\textcolor{blue}{RP4-697K14.7} (0.87)}\\
+{\textcolor{blue}{Ripk1} (0.71)} & {\textcolor{blue}{RIPK1} (1.93)}\\
+{\textcolor{red}{Tap1} (-4.38)} & {\textcolor{blue}{TAP1} (6.91)}\\
+{\textcolor{blue}{Arid5a} (2.06)} & {\textcolor{blue}{ARID5A} (0.23)}\\
+{\textcolor{red}{Saps3} (-3.51)} & {\textcolor{blue}{SAPS3} (5.62)}\\
+{\textcolor{blue}{Daxx} (5.36)} & {\textcolor{red}{DAXX} (-3.31)}\\
+{\textcolor{red}{Casp4} (-2.56)} & {\textcolor{blue}{AP002004.1} (4.14)}\\
+{\textcolor{red}{Cxcr5} (-1.36)} & {\textcolor{blue}{CXCR5} (2.63)}\\
+{\textcolor{blue}{Notch1} (0.60)} & {\textcolor{red}{NOTCH1} (-0.06)}\\
+{\textcolor{red}{Ldha} (-1.10)} & {\textcolor{blue}{LDHA} (1.61)}\\
+{\textcolor{red}{Mfng} (-0.63)} & {\textcolor{blue}{MFNG} (1.10)}\\
+{\textcolor{blue}{Hk1} (4.89)} & {\textcolor{red}{HK1} (-4.47)}\\
+{\textcolor{red}{Prkcq} (-1.03)} & {\textcolor{blue}{PRKCQ} (0.84)}\\
+{\textcolor{blue}{Irf8} (2.70)} & {\textcolor{red}{IRF8} (-3.31)}\\
+{\textcolor{blue}{Igtp} (0.02)} & {\textcolor{red}{IRGM} (-0.92)}\\
+{\textcolor{red}{Mx2} (-1.23)} & {\textcolor{blue}{MX1} (0.20)}\\
+{\textcolor{blue}{Pnpt1} (3.12)} & {\textcolor{red}{PNPT1} (-4.46)}\\
+{\textcolor{red}{Nmi} (-0.87)} & {\textcolor{red}{NMI} (-0.55)}\\
+{\textcolor{blue}{Il21} (2.68)} & {\textcolor{red}{IL21} (-4.69)}\\
+{\textcolor{blue}{Ifih1} (1.00)} & {\textcolor{red}{IFIH1} (-3.19)}\\
+{\textcolor{red}{Oasl1} (-2.29)} & {\textcolor{blue}{OASL} (0.01)}\\
+{\textcolor{blue}{Rpa1} (1.82)} & {\textcolor{red}{RPA1} (-4.36)}\\
+{\textcolor{blue}{Ankrd28} (1.66)} & {\textcolor{red}{ANKRD28} (-4.34)}\\
+{\textcolor{blue}{Smc4} (2.15)} & {\textcolor{red}{SMC4} (-5.12)}\\
+{\textcolor{blue}{Muc1} (0.27)} & {\textcolor{red}{MUC1} (-3.25)}\\
+{\textcolor{blue}{Isg15} (0.53)} & {\textcolor{red}{ISG15} (-3.57)}\\
+{\textcolor{blue}{Kat2b} (0.79)} & {\textcolor{red}{KAT2B} (-4.23)}\\
+{\textcolor{red}{Junb} (-4.02)} & {\textcolor{red}{JUNB} (-0.08)}\\
+{\textcolor{blue}{Map3k8} (1.02)} & {\textcolor{red}{MAP3K8} (-5.33)}\\
+{\textcolor{red}{Cxcr4} (-0.74)} & {\textcolor{red}{CXCR4} (-3.63)}\\
+{\textcolor{red}{Il6st} (-1.06)} & {\textcolor{red}{IL6ST} (-3.37)}\\
+{\textcolor{blue}{Irf7} (0.74)} & {\textcolor{red}{IRF7} (-5.39)}\\
+{\textcolor{red}{Mavs} (-1.97)} & {\textcolor{red}{MAVS} (-5.26)}\\
+{\textcolor{red}{Eif3b} (-4.46)} & {\textcolor{red}{EIF3B} (-3.51)}\\
+{\textcolor{red}{Hdac5} (-3.20)} & {\textcolor{red}{HDAC5} (-4.84)}\\
+{\textcolor{red}{Sirt7} (-4.06)} & {\textcolor{red}{SIRT7} (-5.13)}\\
+{\textcolor{red}{Ptpn13} (-3.87)} & {\textcolor{red}{PTPN13} (-5.40)}\\
+{\textcolor{blue}{Oas2} (15.42)} & \\
+{\textcolor{blue}{Elovl6} (13.90)} & \\
+{\textcolor{blue}{Ppa1} (11.56)} & \\
+{\textcolor{blue}{Pml} (8.81)} & \\
+{\textcolor{blue}{Zbp1} (8.55)} & \\
+{\textcolor{blue}{Ifit1} (8.02)} & \\
+{\textcolor{blue}{Parp12} (7.99)} & \\
+{\textcolor{blue}{Oas3} (6.15)} & \\
+{\textcolor{blue}{Arrb2} (5.67)} & \\
+{\textcolor{blue}{Casp8} (3.69)} & \\
+{\textcolor{blue}{Eif2ak3} (2.80)} & \\
+{\textcolor{blue}{Irf6} (2.63)} & \\
+{\textcolor{blue}{Stk10} (2.30)} & \\
+{\textcolor{blue}{Syne2} (1.23)} & \\
+{\textcolor{blue}{Ptpn1} (1.03)} & \\
+{\textcolor{blue}{Nfe2l2} (0.59)} & \\
+{\textcolor{blue}{Hdac6} (0.04)} & \\
+{\textcolor{blue}{\textbf{Dcpp3}} (6.14)} & \\
+{\textcolor{blue}{\textbf{Tha1}} (4.61)} & \\
+{\textcolor{blue}{\textbf{Oasl2}} (2.19)} & \\
+ & {\textcolor{blue}{ITK} (6.49)} \\
+ & {\textcolor{blue}{ARID5B} (4.61)} \\
+ & {\textcolor{blue}{PFKFB3} (3.78)} \\
+ & {\textcolor{blue}{VAV1} (3.00)} \\
+ & {\textcolor{blue}{IFIT3} (2.70)} \\
+ & {\textcolor{blue}{EIF2AK2} (2.29)} \\
+ & {\textcolor{blue}{IRF1} (1.07)} \\
+ & {\textcolor{blue}{XAF1} (0.97)} \\
+ & {\textcolor{blue}{ZC3HAV1} (0.90)} \\
+ & {\textcolor{blue}{DHDH} (0.55)} \\
+ & {\textcolor{blue}{\textbf{IFI16}} (6.52)} \\
+ & {\textcolor{blue}{\textbf{MX2}} (0.78)} \\
+
+\end{longtable}
+\unskip
+\unpenalty
+\unpenalty}
+\unvbox\ltmcbox
+\end{center}
+\end{multicols*}
+\caption{Timepoint \unit{2}{h}, $\alpha = 0.8$, FDR = 0.1}
+\label{fig:table2h}
+\end{table*}
+\end{center}
