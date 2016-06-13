@@ -1,16 +1,10 @@
 \chapter{State of the art}
 \label{chap:state}
 
+%QUOTE XXX We make our world significant by the courage of our questions and by the depth of your answers. Carl Sagan QUOTE XXX
 
-\section{Biological entities and their analysis}
 
-\subsection{Entities}
-
-\subsection{Biology as science}
-
-\subsection{High throughput experiments}
-
-\subsection{Statistics}
+\section{Statistical analysis of gene expression}
 
 	Nowadays, the differential analysis of transcriptomic profiles is ubiquitous in molecular biology.
 	The ability to broadly assey biomolecular profiles of multiple samples cheaply enabled the wide adoption of techniques based on the differential analysis of multiple whole-genome samples.
@@ -34,7 +28,7 @@
 
 	However, most of those studies are based on gene-centric methods, which use univariate statistical testing to call for significantly differentially expressed genes.
 
-\section{Networks}
+\section{Networks analysis}
 
 \subsection{Biological networks}
 
@@ -65,20 +59,26 @@
 
 	\subsection{Network analysis}
 
-
 \section{Modules}
 
 There exists mostly two approaches to use biological networks to detect interesting biological processes.
-The first category is composed of techniques that aim to select sets of genes in specific biological contexts.
+The first category is composed of \emph{comparative} approaches of the networks structures, that enables to compare networks from different species or of the same species but under different conditions.
+They are treated in \cref{subsec:topomodules}.
+The second category is composed of techniques that aim to select sets of genes in specific biological contexts.
 These techniques usually combine both biological network structures and experimental data, and are called \emph{integrative} approaches since they combine data of different types into a single algorithm.
-The second category is composed of \emph{comparative} approaches of the networks structures, that enables to compare networks from different species or of the same species but under different conditions.
+They are treated in \cref{subsec:activemodules}.
 
-	\Textcite{sharan2006modeling} identify three broad types of comparative approaches: network alignment, network integration, and network querying methods.
+\subsection{Topological modules}
+\label{subsec:topomodules}
 
-	Even though what they qualify as network integration is an important aspect of networks comparison (which is used for example for protein interaction prediction \parencite{rhodes2005probabilistic}, or for protein modules detection \parencites{kelley2005systematic}{zhang2005biology}), it is different enough from our core problem that we will not go into details.
+	This section present methods that use the networks in themselves to extract structures deemed interesting.
+	In order to do so, they use the topological structures of the networks to detect substructures.%that are known to appear in targeted biological function.
 
-	On the other hand, networks alignments and networks querying problems are two sides of the same coin.
-	Indeed, in general terms, network alignment is two seemingly similar subproblems: the \emph{local graph alignment} problem, and the \emph{global graph alignment} problem.
+	\Textcite{sharan2006modeling} identify three broad types of such approaches: network alignment, network integration, and network querying methods.
+	Even though what they call network integration is an important category of networks comparison problems, which are used for example for protein interaction prediction \parencite{rhodes2005probabilistic} or for protein modules detection \parencites{kelley2005systematic}{zhang2005biology}, it is unrelated from our core problem.
+
+	What they name networks alignments and networks querying problems are two closely related categories of problems.
+	In general terms, graph alignments are made of two seemingly similar subproblems: the \emph{local graph alignment} problem, and the \emph{global graph alignment} problem.
 	Precisely, in the local alignment problem we look for a subgraph in the larger input that most closely resemble a query graph or query criteria.
 	In the global alignment problem we try to match every nodes of one graph to every nodes of the other graph.
 
@@ -90,20 +90,20 @@ The second category is composed of \emph{comparative} approaches of the networks
 	Furthermore, the matching can be weighted, or constrained by a bipartite similarity relationship between the two graphs.
 	They are all optimization problems where some criteria, for example the number of matched nodes or edges, must be maximized.
 
-	First, there are the methods that use the networks in themselves to extract structures deemed interesting.
-	They usually use topological structures of the network in study combined with graph algorithms to detect substructures that are known to appear in targeted biological function.
+	These problems pertains to the \emph{module discovery} class of problems over biological networks\footnote{It is also named \emph{community structure discovery} when applied over social networks.}.
 
-	However, an interesting problem with biological networks is the detection of similar substructures in $k$ different networks.
-	They can either represent different species or the same species in different conditions.
-	The most simple\footnote{But nonetheless difficult, cf. \cref{subsec:netalignment}.} version of the problem is that of topological alignment, but there exists weighted alignment problems that can be used.
+%	However, an interesting problem with biological networks is the detection of similar substructures in $k$ different networks.
+%	They can either represent different species or the same species in different conditions.
+%	The most simple\footnote{But nonetheless difficult, cf. \cref{subsec:netalignment}.} version of the problem is that of topological alignment, but there exists weighted alignment problems that can be used.
 
-	This section is broken in three independent subsections.
-	First in \cref{subsec:substructure} we present an overview of the topological techniques over biological networks used to infer interesting structures.
-	In \cref{subsec:moduledisc} we provide a detailed look into the module discovery problem, where biological networks and experimental data are combined in order to explain some specific biological process.
-	Finally, in \cref{subsec:netalignment} we look at solutions that look across multiple networks to infer information.
-	In this subsection we will look into technique that explicitly recognize the networks structures through alignment as well as other models.
+%	This section is broken in three independent subsections.
+%	First in \cref{subsec:substructure} we present an overview of the topological techniques over biological networks used to infer interesting structures.
+%	In \cref{subsec:moduledisc} we provide a detailed look into the module discovery problem, where biological networks and experimental data are combined in order to explain some specific biological process.
+%	Finally, in \cref{subsec:netalignment} we look at solutions that look across multiple networks to infer information.
+%	In this subsection we will look into technique that explicitly recognize the networks structures through alignment as well as other models.
 
 \subsection{Active modules}
+\label{subsec:activemodules}
 
 	The category of methods use the networks combined with biological experimental data, for example expression profiles, to detect structures of interest in the context of the experiment.
 	These methods are well adapted for an understanding of single-species processes, for which the interpretation of the results follow logically from the inputs.
@@ -123,15 +123,11 @@ The second category is composed of \emph{comparative} approaches of the networks
 	More biology of modules XXX TODO: \parencites{dittrich2008identifying}{yamamoto2009better}{backes2012integer}{mitra2013integrative}.
 
 
-\subsection{Cross-species analysis}
-
-
-
-\subsection{Active and cross-species modules}
+\subsubsection{Cross-species analysis}
 
 	Several authors already identified the benefits of combining cross-species experimental data.
 	At the single gene level, \textcite{noort2003predicting} have demonstrated that conserved co-expression is a strong co-evolutionary signal.
-	More recent  studies suggested to identify conserved biological processes.
+	More recent studies suggested to identify conserved biological processes.
 
 	Talk about cMonkey: \parencite{reiss2006integrated}.
 	And cMonkey2: \parencite{reiss2015cmonkey2}.
@@ -147,28 +143,25 @@ The second category is composed of \emph{comparative} approaches of the networks
 
 	\Textcite{dede2014triclust} introduced a method that finds triclusters consisting of genes that are coexpressed across a subset of samples and a subset of species.
 
+	\paragraph{Modules as connected subgraphs}
 
-	\subsubsection{Connected}
+	\Textcite{deshpande2010scalable} developed the \nexus{} algorithm for finding conserved active subnetworks.
+	\nexus{} is based on simple notions of activity and orthology and uses a heuristic search strategy.
+	The authors use the average fold change of genes in a module as a measure for activity.
+	To deal with conservation, they collapse paralogous genes within a cluster of orthologous genes (COG) \parencite{tatusov1997genomic}\footnote{As provided by databases such as Inparanoid \parencite{obrien2005inparanoid}.} into single nodes in the respective networks.
+	They find modules using a seed-and-extend greedy heuristic that starts from a pair of orthologous seed nodes and then tries to simultaneously grow the two subnetworks by including pairs of neighboring orthologous genes, taking into account their activity as well as the interaction confidences.
+	This strategy enforces a very stringent conservation policy: only modules whose genes are fully conserved are found.
+	In addition, the locality of the greedy search strategy impairs the ability to find larger conserved modules and extending the search space around the seed genes drastically increases the runtime.
 
-		\Textcite{deshpande2010scalable} developed the \nexus{} algorithm for finding conserved active subnetworks.
-		\nexus{} is based on simple notions of activity and orthology and uses a heuristic search strategy.
-		The authors use the average fold change of genes in a module as a measure for activity.
-		To deal with conservation, they collapse paralogous genes within a cluster of orthologous genes (COG) \parencite{tatusov1997genomic}\footnote{As provided by databases such as Inparanoid \parencite{obrien2005inparanoid}.} into single nodes in the respective networks.
-		They find modules using a seed-and-extend greedy heuristic that starts from a pair of orthologous seed nodes and then tries to simultaneously grow the two subnetworks by including pairs of neighboring orthologous genes, taking into account their activity as well as the interaction confidences.
-		This strategy enforces a very stringent conservation policy: only modules whose genes are fully conserved are found.
-		In addition, the locality of the greedy search strategy impairs the ability to find larger conserved modules and extending the search space around the seed genes drastically increases the runtime.
+	In recent work, \textcite{zinman2015moduleblast} introduce \moduleblast{}, a method that, similarly to \nexus{}, represents groups of orthologous proteins as single nodes in a combined network and tries to find connected subnetworks that are differentially expressed.
+	The novelty of the method is the classification of the found modules according to the sign of the log fold change expression values.
+	By doing so, the authors are able to assess whether conserved active modules show consistent or inconsistent
+  eession patterns.
+	However \moduleblast{}, like \nexus{}, requires strict conservation of module genes.
+	We see that as an important limitation that our present work aim to correct.
 
-		In recent work, \textcite{zinman2015moduleblast} introduce \moduleblast{}, a method that, similarly to \nexus{}, represents groups of orthologous proteins as single nodes in a combined network and tries to find connected subnetworks that are differentially expressed.
-		The novelty of the method is the classification of the found modules according to the sign of the log fold change expression values.
-		By doing so, the authors are able to assess whether conserved active modules show consistent or inconsistent
-  expression patterns.
-		However \moduleblast{}, like \nexus{}, requires strict conservation of module genes.
-		We see that as an important limitation that our present work aim to correct.
-
-
-\section{Discrete optimization}
-
-\subsection{The \textsc{maximum-weight connected subgraph} problem}
+%\section{Discrete optimization}
+\section{The \textsc{maximum-weight connected subgraph} problem}
 \label{sec:mwcsproblem}
 
 	This section is separated in two parts.
@@ -184,15 +177,29 @@ The second category is composed of \emph{comparative} approaches of the networks
 
 	The \textsc{steiner tree} problem is an extremely well known combinatorial optimization problem, which is part of Karp's original 21 NP-complete problems \parencite{karp1972reducibility}.
 	It has its origin in the geometry of Jakob Steiner's eponym Steiner problem, and pertain to the class of mathematical optimization problems over graphs.
+	It is informally defined as follows.
 	A large number of variations of this problem exists: the \emph{Steiner tree problems}.
 	\Textcite{hauptmann2014compendium} maintain an extensive and up-to-date compendium of those variants.
 
+	\paragraph{}
+	One of the variants of the \textsc{steiner tree} problem is the \textsc{prize-collecting steiner tree} problem, or \textsc{pcst} problem.
+	Is is informally defined as follows.
+
+	\textbf{\pcst{}$\colon$} Given a graph, a non-negative weight for each vertex, and a non-negative cost for each edge, the goal is to find the subtree that maximizes the sum of the weights minus the sum of the costs.
+
+	The \pcst{} problem is an \emph{utility versus cost optimization} variant (as formally defined by \textcite{conrad2007connections}) of the \textsc{steiner tree} problem.
+	\Textcite{bienstock1993note} were the firsts to formally introduce the problem, and the first recognized proof of NP-hardness follows from \textcite{camerini1979complexity} (even through the problem was not formally defined at the time).
+	Surprisingly\footnote{They themselves acknowledge that this is an easy result \parencite[footnote 12]{feigenbaum2000sharing}.}, \textcite{feigenbaum2000sharing} were the first to prove that the \pcst{} problem is NP-hard to approximate within any constant ratio $0 < \epsilon < 1$, or APX-hard, using a reduction from \textsc{sat}.
+	This variant is highly relevant to our context as there exist bidirectional reductions between the \pcst{} and \mwcs{} problems, and for a long time reducing an \mwcs{} instance to a \pcst{} instance was the technique of choice to actually solve the problem (cf. \cref{subsec:solvingmwcs}).
+
+	\paragraph{}
 	The \textsc{maximum-weight connected subgraph} problem, or \mwcs{} problem, falls within the same classification as various Steiner tree problems: it is a problem of combinatorial optimization over graphs.
 	It is informally defined as follows.
 
-	Given a graph and a real-valued weight for each vertex, the goal is to find the connected set of vertices that maximizes the sum of the weights.
+	\textbf{\mwcs{}$\colon$} Given a graph and a real-valued weight for each vertex, the goal is to find the connected subset of vertices that maximizes the sum of the weights.
 
-	Note that the solution is trivial, full or empty, if the vertices' weights are respectively all positive or all negative.
+	First observe that, since the edges are unweighted, the solution is trivial, full or empty, if the vertices' weights are respectively all positive or all negative.
+	This is in constrast with the \pcst{} problem where the positive weights of the vertices oppose the costs of the edges.
 
 	From a computer science point of view, the \mwcs{} problem is simple in its definition.
 	Nevertheless, it is actually a very difficult problem to solve, and in many cases remains intractable.
@@ -202,17 +209,14 @@ The second category is composed of \emph{comparative} approaches of the networks
 	Johnson made the fundamental observation that the solution to the \mwcs{} problem can always be reduced to a tree, since the additional edges serve no purpose.
 	Karp later provided another proof of NP-hardness for the \mwcs{} problem in \parencite[Supplementary Material]{ideker2002discovering}, by providing a reduction from the \textsc{minimum set cover} problem, another problem which is one of his 21 first NP-complete problems \parencite{karp1972reducibility}.
 
-	One of the variants of the \textsc{steiner tree} problem is the \textsc{prize-collecting steiner tree} problem, or \textsc{pcst} problem.
-	It is an \emph{utility versus cost optimization}\footnote{As defined by \textcite{conrad2007connections}.} variant of the \textsc{steiner tree} problem, for which the first proof of NP-hardness is provided by \textcite{camerini1979complexity}.
-	Surprisingly, \textcite{feigenbaum2000sharing} were the first to prove that the \pcst{} problem is NP-hard to approximate within any constant ratio $0 < \epsilon < 1$, or APX-hard, using a reduction from \textsc{sat}\footnote{They themselves acknowledge that this is an easy result \parencite[footnote 12]{feigenbaum2000sharing}.}.
-	This variant is highly relevant to our context as there exist bidirectional reductions between the \pcst{} and \mwcs{} problems, and for a long time reducing an \mwcs{} instance to a \pcst{} instance was the technique of choice to actually solve the problem (cf. \cref{subsec:solvingmwcs}).
 
 	Indeed, \textcite{alvarez2013maximum} proved that the \mwcs{} problem is actually APX-hard itself.
 	Using the SAT reduction previously mentioned \parencite{feigenbaum2000sharing}, they extended the result to \mwcs{} using a straightforward reduction of \pcst{} to \mwcs{}.
 
 	In the same way the \textsc{steiner tree} broadly defines a large set of related problems, the \mwcs{} problem defines itself a set of closely related problems.
-	These problems can be applied in many different contexts, of which: social network sciences, operations research, certainly networks design, and system biology, which is out main interest in this manuscript.
+	These problems can be applied in many different contexts, of which: social network sciences, operations research, certainly networks design, and system biology, which is our main interest in this manuscript.
 
+	\paragraph{}
 	Based on the basic version of the \mwcs{} problem, the principal variants are the \emph{constrained} versions, with an allocated budget and additional cost assigned to each vertex.
 	The \textsc{$k$-cardinality \mwcs{}}, the \textsc{cardinality-constrained \mwcs{}}, and the \textsc{budget-constrained \mwcs{}} serve interesting purposes.
 	The \textsc{$k$-cardinality \mwcs{}} require that the solution be comprised of exactly $k$ vertices, whereas the \textsc{cardinality-constrained \mwcs{}} variant require that the solution includes at most $K$ vertices.
@@ -224,12 +228,12 @@ The second category is composed of \emph{comparative} approaches of the networks
 
 	They can all be defined either on graphs or on directed graphs, and there exists rooted variants where one (or multiple) root(s) have to be selected in the solution.
 
-	There also exists minimization variants for all those problems, which are strictly equivalent from an optimality standpoint\footnote{It is equivalent to minimizing the opposite or the inverse of the nodes' weights}.
-	XXX they might differ from approximation standpoint though (working draft --\emph{Approximation algorithms for finding a $k$-connected subgraph of a graph with minimum weight}, Tam\'{a}s Hajba--). Need to read in more depth XXX.
-
-	XXX Variants with costs on the edges also exists. Do we talk about them ? Never used afterward XXX
+	There also exists minimization variants or reformulations for those problems. Most of them are strictly equivalent from an optimality standpoint: minimizing the sum of the opposite of the nodes' weights.
+	However, they differ from approximation standpoint, see \parencites{feigenbaum2000sharing}{johnson2000prize} for details.
 
 	\subsection{\mwcs{} in practice}
+
+		The \mwcs{} problem and its cardinality-constrained and budget-constrained variants are used in numerous important practical applications.
 
 		\Textcite{hochbaum1994node} first described the fixed cardinality variant of the problem (\textsc{$k$-cardinality \mwcs{}}).
 		They relate its use in two contexts.
@@ -243,20 +247,70 @@ The second category is composed of \emph{comparative} approaches of the networks
 		They were the firsts to introduce the rooted variant where a single root is provided for the solution, that they called the \textsc{constrained mcg} (\textsc{cmcg}).
 		They used this rooted variant to provide a decomposition scheme of the \mwcs{} problem into multiple \textsc{cmcg} subproblems.
 		They acknowledge that the optimal solution is NP-hard to find, and provide heuristics for their incremental roots selection.
+		They use all problems that they introduce in the fiber-optic networks design context.
 
-		Gomes' team recently looked into the budget constrained version of the problem, both rooted and unrooted variants, that they apply in the context of \emph{conservation planning} \parencites{conrad2007connections}{gomes2008connections}{dilkina2010solving}.
+		Gomes' team looked into the budget constrained version of the problem, both rooted and unrooted variants, that they apply in the context of \emph{conservation planning} \parencites{conrad2007connections}{gomes2008connections}{dilkina2010solving}.
+
+		\Textcite{chen2012efficient} used the \mwcs{} problem to extract signatures from a video stream for the activity detection problem. They represent the video as a three dimentionnal 6-connect graph, i.e. a space-time matrix, where each node's weights represent video features. They then use standard classifier to classify the signatures.
+
+		\Textcite{carvajal2013imposing} also looked into the forest planning problem to select contiguous regions of forest to maximizes ecosystem protection in nature reserve design, i.e. the number of species and habitats preserved.
+
+		Furthermore, as stated in section XXX, \textcites{dittrich2008identifying}{yamamoto2009better}{backes2012integer}{mitra2013integrative} all used the \mwcs{} problem or its variants in system biology to extract connected sets of genes.
+
+
 
 	\subsection{Solving the \mwcs{} problems}
 	\label{subsec:solvingmwcs}
 
+	Over the years, many methods have been proposed to solve the \mwcs{} problem.
+	They can mostly be categorized into two groups: 1) methods that first reduce the \mwcs{} instance into a \pcst{} instance, or 2) through direct modelization.
+
+	In both groups, many techniques have been proposed in order to make instances easier to solve.
+	Instance size reductions are often used, which leads to exact methods if quality guarantees are preserved through reduction, or heuristics (possible approximation) methods when more aggressive simplifications are performed.
+	Size reduction algorithms are fundamental techniques in solving large practical Steiner tree problems (or similar, such as the \mwcs{} problem), and applying known exact reduction is the first step for real world instances resolution \parencite{polzin2003algorithms}.
+
 	\subsubsection{Through the Prize-Collecting Steiner Tree problem}
 
-	\subsubsection{Through a direct method (Miranda-Alvarez)}
+		In their seminal paper, \textcite{goemans1995general} were the firsts to provide an approximation algorithm (a 2-approximation) for a number of \emph{constrained forest} problems, such as the \pcst{} problem.
+		They further develop their method in \parencite{goemans1997primal}.
+		This is an important contribution since they reformulate the problem into an easy to approximate formulation (the standard formulation is APX-hard), which became the basis for many other contributions afterward.
 
-		\begin{itemize}
-			\item rooted: \cite{alvarez2013rooted}
-			\item unrooted: \cite{alvarez2013maximum}
-		\end{itemize}
+		Builting on these algorithms, \textcite{johnson2000prize} proposed multiple variations of this 2-approximation for \pcst{}, that provide better performance, and application to variants such as the \textsc{quota \pcst{}} where the sum of the weights must be at least a given \emph{quota}, and the \textsc{budget \pcst{}} where the sum of the costs must be at most a given \emph{budget}.
+
+		\Textcite{lucena2004strong} introduces the \emph{generalized subtour elimination constraints} technique, and uses the separation algorithm first described by \textcites{fischetti1994weighted}.
+
+		In two papers, \textcites{ljubic2005solving}{ljubic2006algorithmic} solved the \mwcs{} problem by combining previously introduced methods for various Steiner tree problems over directed graphs. Their technique was the first to solve to optimality some of the privous benchmark instances and was order of magnitude faster than previous methods on some other instances.
+
+		\Textcite{dittrich2008identifying} were the first to describe a reduction from \mwcs{} to \pcst{} with linear conservation of the objective function optimal value.
+		Given this reduction, any method previously proposed to solve the \pcst{} problem could now be used to solve instances of the \mwcs{} problem, application that they demonstrate in system biology for module extraction.
+		They also gave an approximation-preserving reduction from \pcst{} to \mwcs{}.
+	
+		\Textcite{chimani2009obtaining} introduces an ILP formulation equivalent to the \textsc{generalized subtour elimination constraints} formulation proposed by \textcite{lucena2004strong} that they call the \emph{directed cut} formulation.
+		They then propose a stronger separation algorithm for this new formulation, which is more efficient in pratice than the previous technique introduced by \textcites{fischetti1994weighted}.
+
+	\subsubsection{Direct formulation}
+
+	Direct formulation methods include all methods that can be used to solve the \mwcs{} problem without first explicitly reducing the \mwcs{} instance to a \pcst{} instance.
+
+		%% k-card
+	\Textcite{quintao2008integer} provide multiple reformulation of the $k$-cardinality variant of the \mwcs{} problem, from which they formulation strong linear relaxations.
+		\Textcite{quintao2010k} further improves the technique by further integrating the constraints introduced very early by \textcite{miller1960integer}.
+
+		\Textcite{backes2012integer} proposed an exact formulation to solve the $k$-cardinality subtrees and connected subgraphs problems.
+
+		\Textcites{alvarez2013maximum}{alvarez2013rooted} introduced the first technique which does not explicitly model the graph edges.
+		Instead they introduce a Branch-and-Cut scheme where connectivity violations are detected from candidate solutions and corresponding constraints are recursively added to the model.
+		They showed that their technique outperformed most of the other methods on practical instances at the time.
+
+		\Textcite{el2014solving} introduce new preprocessing rules that they apply until an stable state is obtained.
+		They introduce a new graph decomposition, into biconnected and triconnected components, and solve each subproblem using a standard branch-and-cut approach similar to the one introduced by \textcite{alvarez2013maximum}.
+
+		\Textcite{althaus2014algorithms} describe, for $k$-induced subgraph, a combination of \parencite{fischetti1994weighted}, \parencite{chimani2009obtaining}, and \parencite{cohen2010several}.
+		%One interesting theoretical result of their paper is that they show that for $k \geq 2$, the polyhedra cannot be compared.
+		In their as of yet unpublished manuscript, \textcite{althausalgorithms} further improved their previous algorithm by introducing exact and heuristic reductions of the size of the \mwcs{} instances.
+		They solve the newly reduced problems using a combination of two MIP programs formulations: the \parencite{cohen2010several} formulation for spanning tree problems, and the addition of the \emph{generalized subtour elimination constraints} to further reduce the polyhedron size.
+		They use \textcite{chimani2009obtaining}'s \emph{directed cut} formulation of the constraints since the separation algorithm for it is very efficient.
+		They integrate some of \textcite{el2014solving}'s exact reductions in their algorithm, and propose heuristic reductions if the practical instance is still too large.
 
 %	\subsection{Comparative approaches}
 %	\label{subsec:compapproches}
@@ -317,5 +371,3 @@ The second category is composed of \emph{comparative} approaches of the networks
 %
 %		\subsection{Combining expression data and comparative techniques}
 %		\label{subsec:combining}
-
-

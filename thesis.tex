@@ -3,6 +3,8 @@
 \documentclass[11pt,a4paper,twoside]{memoir}
 \usepackage[utf8]{inputenc}
 
+\usepackage{pdfpages}
+
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
@@ -15,6 +17,9 @@
 %\usepackage{tgschola}
 %\usepackage[bitstream-charter]{mathdesign}
 %\usepackage[libertine]{newtxmath}
+
+\usepackage{fancyvrb}
+\usepackage{shortvrb}
 
 %\usepackage{polyglossia}
 %\setdefaultlanguage{english}
@@ -86,6 +91,17 @@
 \newsubfloat{figure}
 
 \usepackage{tikz}
+\usetikzlibrary{%
+  arrows,%
+  shapes.misc,% wg. rounded rectangle
+  shapes.arrows,%
+  chains,%
+  matrix,%
+  positioning,% wg. " of "
+  scopes,%
+  decorations.pathmorphing,% /pgf/decoration/random steps | erste Graphik
+  shadows%
+}
 
 \usepackage{enumitem}
 
@@ -94,7 +110,6 @@
 \newtheorem{lemma}{Lemma}
 \newtheorem{problem}{Problem}
 
-\cftpagenumbersoff{part}      % Do not put page number in toc for parts
 \setsecnumdepth{subsubsection}   % Stop numbering after subsection level
 \setcounter{secnumdepth}{6} % allow for the referencing of paragraphs
 
@@ -129,7 +144,8 @@
 \usepackage[nameinlink]{cleveref}
 \usepackage{footnotebackref}
 
-\crefname{subsection}{subsection}{subsections}
+%\crefname{subsection}{subsection}{subsections}
+%\crefname{subsubsection}{subsubsection}{subsections}
 
 \makeatletter
     \renewcommand\@makefntext[1]{%
@@ -168,6 +184,12 @@
 \newcommand{\cnf}{\mbox{\textsc{3-cnf(3)}}}
 \newcommand{\mcnf}{\mbox{\text{\textsc{3-cnf(3)}}}}
 
+%to fix wrong spacing of paren with \left and \right
+\let\originalleft\left
+\let\originalright\right
+\renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
+\renewcommand{\right}{\aftergroup\egroup\originalright}
+
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
 \DeclarePairedDelimiter\norm{\lvert}{\rvert}
 \DeclarePairedDelimiter\card{\lvert}{\rvert}
@@ -175,7 +197,8 @@
 \DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}%
         { #1 \,\,\delimsize|\,\, #2 }
 
-\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
 
 \graphicspath{ {img/} }
 
@@ -188,43 +211,65 @@
 
 \begin{document}
 
-\clearpage\maketitle
+%\clearpage\maketitle
+\includepdf{Page-titre.pdf}
 \thispagestyle{empty}
+\clearpage
 
 \frontmatter
+
+\vphantom{foobar} \vphantom{foobar} \vphantom{foobar} \vphantom{foobar} \vphantom{foobar} \vphantom{foobar} \vphantom{foobar} \vphantom{foobar}
+\hspace{\fill}\emph{Pour tous ceux qui n'ont cessé de croire en moi.}
+\thispagestyle{empty}
+
+\addtocontents{toc}{\cftpagenumbersoff{chapter}}
+
+\chapter*{Résumé}
+
+	Cette these 
+
+\paragraph{Mots clés:}Bioinformatique, Optimization combinatoire, Maximum-Weight Connected Subgraph, Recherche de modules biologiques
+
+\clearpage
+
+\chapter*{Abstract}
+
+	This thesis
+
+\paragraph{Keywords:}Bioinformatics, Combinatorial optimization, Maximum-Weight Connected Subgraph, Biological module discovery
+
+\cleardoublepage
+
 \pagenumbering{Roman}
 
  \microtypesetup{protrusion=false}
  \tableofcontents*
- \newpage
+ \cleardoublepage
+
  \listoffigures*
- \newpage
+ \cleardoublepage
+
  \listoftables*
  \microtypesetup{protrusion=true}
 
- \mainmatter
+\mainmatter
 
-\addtocontents{toc}{\cftpagenumbersoff{chapter}}
 
-% \input{abstract}
-\addcontentsline{toc}{chapter}{Abstract}
-\chaptermark{Abstract}
-
- \cftinserthook{toc}{IndentChap}
 %%\part{Preliminary notions}
 %%\label{pt:1}
 
-%\input{prelim}
-\addcontentsline{toc}{chapter}{Introduction}
-\chaptermark{Introduction}
-\stepcounter{chapter}
-
-%\input{stateart}
-\addcontentsline{toc}{chapter}{State of the art}
-\chaptermark{State of the art}
-\stepcounter{chapter}
-
 \addtocontents{toc}{\cftpagenumberson{chapter}} % to restore the showing of page numbers
+
+%\addcontentsline{toc}{chapter}{Introduction}
+%\chaptermark{Introduction}
+ \input{prelim}
+
+%\cftinserthook{toc}{IndentChap}
+
+ \input{stateart}
+%\addcontentsline{toc}{chapter}{State of the art}
+%\chaptermark{State of the art}
+%\stepcounter{chapter}
 
 %%\part{Cross-species module discovery}
 %%\label{pt:2}
@@ -236,18 +281,19 @@
  \input{apxhard}
 %%\input{mwrbcs}
 
+
+%\bookmarksetup{startatroot}
+%\cftinserthook{toc}{UnindentChap}
+
+%\addtocontents{toc}{\cftpagenumbersoff{chapter}}
+%\addcontentsline{toc}{chapter}{Conclusion}
+%\chaptermark{Conclusion}
+%\stepcounter{chapter}
+%\addtocontents{toc}{\cftpagenumberson{chapter}} % to restore the showing of page numbers
+ \input{conclusion}
+
  \appendix
  \input{xheinzAppendices}
-
- \bookmarksetup{startatroot}
- \cftinserthook{toc}{UnindentChap}
-%\input{conclusion}
-
-\addtocontents{toc}{\cftpagenumbersoff{chapter}}
-\addcontentsline{toc}{chapter}{Conclusion}
-\chaptermark{Conclusion}
-\stepcounter{chapter}
-\addtocontents{toc}{\cftpagenumberson{chapter}} % to restore the showing of page numbers
 
 \backmatter
 \pagenumbering{alph}
