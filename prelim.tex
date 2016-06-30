@@ -1,69 +1,4 @@
-\chapter{Introduction}
-%\chapter*{Introduction}
-%\addcontentsline{toc}{chapter}{Introduction}
-%\chaptermark{Introduction}
-\label{chap:intro}
-
-Where first biologists looked at independant \emph{living organisms} in their environments and interacted with them at the human scale, modern biologists have much more complex views of and interactions with the living world.
-For example modern molecular biologists looks into the invisible and analyses cellular processes.
-And most --if not all-- modern biologist are intersted as much with the subject of their study as with its surrounding that it connect to throught its interactions.
-
-No definition of life is unequivocal, but most agree that in order to be considered a living organism one has be able to grow and adapt to external stimuli in order to maintain its homeostasis (maintaining a stable state by means of one or many internal processes) and be able to replicate.
-According to this definition the most basic unit of life is the \emph{cell}.
-Cells can either be organisms in themselves, bacteria being the perfect example, or the basis for complex multicellular organisms, for example animals and land plants.
-
-Cells are made of many biomolecules in constant interactions.
-These molecules form many structures, including a membrane and every other mechanisms that are required for the cell to function as a living organism.
-Two fundamental kinds of biomolecule are the nucleic acid chains, such as deoxyribonucleic acid (DNA) and ribonucleic acid (RNA), and amino acid chains, such as proteins.
-
-Nucleic acid molecules are strings of nucleotides that encode and transmit informations.
-
-Proteins are complex macromolecules that constitute the mechanisms through which the cell function.
-There exist many different types of proteins, each doing one or more specific tasks.
-Proteins rarely act alone, and in order to do their work, they interact with other types of proteins, and thus form protein-protein interaction networks.
-
-At any given time, a cell contains a large number of proteins for each kind.
-By the random nature of biomolecules interactions, the relative concentration for each of these protein types guide the functioning of the cell overall.
-
-\paragraph{}
-
-It is difficult to directly measure the concentrations for each type of proteins.
-However, modern microarray or sequencing techniques allow the measure of the precursor of the proteins: messenger RNA.
-Hence, an histogram of these proxies of the proteins concentration can be made: \emph{expression profiles}.
-
-Expression profiles are like the molecular signatures of the cells.
-Indeed, the proteins that are present in a skin cell are very different from those in a blood cell.
-
-These molecular signatures allow the automated classification of different cells by type.
-
-\emph{Differential analysis} is a technique where the expression profiles for a control cell line are compared to the one from a condition cell line, and the differences are extracted.
-It allows the detection of slight variations in cell functioning within the same cell type.
-
-\paragraph{}
-
-There exist many computational methods for the analysis of these expression profiles.
-In this thesis we contribute to the \emph{active module discovery} problem, where the expression levels for each proteins are used to extract proteins of interests.
-These are proteins that are highly differentiated between the control and the condition.
-
-Many statistical approaches have been proposed to detect these sets of proteins that are important in the phenomenon under study.
-One shortcoming of many of these methods is that they occasionally find sets of proteins that have little in common for the cellular processes, and biological interpretation of these results become difficult, if even significant.
-
-Here, we take the \emph{connected module} approach, where modules are proteins of interest with the added constraint that they have to physically interact.
-A few techniques have been proposed that use the protein-protein interactions networks as graph structures.
-Computationally, these techniques are all connected to the \emph{connected subgraphs problems}, such as the \textsc{prize-collecting steiner tree} (\pcst{}) problem or the \textsc{maximum-weight connected subgraph} (\mwcs{}) problem.
-
-\paragraph{}
-
-The main contribution of this thesis is the introduction of a model for the detection of active connected modules across two species.
-We are looking for active connected modules that are similar in composition between two species.
-The similarity is a flexible ratio of similar proteins over all proteins in the solution.
-
-We present a mixed-integer programming formulation of our model, and propose a branch-and-cut algorithm to solve it to optimality in reasonable run time on practical instances.
-
-We then analyse our model from a complexity standpoint.
-We demonstrate that the problem is APX-hard in the general case.
-We also show that it can be solvable in polynomial time and fixed parameter tractable polynomial time for some categories of input.
-
+\chapter{Preliminaries}
 \section{Biological entities and their analysis}
 
 %When we think about biology, we first picture living organisms, the basic unit of biology.
@@ -168,7 +103,7 @@ TAGTAATTACTCTATTTCCACGTCAT\textcolor{red}{A}TTTCCGGG
 
 \subsubsection{RNA}
 
-Like DNA, RNA is a nucleic acid sequence, but with some differences. For example, RNA molecules are single-stranded, while DNA is double-stranded. Also DNA and RNA differ slightly at the nucleotide level, in particular there is a 'U' (uracil) instead of 'T'. Most importantly, RNA sequences - called mRNA for messenger RNA - correspond to the coding regions. The non-coding regions are excised during the transcription process.
+Like DNA, RNA is a nucleic acid sequence, but with some differences. For example, RNA molecules are single-stranded, while DNA is double-stranded. Also DNA and RNA differ slightly at the nucleotide level, in particular there is a 'U' (uracil) instead of 'T'. Most importantly, RNA sequences ---called mRNA for messenger RNA--- correspond to the protein coding regions. %The non-coding regions are excised during the transcription process.
 
 %copy the example : http://jonlieffmd.com/wp-content/uploads/2012/12/splicing1.gif
 \colorlet{ColorPink}{red!17}
@@ -291,13 +226,13 @@ Like DNA, RNA is a nucleic acid sequence, but with some differences. For example
 \end{figure}
 
 
-Different species have their own sets of RNA sequences at any given  time. In particular, they respond to environmental stimuli by varying the level of RNA molecules that are present at a given time, process that is called \emph{gene expression}. The set of RNA molecules of an organism is called \emph{transcriptome}.
+Different species have their own sets of mRNA sequences at any given  time. In particular, they respond to environmental stimuli by varying the level of mRNA molecules that are present at a given time, process that is called \emph{gene expression}. The set of mRNA molecules of an organism is called \emph{transcriptome}.
 
 %\TODO{RNA is obtained by sequencing, captures the expression of exome}
 
 \subsubsection{Proteins}
 
-\emph{Translation}, which is the second step in gene expression, ''reads'' the RNA sequences and translates (according to the genetic code) them into amino acid sequences, that is sequences over the alphabet of 22 amino-acid letters.  Each group of three bases in the mRNA constitutes a  \emph{codon}, and each codon defines a particular amino acid. This is why it is called a triplet code. Consequently, the RNA sequence is used as a template to build sequences of amino acids that constitute proteins.
+\emph{Translation}, which is the second step in gene expression, ''reads'' the RNA sequences and translates (according to the genetic code) them into amino acid sequences, that is sequences over the alphabet of 21 amino-acid letters.  Each group of three bases in the mRNA constitutes a  \emph{codon}, and each codon defines a particular amino acid. This is why it is called a triplet code. Consequently, the mRNA sequence is used as a template to build sequences of amino acids that constitute proteins.
 
 %\TODO{example of a protein}
 
@@ -319,16 +254,21 @@ Microarrays, RNA-sequencing, high precision microscopy, and mass spectrometry, a
 With the collection of these volumes of data, a number of challenges arise, among which (i) the collection of data  into accessible repositories, and (ii) the analysis and interpretation of the underlying knowledge.
 Analysis requirements of biological data have brought  biology within the scope of data science, towards what is called quantitative biology.
 
-\subsubsection{Biological databases}
+%\subsubsection{Biological databases}
 
 
 \subsection{High throughput experiments}
 
 %\subsubsection{microarrays}
 
-\emph{Microarrays} is an experimental technique that can analyze the expression of many genes simultaneously and in an efficient manner \parencites{smyth2005use}{sealfon2011rna}. Microarrays can be used to perform different measurements, among others are the detection and measurement of gene expression at the mRNA or protein level, detection of  mutations and location of chromosomal changes. A microarray is a collection of spots attached to a solid surface. Each spot -- corresponding to one gene -- on a microarray contains multiple identical strands of DNA and that are unique to this spot. Thousands of spots are arranged in rows and columns on a solid surface. The resulting data is the intensity of fluorescence for each spot that represents the level of expression of the corresponding gene.
-
-Consequently, data produced by microarray technique requires a certain amount of image processing 
+This ability to quantify many molecular targets in parallel was an important step towards the understanding of complex biological processes.
+\emph{Microarrays} is an experimental technique that can analyze the expression of many genes simultaneously and in an efficient manner \parencites{smyth2005use}{sealfon2011rna}.
+Microarrays can be used to perform different measurements, among others are the detection and measurement of gene expression at the mRNA or protein level, detection of  mutations and location of chromosomal changes.
+A microarray is a collection of spots attached to a solid surface.
+Each spot -- corresponding to one gene -- on a microarray contains multiple identical strands of DNA and that are unique to this spot.
+Thousands of spots are arranged in rows and columns on a solid surface.
+The resulting data is the intensity of fluorescence for each spot that represents the level of expression of the corresponding gene.
+Consequently, data produced by microarray technique requires some amount of post-processing.
 
 %\TODO{REF microarray data processing : http://web.cs.mun.ca/~harold/Courses/Old/CS6754.W06/Diary/ng1032.pdf}
 
@@ -336,15 +276,18 @@ Consequently, data produced by microarray technique requires a certain amount of
 %	Microarray technologies are high-throughput screening methods for biological material, that allow experimenters to assay the amount the quantity of a specific material on a large scale.
 	%Further, they typically allow to screen up to or more than ten thousand different targets \parencites{smyth2005use}{sealfon2011rna}.
 	
-This ability to quantify many molecular targets in parallel was an important step towards the understanding of complex biological processes. However, microarray data is subject to variability and noise. A number of normalization techniques have been developed to deal with these artifacts (REF, REF). However, normalization can not adjust for the major flaw of microarrays, that is batch effect. Consequently, combining batches of data produced by microarrays can potentially lead to erroneous results \parencite{johnson2007adjusting}.
+Furthermore, microarray data is inherently subject to variability and noise.
+A number of normalization techniques have been developed to deal with these artifacts \parencite{reimers2010making}.
+However, normalization can not adjust for the major flaw of microarrays, that is batch effect.
+Consequently, combining batches of data produced by microarrays can potentially lead to erroneous results \parencite{johnson2007adjusting}.
 
-\subsubsection{NGS}
-\label{subsubsec:ngs}
-
-\subsubsection{RNA-Seq}
-\label{subsubsec:rnaseq}
-
-Comparison microarray - NGS \parencite{richard2014comparison}
+%\subsubsection{NGS}
+%\label{subsubsec:ngs}
+%
+%\subsubsection{RNA-Seq}
+%\label{subsubsec:rnaseq}
+%
+%Comparison microarray - NGS \parencite{richard2014comparison}
 
 %This thesis propose 
 %
@@ -428,17 +371,23 @@ Comparison microarray - NGS \parencite{richard2014comparison}
 %%	\subsection{String}
 %%		\paragraph{Suffix trees and array}
 
+\paragraph{}
+\paragraph{}
+The next two sections introduce fundamental concepts and terminology that will be used at length through this work.
+In \cref{sec:compandcomp} we give an overview of the computer science concepts that serve as a basis for the optimization theory.
+In \cref{sec:optproblems} we provide the reader with a brief introduction to both practical and theoretical aspects of optimization, and specifically combinatorial optimization, on which this thesis builds atop.
+
 \section{Computation and complexity classes}
-	In this section we introduce the fundamental concepts and terminology that will be used at length through this work.
+\label{sec:compandcomp}
 	%It is our hope that this introduction will suffice for the reading of this text
 
 	\paragraph{}
 	A \emph{computational problem} is a mathematical question that is susceptible to being solved by a computer.
-	Even though any specific mathematical question is potentialy a computational problem, it is usual for computational problems to regroup a set of similar questions.
-	For exemple, alhough \textit{''Is 42 a prime number?''} is a mathematical question that can be solved by a computer, \textit{''Given a number $n$, is $n$ a prime number?''} is really the computational problem here.
-	Every possible input to the problem form in \emph{instance} of said problem, for which there might very well be an infinite number, and each of which having its own specific \emph{solution}.
-	In the aforementioned exemple there are an infinite number of instances, one for every $n$, each with its own $yes$ or $no$ answer.
-	By convention, ''computational'' is very often omited, hence the previous problem would be called for exemple \textit{''the primality test \emph{problem}''}.
+	Even though any specific mathematical question is potentially a computational problem, it is usual for computational problems to regroup a set of similar questions.
+	For example, although \textit{''Is 42 a prime number?''} is a mathematical question that can be solved by a computer, the computation problem is: \textit{''Given a number $n$, is $n$ a prime number?''}.
+	Every possible input to the problem forms an \emph{instance}, which there might be an infinite number, and each of which having its own \emph{solution}.
+	In the aforementioned example there are an infinite number of instances, one for every $n$, each with its own $yes$ or $no$ answer.
+	By convention, ''computational'' is very often omitted, and the previous problem would be called \textit{''the primality test \emph{problem}''}.
 
 	\emph{Theoretical computer science} is an inclusive field of both mathematics and general computer sciences that studies many of the theoretical aspects of computation.
 	In this field any computation is expressed for a specific \emph{model of computation}.
@@ -446,80 +395,99 @@ Comparison microarray - NGS \parencite{richard2014comparison}
 
 	\paragraph{}
 	Computational problems are solved with algorithms, series of well-defined sequential or parallel operations that can be executed by the model for which it was designed.
-	Formally, an algorithm unambiguously define an \emph{effective method} in the \emph{Turing-Church} sense, that is a series of finite number of mechanical steps that the model can execute and that always produce a correct answer (for the problems it is intended to solve).
+	Formally, an algorithm unambiguously defines an \emph{effective method} in the \emph{Turing-Church} sense, that is a series of finite number of mechanical steps that the model can execute and that always produce a correct answer (for the problems it is intended to solve).
 
 	\emph{Serial algorithms}, containing only sequential operations, form the vast majority of known algorithms and are usually identified simply as ''algorithms''.
 	On the other hand, algorithms containing parallel sequences are aptly named \emph{parallel algorithms}\footnote{Not to be confused with \emph{concurrent algorithms}, algorithms for which concurrent steps can execute in undefined order, even though the two are often closely related.}, and although their \emph{fork} points (points of separation) and \emph{join} points (points of junction) are well defined, their analysis comes with its own share of idiosyncrasies.
 	Parallel algorithms are the foundation of modern optimization problem solvers.
-	The authors recommend \parencite{jada1992introduction} for a thorough introduction to this subject.
-	Furthermore the sequential transitions need not be deterministic: the integration of a random factors is the basis for the \emph{randomized algorithms}.
-	Ramdomized algorithms are also very important in optimization contexts, particularly for approximation schemes with the use of \emph{randomized rounding}.
-	We recommend \parencite[Chapters~5 and 6]{williamson2011design} for a clear and comprehensive treatment of the topic.
+	We recommend \parencite{jada1992introduction} for a thorough introduction to this subject.
+	Furthermore the sequential transitions need not be deterministic: the integration of a random factor is the basis for the \emph{randomized algorithms}.
+	Randomized algorithms are also very important in optimization contexts, particularly for approximation schemes with the use of \emph{randomized rounding}.
+	We recommend \parencite[Chapters~5 and 6]{williamson2011design} for a clear and comprehensive reference on the topic.
 
-	Even though the Mixed-Integer Programs (MIP) Solvers that we use in this work implement inhenrently parallel and optionally randomized algorithms (see \cref{subsec:bnsalgo}) to solve our instances, the study of said algorithms and the associated models of computation is well beyond the scope of this manuscript since in the general case (including ours) a parallel and/or randomized algorithm does not change the inherent caracteristics (that we investigate) of the problem that it solves.
+	Even though the Mixed-Integer Linear Programs (MILP) solvers that we use in this work implement inherently parallel and optionally randomized algorithms (see \cref{sec:optproblems}) to solve our instances, the study of said algorithms and the associated models of computation is well beyond the scope of this manuscript since in the general case (including ours) a parallel and/or randomized algorithm does not change the inherent characteristics of the problem that it solves.
 
 	\paragraph{}
-	We thus have on one hand computational problems and on the other hand algorithms (for specific models of computations) that solve their problems\footnote{Technically an algorithm cannot solve a problem since it only define a series of step, \emph{executing} (or \emph{running}) the algorithm solves the problems; nevertheless it is extremely common for the expression to be used and this manuscript no different.} by computing their solution.
-	For a given problem, different algorithms, running on different models of computation, can exhibit very different caracteristics, when they exists at all.
-	The study of models of computations and their expressiveness in term of algorithms ---and hence of the problems that they can solve, and with which caracteristics--- is part of the \emph{theory of computation}.
+	On one hand we have computational problems and on the other hand algorithms to solve these problems %\footnote{Technically an algorithm cannot solve a problem since it only define a series of step, \emph{executing} (or \emph{running}) the algorithm solves the problems; nevertheless it is extremely common for the expression to be used and this manuscript no different.}
+		by computing a solution.
+	For a given problem, different algorithms, running on different models of computation, can exhibit very different characteristics. %, when they exists at all.
+	The study of models of computation and their expressiveness in terms of algorithms ---and thus of the problems that they can solve--- %, and with which characteristics---
+		is part of the \emph{theory of computation}.
 	For a general introduction to the subject we recommend \parencite{sipser2012introduction}.
-	The problems that we study in this manuscript are deeply driven by their practical applications.
-	Hence from now on, for the sake of simplification and unless specified otherwise, we consider only one theoretical model of computations: \emph{Turing machines}.
-	These Turing machines are an abstract model that allows us to theoretically ground the research of algorithms' properties and are the foundation of the Turing-Church's theory of effective methods.
+	The problems that we study in this manuscript are driven by their practical applications.
+	%Hence from now on, for the sake of simplification and unless specified otherwise, we consider only one theoretical model of computations: \emph{Turing machines}.
+	%These Turing machines are an abstract model that allows us to theoretically ground the research of algorithms' properties and are the foundation of the Turing-Church's theory of effective methods.
 
 	The fact that there exists a potentially large number of algorithms %\footnote{Actually an infinity since one can always add as many \emph{NOP} (\emph{No Operation}) as wished for to an existing algorithm, thus arguably making new algorithms for the problem.}
-	that solve a given computational problem certainly does not mean that they are all equal, quite the opposite.
-	There are many caracteristics that can be used to compare and classify algorithms, the most important ones being the \emph{complexity measures} that satisfy the \emph{Blum complexity axioms}.
+	that solve a given computational problem does not mean that they are all equivalent. %, quite the opposite.
+	There are many characteristics that can be used to compare and classify algorithms, the most important ones being the \emph{complexity measures} that satisfy the \emph{Blum complexity axioms}.
 	Namely, the two most significant measures are the \emph{execution time complexity} (also named \emph{run time}, \emph{runtime}, or simply \emph{time complexity}) and the \emph{memory space complexity} (or simply \emph{space complexity}) measures, informally the minimum number of steps and the minimal amount of storage that an algorithm must use to successfully compute the solution to the problem at hand.
 	These measures provide the means to quantify the necessary resources that an algorithm requires for its computation to complete, which gives us an element to express the \emph{efficiency} of the algorithm.
-	When unspecified ''complexity'' usually means ''execution time complexity''.
+	When unspecified, ''complexity'' usually means ''execution time complexity''.
 
-	Since algorithms solve computational problems, they have to accept as many different input as there exist instances of the problem.
-	The \emph{analysis of algorithm} is a field that provides tools that make possible the study of algorithms under any of their valid inputs, enabling the expression of complexity measures as functions of the inputs.
-	In the \textit{''the primality test \emph{problem}''} previously mentioned, the complexity of an algorithm solving this problem would therefore be a function of $n$, the abstract number that is tested and which is the input of the algorithm.
-	Since the algorithm and its complexity hold for any arbritrary large number $n$ the complexity is generayly measured asymptotically.
-	To denote this asymptotic representation of complexity, we use the \emph{Big-O asymptotic notation} ($O$).
-	Formally, the notation means \[ f(n) \in O(g(n)) \qquad \iff \qquad \exists M,n_0 \quad \text{s.t.}\quad \abs{f(n)} \leq \abs{M\times{}g(n)} \quad \forall\, n\geq n_0.\]
-	Thus the Big-O function designate an asymptotic upper bound for the function and allows for a notation that represents its growth rate, also known as the \emph{order (of growth) of the function}.
+%	Since algorithms solve computational problems, they have to accept as many different input as there exist instances of the problem.
+	The \emph{analysis of algorithms} is %a field that provides tools that make possible
+		the study of the efficiency of algorithms as function of the length of the input.
+	In the \textit{''the primality test \emph{problem}''} previously mentioned, the complexity of an algorithm solving this problem would therefore be a function of $n$. %, the abstract number that is tested and which is the input of the algorithm.
+	Since the algorithm and its complexity hold for any %arbitrary large number
+		$n$, the complexity is generally measured asymptotically.
+	To denote this asymptotic representation of complexity, we use the \emph{Big-O asymptotic notation}:
+	\[ f(n) \in O(g(n)) \qquad \iff \qquad \exists M,n_0 \quad \text{s.t.}\quad \abs{f(n)} \leq \abs{M\times{}g(n)} \quad \forall\, n\geq n_0.\]
+	Thus the Big-O function designates an asymptotic upper bound for the function and allows for a notation that represents its growth rate, also known as the \emph{order (of growth) of the function}.
 	Informally, it means that the term with highest growth rate in the function $f(n)$, stripped of its factor, is lesser or equal than $g(n)$ asymptotically (usually equal since we want the tightest bound possible).
 	Thereby, constant growth rate is denoted $O\left(1\right)$, logarithmic growth rate: $O\left(lg\left(n\right)\right)$, linear growth rate: $O\left(n\right)$, quadratic growth rate: $O\left(n^2\right)$, etc.
-	When unspecified, ''complexity'' usually means ''worst case asymptotic complexity'' in opposition to ''exact'', ''average-case'' or ''best-case complexity'' which use are less common in theoretical contexts, because mostly dependent on the details of the execution model\footnote{E.g. $O\left(1\right)$ multiplication when the result holds inside machine registers against $O\left(n^{\lg 3}\right)$ for arbitrary large $n$-digits number with the Karatsuba multiplication algorithm \parencite{karatsuba1963multiplication}.} and/or valid only for some restricted set of inputs\footnote{E.g. the insertion sort which for an $n$ elements list takes $O(n)$ when the list is already sorted, $O(kn)$ time to sort the list when it contains at most $k$ invertions, and $O(n^2)$ time in the general (worst) case.}.
+	Note however that an algorithm complexity is dependant on the execution model and on the set of inputs.
+	For example regarding the execution model, integer multiplication is often assumed $O\left(1\right)$ when it actually only holds when the result is contained inside machine registers, where it is an $O\left(n^{\lg 3}\right)$ operation for arbitrary large $n$-digits number with the Karatsuba multiplication algorithm \parencite{karatsuba1963multiplication} in general.
+	In regard to the inputs, the insertion sort or an $n$ elements list takes $O(n)$ when the list is already sorted, $O(kn)$ time to sort the list when it contains at most $k$ inversions, and $O(n^2)$ time in the general (worst) case for example.
+	When unspecified, ''complexity'' usually means ''worst case asymptotic complexity'' in opposition to ''exact'', ''average-case'' or ''best-case complexity'' which use are less common in theoretical contexts.
 
 	Note that the notation $O\left(g\left(n\right)\right)$ actually defines the set of all functions such that the definition holds, that is of all functions $f(n) \in O\left(g\left(n\right)\right)$.
 	And since clearly $O(1) \subset O\left(lg\left(n\right)\right) \subset O\left(n\right) \subset O\left(n^2\right) \subset \ldots{} $, this notation provides a natural classification of algorithms into ever more inclusive classes of increasing complexity.
 	Although in the general case not all such classes hold an inclusion relationship with each other, hierarchical classification of classes is central to complexity analysis of computational problems.
 	Classes for a specific resource $res$ (e.g. time) are defined by the set of problems that can be solved in $O(f(n))$ in regard to $res$ for any input of size $n$.
-	Even though not stricly correct, we often denote such a class the \emph{$f(n)$ $res$ class}, and say that an algorithm is \emph{in (the order of) $f(x)$ $res$}.
-	\emph{Computational complexity theory} (oftentimes simply \emph{complexity theory}) is the field of knowledge that uses the complexity measures to classify problems into such complexity classes.
+	Even though not strictly correct, we often denote such a class the \emph{$f(n)$ $res$ class}, and say that an algorithm is \emph{in (the order of) $f(x)$ $res$}.
+	%\emph{Computational complexity theory} (oftentimes simply \emph{complexity theory}) is the field of knowledge that uses the complexity measures to classify problems into such complexity classes.
+
 
 	\paragraph{}
-	Where the analysis of algorithms study the fundamental caracteristics of algorithms, complexity theory is concerned with the study of the problems themselves, outlined by all conceivable algorithms that can solve it.
+	Where the analysis of algorithms studies these characteristics of algorithms, complexity theory is concerned with the study of the problems themselves, whatever the algorithmic solution.
 	In practice when all the knowledge that we have about a problem is a set of algorithms that can solve it, we consider a problem to be at most as difficult (that is: complex)  as the ''best'' known algorithm that solves the problem, in other words the one which complexity is in the most restrictive complexity class (for a given resource).
-	For exemple, the fastest known algorithm that can solve the primality test problem is \textcite{lenstra2002primality}'s and is in $O\left(\left(\log n\right)^6\times{}\left(2 + \log(\log n)\right)^c\right)$ time, for some real valued constant $c$; the primality test problem is thereby in this complexity class.
-	Even though some conjecture suggest that there may be, it is not known if a faster algorithm actually exists for this problem, in other word it is not know if there exists a more restrictive complexity class that includes the primality test problem.
+	For example, the fastest known algorithm that can solve the primality test problem is \textcite{lenstra2002primality}'s and is in $O\left(\left(\log n\right)^6\times{}\left(2 + \log(\log n)\right)^c\right)$ time, for some real valued constant $c$; the primality test problem is thereby in this complexity class.
+	\Textcite{agrawal2004primes} speculated that there may be a faster algorithm for this problem, it is yet unknown if one actually exists.
+	That is, it is unknown if there exists a more restrictive complexity class that includes the primality test problem.
 
-	Oftentimes, the best technique to classify problems is to analyse how one problem compares to a well known other, using a technique called \emph{problem reduction}.
-	Being able to reduce a problem $A$ to a problem $B$ means that there exists a method capable of transforming any instances of $A$ into instances of $B$, and is noted $A \leq B$.
-	Technically, a reduction from $A$ to $B$ allows any algorithm that solve $B$ to also solve $A$.
+	One of the techniques to study the complexity of a problem is the \emph{problem reduction} approach.
+	A problem $A$ is said reducible to problem B, noted $A \leq B$, if there exists a method that can transform any instance of $A$ into an instance of $B$.
+%	This means that there exists an algorithm capable of transforming any instances of $A$ into instances of $B$.
+	Technically, a reduction from $A$ to $B$ allows any algorithm that solves $B$ to also solve $A$.
 	Provided that the reduction's algorithm does not take any more resources than the algorithm that solves $B$, it means that $A$ cannot be harder to solve than $B$, since any of its instances can be reduced to $B$.
 	Conversely, if we know that $A$ is a difficult problem (we know that some of its instances are difficult to solve), being able to reduce all of its instances to any of problem $B$ proves that $B$ is at least as difficult as $A$, since we know that some of its instances are indeed difficult from the reduction of the difficult ones from $A$.
 
+	Most often, problem reduction are studied under polynomial resource constraints.
+	Note that, since for any amount of space resource that a deterministic algorithm requires, it first needs to be run through and thus a deterministic algorithm is always at most as fast as the amount of memory that it requires.
+	For this reason, the deterministic run time complexity measure is more restrictive than the deterministic space complexity measure, and polynomial-time problem reductions give the strongest results in regard to problem classification.
+
 	\paragraph{}
-	Most often, problem reductions compare problems of same \emph{problem type}.
-	There exist many types of problems: function problems (which informally are problems that ask $y = f(x)$ given $x$), counting problems (which are problems for which we count the number of answers), optimization problems (which are problems that ask which is the \emph{best} solution in a set of candidates, to be formally introduced in \cref{sec:optproblems}), etc.
-	The most commonly used in complexity theory are \emph{decision problems}, problems that ask a binary ''yes/no'' question.
+	Most often, problem reductions compare problems of same \emph{problem type}, for which there exists many types:
+	\begin{itemize}
+		\item \emph{decision problems} which are problem that ask a binary ''yes/no'' question,
+		\item \emph{function problems} which given an $x$ are problems that ask $y = f(x)$,
+		\item \emph{counting problems} for which we count the number of valid answers,
+		\item \emph{optimization problems} which are problems that ask which is the \emph{best} solution in a set of candidates,
+		\item etc.
+	\end{itemize}
 
-	Decision problems are often central to complexity theory because the two most prevalent complexity classes, $P$ and $NP$, are formally defined for these problems.
-	Furthermore most problems types can be reasonably converted to decision problems (and often the other way aroud), see \cref{subsec:combio} for an application of this principle to combinatorial optimization problems.
-	The first class, $P$, includes all decision problems that can be solved in \emph{polynomial time} by a \emph{deterministic Turing machine}, and the second class, $NP$, all decision problems that can be solved in \emph{polynomial time} by a \emph{nondeterministic Turing machine}.
-	Since the set of nondeterministic choices includes all deterministic choices, clearly $P \subseteq NP$.
+	The most commonly studied in complexity theory are \emph{decision problems}, and they are central to complexity theory.
+	Indeed two most prevalent complexity classes, $P$ and $NP$, are formally defined for these problems.
+	%Most problems types can be reasonably converted to decision problems, and often the other way around, see \cref{subsec:combio} for an application of this principle to combinatorial optimization problems.
+%	The first class, $P$, includes all decision problems that can be solved in \emph{polynomial time} by a \emph{deterministic Turing machine}, and the second class, $NP$, all decision problems that can be solved in \emph{polynomial time} by a \emph{nondeterministic Turing machine}.
+%	Since the set of nondeterministic choices includes all deterministic choices, clearly $P \subseteq NP$.
 
-	There exist many other complexity classes, sometimes even defined for only one or a very small set of specific problems.
-	For an up to date compendium of complexity classes we recommend the list maintained by \textcite{complexityzoo}.
+%	There exist many other complexity classes, sometimes even defined for only one or a very small set of specific problems.
+%	For an up to date compendium of complexity classes we recommend the list maintained by \textcite{complexityzoo}.
 
 	%Finally, two closely related notion need to be introduced.
 	A problem $p$ is said to be \emph{hard} for some complexity class $C$, or \emph{$C$-hard}, if every problem in $C$ can be reduced to $p$ using a reasonable volume of resources.
-	Most often, a reasonable volume of resources amount to a polynomial quantity, and since the most restrictive resource is the run time\footnote{In comparison to space, since any amount of space that a deterministic algorithm requires first needs to be run through, a deterministic algorithm is always at most as fast as the amount of memory that it requires.}, \emph{polynomial-time reduction} are most commonly used.
 	Thus, the set of \emph{$C$-hard} problems is the set of all problems that are harder or equally hard as the most difficult problems in $C$.
 
 	A problem $p$ is said to be \emph{complete} for some complexity class $C$, or \emph{$C$-complete}, if $p$ is in $C$ and $p$ is \emph{$C$-hard}.
@@ -534,58 +502,59 @@ Comparison microarray - NGS \parencite{richard2014comparison}
 
 	Mathematical optimization problems are problems where we search for the \emph{optimal element} (maximal or minimal depending on the problem) of a real-valued \emph{objective function}, subject to some constraints over its domain.
 	It is very rare that only the value of the optimal element is required, and most often it is the \emph{valuation of the input} that leads to the optimal element, that is the values of input parameters of the function, that we really require.
-	Formally, an optimization problem have the following form\footnote{This is the form predominantly used in strictly mathematical situations.}:
+	Formally, an optimization problem has the following form: %\footnote{This is the form predominantly used in strictly mathematical situations.}:
 	\begin{align*}
-		&\text{Given an \emph{objective function} }f\colon D_f \to \mR\text{ that we want to minimize,}\\
-		&\text{given the \emph{choice set} }CS \subseteq D_f,\\
-		&\text{find an element }opt \in CS\text{ such that }f(opt) \leq f(x)\quad\forall x\in CS.
+		&\text{Given an \emph{objective function} }f\colon D \to \mR\text{ that we want to minimize,}\\
+		&\text{given the \emph{choice set} }S \subseteq D,\\
+		&\text{find an element }opt \in S\text{ such that }f(opt) \leq f(x)\quad\forall x\in S.
 	\end{align*}
-	Note that by convention this standard form is for minimization problems; maximization problems are strictly equivalent since, for any given maximization problem, negating the objective function effictively makes it a minimization problem.
+	Note that by convention this standard form is for minimization problems; maximization problems are strictly equivalent since, for any given maximization problem, negating the objective function effectively makes it a minimization problem.
 	Depending on the context, the objective function is also named the \emph{cost function}, cost that we usually want to minimize, or the \emph{utility} (or \emph{profit}) \emph{function}, utility (or profit) that we usually want to maximize.
 
-	When the choice set is simple enought or clearly defined, the previous problem notation is oftentimes shortened to the smaller (but much less explicit) version $\min\limits_{x\in CS}f(x)$, or $\argmin\limits_{x\in CS}f(x)$ when the valuation of $x$ is explicitly required.
-	These notations are most often used in statistical optimization fields, such are machine learning, where optimization problems hold a central place; and such use we indeed apply in \cref{sub:statistical_analysis_and_node_scoring} (albeit in a maximization form) where the parameters of a \emph{mixture model} are optimized by a \emph{maximum-likelihood estimation}.
+	When the choice set is simple enough or clearly defined, the previous problem notation is oftentimes shortened to the smaller (but much less explicit) version $\min\limits_{x\in S}f(x)$, or $\argmin\limits_{x\in S}f(x)$ when the valuation of $x$ is explicitly required.
+	%These notations are most often used in statistical optimization fields, such are machine learning, where optimization problems hold a central place; and such use we indeed apply in \cref{sub:statistical_analysis_and_node_scoring} (albeit in a maximization form) where the parameters of a \emph{mixture model} are optimized by a \emph{maximum-likelihood estimation}.
 
 	\paragraph{}
-	In most practical applications, however, the choice set rarely possess a straightforward definition, and is instead described by a set of \emph{constraints}, that is a set of equalities and inequalities such that $\forall x\in D_f,\,x\in CS$ if and only if $x$ satisfies them all.
-	In regard to the objective function, all points $x\in D_f$ are \emph{potential solutions} and constitute the \emph{search space} of the optimization problem, all $x\in CS$ are \emph{candidate solutions} (or \emph{feasible solutions}) to the problem, and all points $x\in D_f\text{ s.t. }x\notin CS$, that is points of the search space where at least one constraint is \emph{violated}, are the \emph{infeasible solutions}.
-	The \textbf{c}hoice \textbf{s}et $CS$ is thus the set of all \textbf{c}andidate \textbf{s}olutions.
-	Given a set of constraints, an optimization problem is formally defined as such\footnote{This is the \emph{standard form} predominantly employed in computational contexts and the one we will mostly use from now on.}:
+	In most practical applications, the choice set rarely has a straightforward definition, and is described by a set of \emph{constraints}, that is a set of equalities and inequalities such that $\forall x\in D,\,x\in S$ if and only if $x$ satisfies them all.
+	All points $x\in D$ are \emph{potential solutions} for $f$ and constitute the \emph{search space} of the optimization problem, all $x\in S$ are \emph{candidate solutions} (or \emph{feasible solutions}) of the problem, and all points $x\in D\text{ s.t. }x\notin S$, that is points of the search space where at least one constraint is \emph{violated}, are the \emph{infeasible solutions}.
+	The choice set $S$ is thus the set of all candidate solutions.
+	Given a set of constraints, an optimization problem is formally defined as follows: %such\footnote{This is the \emph{standard form} predominantly employed in computational contexts and the one we will mostly use from now on.}:
 	\begin{alignat*}{4}
 		\min\quad& f(x) & & &\\
 		\text{subject to}\quad& g_i(x) & \leq & G_i\quad & \forall i \in [1, m] \\
 		                      & h_j(x) &   =  & H_j\quad & \forall j \in [1, n] \\
 	\end{alignat*}
-	$f(x)$ is the objective function, $\bigcup_{i \in [1,m]}{g_i}$ is the set of all inequality constraints, and $\bigcup_{j \in [1,n]}{h_j}$ the set of all equality constraints, and the \emph{subject to} is often abbreviated as simply \emph{s.t}.
+	where $f(x)$ is the objective function, $\bigcup\limits_{m}{g_i}$ is the set of all inequality constraints, and $\bigcup\limits_{n}{h_j}$ the set of all equality constraints. %, and the \emph{subject to} is often abbreviated as simply \emph{s.t}.
 
 	\paragraph{}
-	Many optimization problems can give the impression of being relatively simple, particularly the ones with a finite choice set.
-	Actually, methodically enumerating all possible inputs of the function that respect the constraints and computing their associated value, then selecting the optimal one from them all, can appear as a perfectly valid method for most optimization problems.
-	And indeed, such a technique can be the basis of a valid algorithm, although it is not very efficient in most general.
-	These algorithms are an application of the \emph{exhaustive search} (or \emph{brute-force search}) methods.
-	However, the cost of these technique is proportional to the number of candidates solutions to test for.
-	In practice the search space is often huge in regard to the size of the input, with many common search spaces (of common optimization problems) growing respectively at an exponential rate; in some cases the search space is not even enumerable.
-	These special cases where the search space is finite constitute the very specific topic of \emph{combinatorial optimization} and will be treated in details in \cref{subsec:combio}.
-	In general, the search space is not necessarilly finite nor even enumerable, and unless the objective function and the constraints conform to some specific restrictions, the search space may prove to be very hard to naively explore in practice.
+%	Many optimization problems can give the impression of being relatively simple, particularly the ones with a finite choice set.
+%	Actually, methodically enumerating all possible inputs of the function that respect the constraints and computing their associated value, then selecting the optimal one from them all, can appear as a perfectly valid method for most optimization problems.
+	Enumerative technique, which are application of \emph{exhaustive search} (or \emph{brute-force search}) methods, can be the basis of valid algorithm for such problems. %, although it is not very efficient in most general.
+%	These algorithms are an application of the .
+%	However, the cost of these technique is proportional to the number of candidates solutions to test for.
+	However, the complexity of enumerative algorithms is proportional to the number of valid valuation of the variable, i.e. the number of candidate solutions. %possible valuations of the variables.
+	In practice the search space of many common optimization problems grows at an exponential rate.
+	Special cases where the search space is finite constitute the very specific topic of \emph{combinatorial optimization} (see \cref{subsec:combio}).
+	In general, the search space is neither finite nor enumerable, and unless the objective function and the constraints conform to some specific restrictions, a naive exploration of the search space is not suitable. %, the search space may prove to be very hard to naively explore in practice.
 
 %	\paragraph{}
 	The effective size of the search space is often compounded by the fact that optimization problems are essentially expressed in high-dimensional spaces.
 	With high-dimensional problems the $x$ that we optimize over becomes a vector, oftentimes noted $\mathbf{x}$, and each component of the vector is said a variable of the problem.
-	In this context, constraints not only describe restrictions to the set of available candidate solutions, but also interdependancies between these variables.
-	These interdependancies define the \emph{Pareto optimality} of the problem, where the variables are valuated such that any one cannot be improved without making any other (and the objective function as a whole) worse.
+	In this context, constraints not only describe restrictions to the set of available candidate solutions, but also interdependencies between these variables.
+	These interdependencies define the \emph{Pareto optimality} of the problem, where the variables are valuated such that any one cannot be improved without making any other and the objective function as a whole worse.
 	Typically, the Pareto optimality is often applied when the objective function is a combination of multiple criteria.
 
-%	\paragraph{Multi-objective optimization}
+	\paragraph{Multi-objective optimization}
 	When multiple objective functions are combined, that is when multiple criteria need to be optimized at the same time simultaneously, the problem is said a \emph{multi-objective optimization}, or \emph{Pareto optimization}.
-	Since in the general case (and very often in practice) a single solution cannot optimize all criteria at the same time, trade-offs have to be made, and some objectives must be optimized in favor of others.
+	Since in the general case (and very often in practice) a single solution cannot optimize all criteria at the same time, trade-offs have to be made and some objectives must be optimized in favor of others.
 	Specifically, some ratio $\alpha \in [0, 1]$ have to be selected such that, for some objective functions $g(\mathbf{x})$ and $h(\mathbf{x})$, the combined objective $f(\mathbf{x}) = \alpha{}g(\mathbf{x}) + (1 - \alpha{})h(\mathbf{x})$ is optimized.
-	The generalization to $k$ objectives does not scale well, and in practice it is very difficult to select a good trade-off (or trade-offs for $k > 2$).
-	We thus define the \emph{Pareto front} as the (most often infinite) set of all vectors $\mathbf{x}$ that are optimal for some value of $\alpha$.
+	For one, the generalization to $k$ objectives does not scale, and second, in practice it is very difficult to select a meaningful trade-offs.
+	We thus define the \emph{Pareto front} as the set of all vectors $\mathbf{x}$ that are optimal for at least one value of $\alpha$.
 	Finding the Pareto front of a problem is very similar to the \emph{Skyline query} problem (or \emph{Skyline operator}), and \textcite{rekatsinas2015finding} gave a recent overview of the difficulties involved.
 	In many cases, multi-objective optimization is problematic either because trade-offs have to be selected beforehand without a well defined models for the consequences, or because computing the Pareto front (or a part) understandably remains a computationally intensive task to this day.
 	In \cref{chap:xheinz} we present a technique that we use to express an inherently multi-criteria problem into a constrained single-objective problem, therefore preventing some of the aforementioned problems and allowing for an easier interpretation of our results.
 
-	\paragraph{Linear programs}
+	\subsection{Linear and convex programs}
 	\emph{Linear programs} are optimization problems where the objective function and the inequality and equality constraints are linear.
 	Each inequality constraint can be seen as a hyperplane, that is a $d$-dimensional generalisation of a 1-d point, of a 2-d line or of a 3-d plane.
 	Hence, each inequality constraint effectively reduce the choice set by requiring that the solution is in the half-space (either on the greater-than or lesser-than side) defined by its geometric equivalence.
@@ -593,14 +562,14 @@ Comparison microarray - NGS \parencite{richard2014comparison}
 	Given the nature of the inequalities and since the search space is defined by the intersection of many half-spaces, it is either empty (no point can respect all constraints at the same time) or convex.
 	Furthermore, the objective function effectively defines a continuous scalar field and its gradient defines the direction of the optimization.
 	Finding the optimal value of the problem is then equivalent to finding the points of the polyhedron where the objective function is optimal.
-	Since the objective function is linear, either there is one unique optimum on a vertice of the polyhedron, or there as infinitely many of them that form an edge or face of the polyhedron.
+	Since the objective function is linear, either there is one unique optimum on a vertex of the polyhedron, or there as infinitely many of them that form an edge or face of the polyhedron.
 	See \cref{fig:linearprog} for a visual representation in 2-dimensions of a simple linear problem.
-	Equality contraints are not strictly necessary since they can always be replaced by two opposite inequalities ($h(x) = H$ becomes the two constraints $h(x) \leq H$ and $-h(x) \leq -H$).
+	Equality constraints are not strictly necessary since they can always be replaced by two opposite inequalities ($h(x) = H$ becomes the two constraints $h(x) \leq H$ and $-h(x) \leq -H$).
 	Geometrically, this describe a $d'$-dimensional hyperplane, with $d' < d$ depending on the variables used in the constraint, effectively reducing the search space dimension.
 	Since a problem with $n$ variables can be represented in a $n$-dimentional space, the number of variables of a problem and its dimension are often used synonymously, even though formally the dimension of the problem $d \leq n$ since the variables do not define orthogonal vectors in general.
 	
 	In 1947 Dantzig proposed the first method to solve linear program: the \emph{simplex algorithm}.
-	Geometrically, the algorithm moves from one vertex to another connected vertex until it finds one where it detect that all other connected vertice are suboptimal (or equal); and since the search space is a convex polytope this point is provably optimal.
+	Geometrically, the algorithm moves from one vertex to another connected vertex until it finds one where it detect that all other connected vertices are suboptimal (or equal); and since the search space is a convex polytope this point is provably optimal.
 	Even though \textcite{klee1970good} showed that there exists pathological instances for which the algorithm run in exponential-time relative to the number of variables\footnote{Which is very closely related to the number of constraints due to \emph{duality}. Unfortunately the \emph{primal-dual theory} is beyond the scope of this manuscript, see \parencite{papadimitriou1982combinatorial} for details.}, it remains used in practice even nowadays.
 	Furthermore, many modern techniques are grounded on the geometrical representations that the algorithm introduced.
 	\Textcite{khachiyan1980polynomial} proposed the first polynomial-time algorithm to solve linear programming problems, the \emph{ellipsoid method}, which was an important theoretical result, but with very few practical applications due to high exponents.
@@ -618,92 +587,133 @@ Comparison microarray - NGS \parencite{richard2014comparison}
 	\paragraph{}
 	Convex optimization is the generalization of linear programming to convex objective functions, convex inequalities and linear equality constraints.
 	The search space of convex optimization problems is itself convex, as the intersection of half-spaces of convex support.
-	This convexity property provide an important invariant: any local optimum is also the gloval optimum.
+	This convexity property provide an important invariant: any local optimum is also the global optimum.
 
-	\Textcite{nesterov1994interior} showed that most convex problems\footnote{Specifically linear programs, but also \emph{second order cone programs} and \emph{semidefinite programs}.}, including linear programs, can be solved in polynomial-time complexity using variations of the interior-point methods that \textcite{karmarkar1984new} introduced for linear programming.
-	In general, however, convex optimization remains a NP-hard problems.%; for exemple the optimization of a quadratic objective functions subject to linear constraint, a problem in appearance easy, is a difficult problem with some instances.
+	\Textcite{nesterov1994interior} showed that most convex problems, specifically \emph{linear programs}, \emph{second order cone programs}, and \emph{semidefinite programs}, can be solved in polynomial-time complexity using variations of the interior-point methods that \textcite{karmarkar1984new} introduced for linear programming.
+	In general, however, convex optimization remains a NP-hard problems. %; for example the optimization of a quadratic objective functions subject to linear constraint, a problem in appearance easy, is a difficult problem with some instances.
 
-	\paragraph{Approximation algorithms} a\\
-
-	\paragraph{Optimization complexity} a\\
-
-	\textbf{XXX PO, NPO, decision problems $\leftrightarrow$ optimization problems ($\leftarrow \exists$ solution with at most / at lest bound $b$ ; $\rightarrow$ enumerate (or binary search over) possible values of $b$) XXX}
-	\phantom{oarst}a\\
-
-	\textbf{XXX APX, FPTAS and PTAS XXX}
+	\paragraph{}
+	Many practical and real-life problems can be modeled as linear and convex optimization problems, and in general as continuous optimization problems.
+	However, these forms of optimization problems are also used to a large degree in the context of combinatorial optimization as \emph{problems relaxations}.
+	A problem is said relaxed when some of its constraints are lifted, such as integrality of the variables for example.
+	In this context the relaxed problem is often used as an \emph{heuristic}: an easier version of the problem that gives an optimistic optimum in a reasonable amount of time.
+	See \cref{subsec:bnsalgo} for an example of such use of linear and convex programs.
 
 	\subsection{Combinatorial optimization}
 	\label{subsec:combio}
 	Combinatorial optimization is the large field of research interested in optimization problems defined over finite search spaces.
 	That is, where the problems is to search for one optimal element inside a discrete set of objects.
+	The domain is closely related to various algorithmic research fields, and in particular to the complexity theory and to the combinatorics field, which together study the complexity of algorithms working on finite combinatorial sets.
 
-
-	Although there exists some easy combinatorial problems, in general this is a class of problems that are often very difficult, for at least two reasons.
+	Although there exists some easy combinatorial problems, in general this is a class of problems that are often difficult for at least two reasons.
 	\begin{enumerate}
 		\item For one, even if the search space is finite, the number of feasible solutions is frequently so high that any enumeration is impossible in practice.
-			For exemple in the two-sequences alignment problem.
+			For example in the two-sequences alignment problem.
 			Given two sequences $\vec{a}=a_1a_2\ldots{}a_m$ and $\vec{b}=b_1b_2\ldots{}b_n$ ($n \leq m$) over the same alphabet, find the alignment that maximize the number of similar characters between the two alignments.
 			In this problem, the number of non redundant alignments between $\vec{a}$ and $\vec{b}$ is $N(m,n)=N(m-1,n)+N(m,n-1)=\binom{m+n}{n}$ which is a clear exponential growth.
 
 		\item Secondly, in many cases, the equivalent decision problem is itself a NP-hard problem.
-			For exemple in the sequence assembly problem with the \emph{shortest superstring problem}.
+			For example in the sequence assembly problem with the \emph{shortest superstring problem}.
 			Given a set of strings $s_1, s_2, \ldots, s_n$, construct a superstring $S$ that contains all $s_i$ as substrings, and such that the length of $S$ is minimal.
 			The decision problem equivalence, knowing given $s$ if there exists a superstring $S_l$ of length $l \leq s$, is actually NP-complete.
 			The proof is given by a reduction of the \emph{vertex cover problem} (decision version) to this shortest superstring problem as shown by \textcite{maier1978complexity} for alphabets of size 5, and later by \textcite{raiha1981shortest} for binary alphabets.
-
 	\end{enumerate}
 
-	Combinatorial optimization is closely related to various algorithmic research domain both, and in particular to the complexity theory and to the combinatorics field (and any enumerative approaches).
+	Combinatorial optimization can be subdivided into two closely related fields: the problems that work on combinatorial structures such as graphs, and integer programming problems.
+	This distinction is useful for two reasons.
+	On the one hand, their are some optimization problems over graphs, such as the flow-network problems, shortest paths or spanning trees, that can be solved in polynomial time, whereas the integer programming problem is difficult.
+	Precisely, the 0--1 integer programming decision problem is NP-complete, and the integer programming decision problem in the general case is NP-hard.
+	On the other hand, such optimization problems can be reduced to integer programming problems, although the reduction might require an exponential number of constraints, for example to model connectivity of the solutions, and thus the reduction is an exponential-time reduction.
+	Note that linear programs that also include integral variables are called Mixed Integer Linear Programs (or MILP) and are a general case of discrete optimization that includes integer programming.
 
-	\begin{itemize}
-		\item TSP, MST (min spanning tree)
-		\item subdomain of mathematical optimization
-		\item many applications
+	Even though combinatorial optimization problem are theoretically difficult, it is often the case that specific instances can be solved in reasonable amount of time.
+	Some problems, although proven difficult, have an extensive literature related to them.
+	In particular many publications propose techniques and heuristics that exhibit better characteristics to solve problems, oftentimes providing better run time in many benchmark instances.
+	One such techniques involves solving in polynomial time a relaxed version or an approximation of the initial problem.
+	Of interest to such studies are real-world instances that do not exhibit exponential behavior and random instances that often constitute basis for benchmarks (see \citetitle{DIMACS} for standard benchmarks for many optimization problems).
+	See \cref{subsec:solvingmwcs} for an extended bibliography of such approaches to solving the \textsc{maximum-weight connected subgraph} problem that we use in practice in \cref{chap:xheinz}.
+
+	\paragraph{}
+	When it comes to solving combinatorial optimization problems, mostly three cases can be observed.
+	First, if the problem can be solved in polynomial time.
+	In this situation, the general approaches often involves greedy algorithms that lead to the global optimum, dynamic programming that reuse sub-problems structure, and linear programming when the combinatorial structure can be expressed as real-valued variables.
+	Second, when the decision problem equivalent is actually NP-hard, informed search space exploration is the technique of choice.
+	In particular, using branch-and-bound and branch-and-cut techniques that are described in \cref{subsec:bnsalgo}.
+	Third, approximation algorithms are often employed when a reasonably close to optimal solution is required within a provable run time complexity.
+	See \cref{subsec:optcomplex} for a brief overview of approximation algorithms and of the complexity class that they induce.
+
+%		\textcite{crescenzi1995compendium} published a compendium of NP opt. problems, that they maintain somewhat up to date at \parencite{npcompendium}.
+
+%		\subsubsection{Polynomial-time solvable example: the min-cut problem}
+%		\label{subsubsec:mincut}
+%			\textbf{XXX Equivalent to the Max-flow problem, min-cut max-flow theorem, \textcite[Section 6.1]{papadimitriou1982combinatorial} for proof XXX}
 		
-		\item two closely related fields, \emph{combinatorial opt.} (loosely named) and \emph{integer programming}
-
-		\item distinction between problems for which polynomial-time algorithms exists and NP-complete problems
-		\item for NP problems real-world instances (that do not exhibit difficult behavior) vs. random
-		\item solving subproblem with polynomial-time algorithm (fpt algorithm..., cf)
-		\item approximation
-
-		\item For problems in P, greedy algorithms, dynamic programming, or linear programming
-
-		\item expression as decision problem
-
-		\item lots of categorie and subcategories
-
-		\item \textcite{crescenzi1995compendium} published a compendium of NP opt. problems, that they maintain somewhat up to date at \parencite{npcompendium}.
-	\end{itemize}
-
-		\subsubsection{Polynomial-time solvable exemple: the min-cut problem}
-		\label{subsubsec:mincut}
-			\textbf{XXX Equivalent to the Max-flow problem, min-cut max-flow theorem, \textcite[Section 6.1]{papadimitriou1982combinatorial} for proof XXX}
-		
-		\subsubsection{Branch-and-* algorithms}
+		\subsubsection{Search space exploration algorithms}
 		\label{subsec:bnsalgo}
 
 			\paragraph{Branch-and-bound}
+			The branch-and-bound technique is a search space exploration technique based on the explicit traversal and pruning of a state tree.
+			It is based on the technique that \textcite{land1960automatic} applied to integer programming.
+			It is very similar to the \emph{star} family of algorithms (such as A*, B*, \dots{}) and to the \emph{alpha-beta} algorithm in regards to both space exploration and to pruning \parencite{nau1984general}.
 
-				The branch-and-bound technique is a search space exploration technique based on the explicit traversal and pruning of the a state tree.
-				It is based on the technique that \textcite{land1960automatic} applied to integer programming.
+			Informally, given a node on the state tree, for each of its children corresponding to a valid variable assignment: if it's a leaf compute the actual valuation, otherwise compute an optimistic valuation (for example using a linear relaxation heuristic).
+			For each of these children, if the valuation is worse than the actual best: discard, otherwise: mark for traversal.
+			Start the procedure at the root where all variables are unassigned, and continue until no more nodes are marked for traversal at which point the best valuated leaf is the optimal state.
 
-				It is very similar to the \emph{star familly} of algorithms (such as A*, B*, \dots{}) and to the \emph{alpha-beta} algorithm in regards to both space exploration and to pruning.
+			In practice the branch-and-bound can be reasonably fast given a good node traversal strategy, for example using a priority order on the optimistic valuations, and given a good heuristic.
+			In particular the heuristic must be as close as possible to the actual valuation in order to prune a maximum number of nodes; many problems have heuristics specifically designed to be used in a branch-and-bound technique.
 
-				\textbf{in \cref{chap:xheinz} use the min-cut algorithm introduced in \cref{subsubsec:mincut} as an heuristic}
+			The branch-and-bound technique is very well studied, and there exists many techniques that optimize the run time or the space requirements of the algorithms.
+			Of note are parallel approaches, which are ubiquitous in modern solvers, and we recommend \parencite{bader2005parallel} for an overview with a practical example applied to the phylogenetic tree reconstruction problem.
+
+			%	\textbf{in \cref{chap:xheinz} }
 
 			\paragraph{Branch-and-cut}
+			\label{par:b-a-cut}
+			The branch-and-bound algorithm requires an explicit definition of the search space for its branch operation, where the list of valid variable assignments must be readily available in order to traverse the list of valid children to explore.
 
-				The branch-and-bound algorithm requires an explicit definition of the search space for its branch operation, in order to construct the list of candidate (sub-)solutions to explore.
+			The branch-and-cut technique is very similar to the branch-and-bound, with the introduction of \emph{global cuts} and \emph{local cuts}: additional constraints that can be added during the execution.
+			Cuts, also named \emph{Gomory cuts} \parencite{gononri1958outline} or \emph{cutting-planes}, are additional constraints that restrict the set of candidate solution. % (hence the name).
+			Global cuts are constraints that, once added into the formulation, must hold for all further solutions anywhere in the state tree, and local cuts are constraints that must hold only for the local sub-problem (the local sub-tree in the state tree).
+			In practice, the addition of these dynamic constraints very often have a positive impact to the run time and space efficiency, and most MILP solvers nowadays implement these cutting-plane techniques as the basis of their algorithm.
 
-				Branch-and-cut is equivalent to branch-and-bound with the addition that additional constraints can be added during the execution.
-				In pratice, 
-				
-				XXX Cannot express the whole problem (exponential number of constraints) XXX
+			One special use of the branch-and-cut technique is for problems that cannot be easily expressed using a branch-and-bound model.
+			For example, many of the problems over graphs that require connectivity of the solution need an exponential number of constraints to be explicitly defined as a MILP formulation.
+			In such context, a first version of the problem can be expressed with a limited (potentially empty) set of initial connectivity constraints in the model, and global cuts are iteratively added during the branch-and-cut execution whenever a potential solution that would break connectivity is found.
+			This is the application that we use in \cref{chap:xheinz} where we use the minimum cut problem over flow network, that can be solved in polynomial time, %introduced in \cref{subsubsec:mincut} as an heuristic.
+				to find connectivity constraints to add to the model.
 
-				XXX Simply faster thanks to the addition of local cuts XXX
+	\subsection{Approximation and complexity of optimization problems}
+	\label{subsec:optcomplex}
+		The classes PO and NPO, respectively \emph{P-optimization} and \emph{NP-optimization problems}, are defined for optimization problems and mirror their equivalent classes P and NP for decision problems.
+		They are seldom used in practice though, and it is not rare for P and NP to be used in optimization contexts to actually mean PO and NPO.
+
+		Note that given an algorithm for an optimization variant of a problem, it is trivial to have an algorithm for the decision variant by checking the optimal solution against the queried bound.
+		Conversely given an algorithm for the decision variant, a binary search over the range of possible values of the objective function gives the optimal solution of the optimization variant in a polynomial number of execution of the decision variant algorithm.
+		These two results show that if either one of the decision or optimization problem can be solved in polynomial time, so is the other.
+
+
+		\paragraph{}
+		Approximation algorithms are algorithms for NPO problems that find sub-optimal solution of provable quality in polynomial-time.
+		Not all combinatorial optimization problem can be approximated though, and of those that can be approximated, some can be at best up to a constant factor of the optimal solution, and some can be up to any factor of the optimal solution.
+		Note that if a problem can be approximated up to any factor, it can certainly be approximated up to a constant factor.
+
+		It is very common for approximation algorithm to be designed as polynomial optimization algorithm applied over a relaxation of the original problem.
+		Such polynomial technique include the greedy approaches, dynamic programming schemes, and convex programming relaxation.
+
+		A \emph{$c$-approximation} for a problem, with $c$ a constant, is an algorithm that takes as input an instance of the problem and that produces a solution of at most $c$ times the optimal solution in polynomial time.
+		A \emph{polynomial-time approximation scheme} (or \emph{PTAS}) for a problem is an algorithm that takes as input an instance of the problem as well as an $\epsilon > 0$ and that can produce a solution within a factor $1 + \epsilon$ (for a minimization problem, $1 - \epsilon$ for maximization) of the optimal solution in polynomial time.
+
+		The set of all problems that can be approximated up to a constant factor in polynomial time induce the complexity class APX.
+		All problems in APX are also said $c$-approximable for a constant $c$.
+		The set of all problems that admit a PTAS induce the PTAS complexity class.
+		Note that unless $P = NP$, $PTAS \subsetneq APX$; see \parencite[p. 20]{jansen1998introduction} for proof.
+		This also means that any APX-hard problems cannot have a PTAS.
+		
+		In \cref{chap:hard} we prove that the \textsc{maximum-weight cross-connected subgraph} problem that we introduce in \cref{chap:xheinz} is actually APX-hard.
 
 		\paragraph{}
 		\paragraph{}
-		For an introduction to optimization problems and the fundamental techniques of the domain (including Branch-and-bound methods) we recommend \textcite{papadimitriou1982combinatorial}'s classic.
-		For an \emph{advanced reference} book on difficult optimization problem and their algorithms, their analysis and their precise classification, we suggest \textcite{hromkovivc2013algorithmics}'s book.
+		For an introduction to optimization problems and the fundamental techniques of the domain (including search space exploration methods) we recommend \textcite{papadimitriou1982combinatorial}'s classic.
+		For an \emph{advanced reference} book on difficult optimization problem and their algorithms, their analysis and their precise classification, we suggest \textcite{hromkovivc2013algorithmics}'s book (for reference note that PTAS is noted NPO(II) and APX is noted NPO(III) in this book).
+

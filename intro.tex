@@ -1,0 +1,95 @@
+\chapter{Introduction}
+%\chapter*{Introduction}
+%\addcontentsline{toc}{chapter}{Introduction}
+%\chaptermark{Introduction}
+\label{chap:intro}
+
+%First biologists looked at independent \emph{living organisms} in their environments and interacted with them at the human scale.
+%In contrast, modern biologists have a much more complex view of the living world, world that they interact with through increasingly elaborate and precise tools.
+%For example, modern molecular biologists look into the smallest unit of life and analyse cellular processes.
+%And most --if not all-- modern biologist are interested as much with the subject of their study as with its surrounding that it connect to through its interactions.
+
+No definition of life is unequivocal.
+
+However, it is largely agreed that in order to be considered a \emph{living organism} a biological entity must be able to 1) grow and adapt to external stimuli in order to maintain its homeostasis (maintaining a stable state by means of one or many internal processes) and 2) be able to replicate autonomously.
+According to this definition the most basic unit of life is the \emph{cell}.
+Cells can either stand alone to constitute unicellular organisms, bacteria being the perfect example, or the basic components of complex multicellular organisms, composing animals and land plants for example.
+
+%The main principle which govern cell function are described under the central dogma of molecular biology.
+Cells are made of many biomolecules in constant interactions.
+The two most fundamental types of biomolecules that define cellular processes are the nucleic acid chains and amino acid chains.
+Deoxyribonucleic acid (DNA) and ribonucleic acid (RNA) are two nucleic acid molecules, strings of smaller molecules named nucleotides, that encode and transmit informations inside the cell.
+Proteins are complex chains of amino acids that constitute the basic components through which the cell functions.
+Their molecular structure is encoded inside the DNA sequences in sections that we call genes.
+
+Cellular function is roughly defined by the proteins that compose a cell at a given time.
+Indeed, by the random nature of biomolecules interactions, the relative concentration of these proteins guide the overall functioning of the cell.
+Of all the proteins encoded inside the DNA, the set of proteins that compose a cell is defined by the genes that are expressed while the other stay silenced.
+
+The many processes by which a cell influence the expression of its genes are complex, and altogether they make up the \emph{gene regulation mechanisms}.
+Gene regulation provides the basic means with which a cell can adapt and respond to stimuli.
+Moreover, in multicellular organisms cells acquire their specific function via the process of \emph{cellular specialization} (or \emph{cellular differentiation}), and gene regulation also provides the required machinery required for the cell to change its internal structure and overall function.
+
+\paragraph{}
+
+To characterize and classify cells by their functions, in principle we can measure the level of concentration of the proteins inside a cell.
+Although it is often prohibitive to measure with precision such concentrations, modern microarray and sequencing techniques enable the efficient and precise measure of messenger RNA.
+Messenger RNA are both the precursor to proteins and are the direct product of gene expression.
+%Hence, an histogram of these proxies of the proteins concentration can be made: \emph{expression profiles}.
+
+By measuring the levels of messenger RNA inside a cell, \emph{expression profiles} are constructed as snapshots of the cells internal states.
+Expression profiles act as molecular reports, that we can compare and classify by detecting similarities in the expressed genes.
+
+The \emph{differential analysis} of expression profiles compare profiles of cells under one condition against cells subject to a second condition.
+It portrays the differences between the two conditions by extracting similarly expression of silenced genes.
+Differential analysis of expression profiles is a fundamental technique that allows to inspect cell functioning as the expression level and extract important knowledge in regard to individual protein function and to functionally linked groups of protein components.
+%It allows the detection of slight variations in cell functioning within the same cell type.
+
+\paragraph{}
+
+Proteins are complex macromolecules made of long chains of smaller amino acids molecules.
+Roughly, each protein correspond to a DNA sequence, called a gene, and the specific string of amino acid that constitute the protein is dictated by the corresponding gene sequence.
+Each protein form an intricate three-dimensional structure through a process called protein folding.
+
+%While it is difficult or expansive to experimentally verify proteins interaction, 
+Proteins are studied in very many fields such as biochemistry, quantum chemistry, molecular dynamics, etc.
+Combined with automatic cross-referencing techniques such as literature mining across all published papers and careful manual curation of high quality publicly available database, the wealth of cross-referenced protein data is substantial.
+
+The information contained in these databases allows the construction of large networks containing the many known of inferred molecular interactions.
+From all these networks, protein-protein interaction (PPI) networks contain the interactions between proteins, and for a particular cell its PPI network represents its \emph{interactome}.
+
+\paragraph{}
+
+The information encoded inside an organism DNA is the result of long chains of evolutionary events through time.
+One such event, and perhaps the most important, is that of inheritance.
+Through inheritance, genetic sequences are passed down from ancestor to descendant species.
+Given that a single species can have many descendant, and that most genetic information is inherited without mutation, many species share the same sequences: \emph{conserved sequences}.
+
+There are evidences that groups of proteins that work in conjunction to accomplish a function are often conserved together.
+These groups of functionally related proteins are important targets for the study of cellular process, in particular those processes that are conserved through evolution.
+
+\paragraph{}
+
+Differential analysis of expression levels are used to extract proteins of interests, that is proteins that are significantly differentiated between the control and the condition.
+Many statistical approaches have been proposed to detect these sets of important proteins for phenomenon under study.
+One shortcoming of many of these methods is that they occasionally find sets of proteins that have little in common for the cellular processes, and biological interpretation of these results becomes difficult, if even significant.
+
+Beyond the many computational methods for the analysis of expression profiles, of interactomes, and of evolutionary conserved DNA sequences, integrative approaches propose the combination of two or more of these types of information into single systemic models.
+This is the case of the \emph{connected module} model, where modules represent sets of significantly differentiated proteins with the additional constraint that they have to physically interact.
+%A few techniques have been proposed that use the protein-protein interactions networks as graph structures.
+%Computationally, these techniques are all connected to the \emph{connected subgraphs problems}, such as the \textsc{prize-collecting steiner tree} (\pcst{}) problem or the \textsc{maximum-weight connected subgraph} (\mwcs{}) problem.
+
+\paragraph{}
+
+This thesis contribute to the module identification problem by integrating conservation information with modern models of modular detection of protein sets.
+We thus introduction a model for the detection of \emph{conserved active connected modules}, that is connected modules that are conversed across two species.
+These active connected modules are similar in sequence composition between the two species.
+%The similarity is a flexible ratio of similar proteins over all proteins in the solution.
+
+We present a mixed-integer programming formulation of our model, and propose a branch-and-cut algorithm to solve to provable optimality in reasonable run time.
+
+We apply our model over cell line differentiation data, namely Th0 into Th17, for both human and mouse.
+
+We also analyse the model from a complexity standpoint, and provide general as well as special cases complexity results.
+%We demonstrate that the problem is APX-hard in the general case.
+%We also show that it can be solvable in polynomial time and fixed parameter tractable polynomial time for some categories of input.

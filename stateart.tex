@@ -3,134 +3,73 @@
 
 %QUOTE XXX We make our world significant by the courage of our questions and by the depth of your answers. Carl Sagan QUOTE XXX
 
+\section{Biological databases}
+	\subsection{Networks}
+
+	Increasingly advanced experimental methods are used to provide evidence of existing interactions.
+	Nowadays, comprehensive litterature combined with advanced text mining capabilities further advance cross-references between biological products.
+	Available resources that provide access to this knowledge are currently accessible from many only databases.
+
+	Two major classes of databases exists: the automatically referenced database \parencite{szklarczyk2014string}, and the manually currated databases \parencite{orchard2012protein}.
+
+	\subsection{Orthologous genes}
+%	\label{subsec:orthology}
+%
+	In their seminal paper, \parencite{tatusov1997genomic} constructed ''clusters of orthologous genes'' (COG) across multiple species.
+	They contain similar cross-species sequences as well as similar intra-species sequences, i.e. paralogous sequences.
+
+	The Inparanoid database \parencite{obrien2005inparanoid} is a publictly available orthology database that contains pairwise ortholog groups of more than 273 organisms\footnote{\url{http://inparanoid.sbc.su.se}, Release 8.0, December 2013}.
+%	COG => PPI networks alignment (difficult problem \parencite{el2011lagrangian}).
+
+%	\Textcite{mccune2012using} provide an overview of homology based techniques for the discovery of evolutionary event.
+
+
+%	Most orthologous sequence detection techniques are directly based on sequence comparison.
+%	However, \parencite{bandyopadhyay2006systematic} integrate with brute force PPI topology analysis across species to infer functional similarity and evolutionary conservation.
+%
+%
+%	Orthology information can effectively be represented as a $k$-partite graph between $k$ species.
+%
+%	XXX in conclusion, use those functionally similar as bipartite ? XXX
+%
+%	\subsection{Network analysis}
 
 \section{Statistical analysis of gene expression}
 
-	Nowadays, the differential analysis of transcriptomic profiles is ubiquitous in molecular biology.
+	Nowadays, differential analysis of transcriptomic profiles is ubiquitous in molecular biology.
 	The ability to broadly assey biomolecular profiles of multiple samples cheaply enabled the wide adoption of techniques based on the differential analysis of multiple whole-genome samples.
 	Indeed, genes for which their expression profiles are correlated over many different conditions are very likely to be involved in the same processes or to exhibit similar functionalities \parencite{ideker2002discovering}.
 	On the other hand, genes with significantly different expression profiles under conditions are candidates for choice as biomarkers for the biological phenomenons under study \parencite{altman2001whole}.
 
 	For example in cancer research, the ability measure transcriptomic state within a cell is a central technique for the analysis of mutated cell biomolecular machinery.
-	Indeed, in order to maximize therapeutic effect of treatment and minimize side effects, it is very important to be able to characterize the genetic profiles of distinct tumor types.
-	For a long time, tumor classification was based on medical expertize and assessment based on the clinical evolution and on the physical appearance of either the cancerous growth or its cells.
+	Indeed, in order to maximize therapeutic effect of treatment and minimize side effects, it is important to be able to characterize the genetic profiles of distinct tumor types.
+	For a long time, tumor classification was based on medical expertise and assessment based on the clinical evolution and on the physical appearance of either the cancerous growth or its cells.
 	However, even for tumor of the same type and grade, widely different clinical development and outcome were observed.
 	A technique allowing for the classification and the detection of cancer types and subtypes was dearly needed.
 
 	The advances of gene expression profiling techniques allowed \textcite{golub1999molecular} to develop such a classification technique based on simple statistical testing: the final prediction is the class for which the sum of scores computed statistically for each genes\footnote{They actually compute the score only for genes that they consider \emph{informative}, even though they acknowledge this selection as "somewhat arbitrary".} is maximal.
 
-	XXX
+%	XXX
 
-	It has been shown that gene profiles can be directly linked to their cell line's origin through consistent correspondence between gene expression patterns and origin of the tissue \parencite{ross2000systematic}.
-	Moreover, whole cell expression profiles can be used to classify cancer tumors, and further predict patient clinical outcome \parencites{perou2000molecular}{sorlie2001gene}{vantveer2002gene}{vijver2002gene}{estevez2015gene}\footnote{The literature in the domain is quite extensive. We suggest here the first studies, as well as one recently published which still uses DNA chip for genes expression profiling.}
+	Whole cell expression profiles can be used to classify cancer tumors, and further predict patient clinical outcome \parencites{perou2000molecular}{sorlie2001gene}{vantveer2002gene}{vijver2002gene}.
+	Moreover, \textcite{ross2000systematic} showed that gene profiles can be directly linked to their cell line's origin through consistent correspondence between gene expression patterns and origin of the tissue.
+	Even though the literature in the domain is quite extensive, recent studies such as \parencite{estevez2015gene} still uses DNA chip for genes expression profiling.
 
-	Even though transcriptome analysis is widespread in cancer research, it allows for many different applications. XXX List other applications: antibiotic treatment, ... XXX
+%	Even though transcriptome analysis is widespread in cancer research, it allows for many different applications. XXX List other applications: antibiotic treatment, ... XXX
 
-	However, most of those studies are based on gene-centric methods, which use univariate statistical testing to call for significantly differentially expressed genes.
+	One important limitation of these studies, however, is that they are based on gene-centric methods, which use univariate statistical testing to call for significantly differentially expressed genes.
+	Modern approaches integrate knowledge for many different database.
 
-\section{Networks analysis}
+\subsection{Cross-species analysis}
 
-\subsection{Biological networks}
-
-	Increasingly advanced experimental methods are used to provide evidence of existing interactions, and nowadays comprehensive resources provide access to this knowledge.
-
-	\begin{itemize}
-		\item Automated: \parencite{szklarczyk2014string}
-		\item Curated: \parencite{orchard2012protein}
-	\end{itemize}
-
-	\subsection{Orthologous genes}
-	\label{subsec:orthology}
-
-	What is homology: \parencite{mccune2012using}
-
-	Cluster of orthologous genes (COG): \parencite{tatusov1997genomic}.
-	
-	Inparanoid: \parencite{obrien2005inparanoid}.
-
-	COG => PPI networks alignment (difficult problem \parencite{el2011lagrangian}).
-
-	-> Identification of functionally similar with brute force PPI topology analysis across species: \parencite{bandyopadhyay2006systematic}
-
-
-	Orthology information can effectively be represented as a $k$-partite graph between $k$ species.
-
-	XXX in conclusion, use those functionally similar as bipartite ? XXX
-
-	\subsection{Network analysis}
-
-\section{Modules}
-
-There exists mostly two approaches to use biological networks to detect interesting biological processes.
-The first category is composed of \emph{comparative} approaches of the networks structures, that enables to compare networks from different species or of the same species but under different conditions.
-They are treated in \cref{subsec:topomodules}.
-The second category is composed of techniques that aim to select sets of genes in specific biological contexts.
-These techniques usually combine both biological network structures and experimental data, and are called \emph{integrative} approaches since they combine data of different types into a single algorithm.
-They are treated in \cref{subsec:activemodules}.
-
-\subsection{Topological modules}
-\label{subsec:topomodules}
-
-	This section present methods that use the networks in themselves to extract structures deemed interesting.
-	In order to do so, they use the topological structures of the networks to detect substructures.%that are known to appear in targeted biological function.
-
-	\Textcite{sharan2006modeling} identify three broad types of such approaches: network alignment, network integration, and network querying methods.
-	Even though what they call network integration is an important category of networks comparison problems, which are used for example for protein interaction prediction \parencite{rhodes2005probabilistic} or for protein modules detection \parencites{kelley2005systematic}{zhang2005biology}, it is unrelated from our core problem.
-
-	What they name networks alignments and networks querying problems are two closely related categories of problems.
-	In general terms, graph alignments are made of two seemingly similar subproblems: the \emph{local graph alignment} problem, and the \emph{global graph alignment} problem.
-	Precisely, in the local alignment problem we look for a subgraph in the larger input that most closely resemble a query graph or query criteria.
-	In the global alignment problem we try to match every nodes of one graph to every nodes of the other graph.
-
-	These two subproblem mirror the similarities that exists between the local and global sequence alignment problems.
-	Indeed, similarly to the global sequence alignment problem which is usually used to compare different species or organisms of the same species, the global network alignment problem correspond to the \emph{network alignment} category describe above.
-	And similarly to the local sequence alignment problem which is usually used to compare or locate subsequences, the local network alignment problem correspond to the \emph{network querying} category.
-
-	When looking for matchings networks, vertices are usually mapped on a one-to-one basis, but it can be many-to-one or many-to-many queries.
-	Furthermore, the matching can be weighted, or constrained by a bipartite similarity relationship between the two graphs.
-	They are all optimization problems where some criteria, for example the number of matched nodes or edges, must be maximized.
-
-	These problems pertains to the \emph{module discovery} class of problems over biological networks\footnote{It is also named \emph{community structure discovery} when applied over social networks.}.
-
-%	However, an interesting problem with biological networks is the detection of similar substructures in $k$ different networks.
-%	They can either represent different species or the same species in different conditions.
-%	The most simple\footnote{But nonetheless difficult, cf. \cref{subsec:netalignment}.} version of the problem is that of topological alignment, but there exists weighted alignment problems that can be used.
-
-%	This section is broken in three independent subsections.
-%	First in \cref{subsec:substructure} we present an overview of the topological techniques over biological networks used to infer interesting structures.
-%	In \cref{subsec:moduledisc} we provide a detailed look into the module discovery problem, where biological networks and experimental data are combined in order to explain some specific biological process.
-%	Finally, in \cref{subsec:netalignment} we look at solutions that look across multiple networks to infer information.
-%	In this subsection we will look into technique that explicitly recognize the networks structures through alignment as well as other models.
-
-\subsection{Active modules}
-\label{subsec:activemodules}
-
-	The category of methods use the networks combined with biological experimental data, for example expression profiles, to detect structures of interest in the context of the experiment.
-	These methods are well adapted for an understanding of single-species processes, for which the interpretation of the results follow logically from the inputs.
-	They can also be used to look across multiple species for interesting process.
-
-	Already in 2001, \textcite{altman2001whole} recognized the need to use networks of genetic interactions to tackle the analysis of expression data.
-	One of the key concepts to understand biological processes in those networks is that of \emph{modules}.
-	Modules are considered to be sets of entities\footnote{Genes, proteins, etc.} that function in a coordinated fashion or physically interact (for a review see \textcite{mitra2013integrative}).
-
-
-	A possible formulation for the problem of finding modules within a network is to look for connected sub-networks that maximize weights on the nodes.
-	These weights typically represent some measure of biological activity, for example the expression level of genes.
-	In their seminal work, \textcite{ideker2002discovering} were the first to solve the problem of finding gene modules within a biological network, using simulated annealing heuristic optimization.
-	They recognize that finding the optimal (with respect to the sum of the nodes' weights) module in a biological network is formally equivalent to the combinatorial \textsc{maximum-weight connected subgraph} problem.
-	This problem will be treated in \cref{sec:mwcsproblem}.
-
-	More biology of modules XXX TODO: \parencites{dittrich2008identifying}{yamamoto2009better}{backes2012integer}{mitra2013integrative}.
-
-
-\subsubsection{Cross-species analysis}
-
-	Several authors already identified the benefits of combining cross-species experimental data.
+	Several authors identified the benefits of combining cross-species experimental data.
 	At the single gene level, \textcite{noort2003predicting} have demonstrated that conserved co-expression is a strong co-evolutionary signal.
 	More recent studies suggested to identify conserved biological processes.
 
-	Talk about cMonkey: \parencite{reiss2006integrated}.
-	And cMonkey2: \parencite{reiss2015cmonkey2}.
+	\Textcite{reiss2006integrated} recognize that co-expression of genes is not enough information for the discovery of the underlying genetic regulatory process.
+	They suggest that co-regulation is a better criteria for detection, and show that a biclustering of the data over both gene expression and condition provide more sensible results.
+	The optimization objective that they propose is an ad-hoc multi-criteria objective that takes into account transcript co-expression, as well as putative \emph{cis}-acting gene regulatory motifs and connectivity between functionally associated clustered genes.
+	They do not provide any new method to solve the biclustering problem, which they acknowledge as being NP-hard problem \parencite{cheng2000biclustering}, and rather implement a local-search heuristic that implicitly look for the Pareto front created by their criteria \parencite{van2003multi}.
 
 	\Textcite{lu2009cross} analyzed transcriptomic profiles of human and mouse macrophages and dendritic cells, under two conditions, to derive common response genes involved in innate immunity.
 	They used a probabilistic graphical model that propagates information for each gene about its involvement in the innate immunity response across species or cell types and conditions then seeks pathway enriched with those common responses genes.
@@ -143,7 +82,88 @@ They are treated in \cref{subsec:activemodules}.
 
 	\Textcite{dede2014triclust} introduced a method that finds triclusters consisting of genes that are coexpressed across a subset of samples and a subset of species.
 
-	\paragraph{Modules as connected subgraphs}
+	\Textcite{reiss2015cmonkey2} updated their cMonkey algorithm \parencite{reiss2006integrated} to address the ''long run-time, complexities, and inefficiencies'' of the previous implementation.
+	In addition to updating the scoring of the multiple criteria of their objective function, the main addition of this paper is the implementation of a global optimization algorithm for this objective, modeled after a standard $k$-means clustering of biological networks \parencite{watts1998collective}.
+
+
+\section{Connected active modules}
+
+%There exists mostly two approaches to use biological networks to detect interesting biological processes.
+%The first category is composed of \emph{comparative} approaches of the networks structures, that enables to compare networks from different species or of the same species but under different conditions.
+%They are treated in \cref{subsec:topomodules}.
+%The second category is composed of techniques that aim to select sets of genes in specific biological contexts.
+%These techniques usually combine both biological network structures and experimental data, and are called \emph{integrative} approaches since they combine data of different types into a single algorithm.
+%They are treated in \cref{subsec:activemodules}.
+
+%\subsection{Topological modules}
+%\label{subsec:topomodules}
+%
+%	This section present methods that use the networks in themselves to extract structures deemed interesting.
+%	In order to do so, they use the topological structures of the networks to detect substructures. %that are known to appear in targeted biological function.
+%
+%	\Textcite{sharan2006modeling} identify three broad types of such approaches: network alignment, network integration, and network querying methods.
+%	Even though what they call network integration is an important category of networks comparison problems, which are used for example for protein interaction prediction \parencite{rhodes2005probabilistic} or for protein modules detection \parencites{kelley2005systematic}{zhang2005biology}, it is unrelated from our core problem.
+%
+%	What they name networks alignments and networks querying problems are two closely related categories of problems.
+%	In general terms, graph alignments are made of two seemingly similar subproblems: the \emph{local graph alignment} problem, and the \emph{global graph alignment} problem.
+%	Precisely, in the local alignment problem we look for a subgraph in the larger input that most closely resemble a query graph or query criteria.
+%	In the global alignment problem we try to match every nodes of one graph to every nodes of the other graph.
+%
+%	These two subproblem mirror the similarities that exists between the local and global sequence alignment problems.
+%	Indeed, similarly to the global sequence alignment problem which is usually used to compare different species or organisms of the same species, the global network alignment problem correspond to the \emph{network alignment} category describe above.
+%	And similarly to the local sequence alignment problem which is usually used to compare or locate subsequences, the local network alignment problem correspond to the \emph{network querying} category.
+%
+%	When looking for matchings networks, vertices are usually mapped on a one-to-one basis, but it can be many-to-one or many-to-many queries.
+%	Furthermore, the matching can be weighted, or constrained by a bipartite similarity relationship between the two graphs.
+%	They are all optimization problems where some criteria, for example the number of matched nodes or edges, must be maximized.
+%
+%	These problems pertains to the \emph{module discovery} class of problems over biological networks\footnote{It is also named \emph{community structure discovery} when applied over social networks.}.
+
+%	However, an interesting problem with biological networks is the detection of similar substructures in $k$ different networks.
+%	They can either represent different species or the same species in different conditions.
+%	The most simple\footnote{But nonetheless difficult, cf. \cref{subsec:netalignment}.} version of the problem is that of topological alignment, but there exists weighted alignment problems that can be used.
+
+%	This section is broken in three independent subsections.
+%	First in \cref{subsec:substructure} we present an overview of the topological techniques over biological networks used to infer interesting structures.
+%	In \cref{subsec:moduledisc} we provide a detailed look into the module discovery problem, where biological networks and experimental data are combined in order to explain some specific biological process.
+%	Finally, in \cref{subsec:netalignment} we look at solutions that look across multiple networks to infer information.
+%	In this subsection we will look into technique that explicitly recognize the networks structures through alignment as well as other models.
+
+%\subsection{Active modules}
+\label{subsec:activemodules}
+
+	Active modules methods combine biological networks with experimental data, such as expression profiles, to detect network structures of interest for the experiment.
+	These methods are well suited to understand single-species processes, since the interpretation of the results usually follows from the inputs.
+	They can also be used to look across multiple species for interesting process.
+
+	Already in 2001, \textcite{altman2001whole} recognized the need to use networks of genetic interactions to tackle the analysis of expression data.
+	One of the key concepts to understand biological processes in those networks is that of \emph{modules}.
+	Modules are considered to be sets of entities, such as genes or proteins, that function in a coordinated fashion or physically interact.
+	See \textcite{mitra2013integrative} for an up to date review.
+
+	One possible formulation, for the problem of finding modules within a network, is to look for connected sub-networks that maximize weights on the nodes.
+	These weights typically represent some measure of biological activity, for example the expression level of genes.
+	In their seminal work, \textcite{ideker2002discovering} were the first to solve the problem of finding gene modules within a biological network, using simulated annealing heuristic optimization.
+	They recognize that finding the optimal module (with respect to the sum of the nodes' weights) in a biological network is formally equivalent to the \textsc{maximum-weight connected subgraph} (\mwcs{}) combinatorial optimization problem.
+	This problem will be treated in \cref{sec:mwcsproblem}.
+
+	\Textcites{dittrich2008identifying} were the firsts to cast the biologically relevant problem into the unified framework of combinatorial optimization theory. % in a systematical approach.
+	By recognizing the theoretical grounds of the \mwcs{} problem, they reduce the overall problem to the very well studied \textsc{prize-collecting steiner-tree} optimization problem and apply an efficient algorithm \parencite{ljubic2006algorithmic} that finds provably optimal solutions to the problem.
+	They acknowledge the close relationship between the initial scoring and the exact solution found, and provide a simple additive scoring function that ultimately allows for an easy interpretation of the results.
+	%They further provide both ways reductions from \mwcs{} to \pcst{} that 
+
+
+	\Textcite{yamamoto2009better} apply the \mwcs{} problem to pathway gene networks in order to identify what they call ''source components'', subnetworks that hopefully represent the source of the differential behavior in the data.
+	They provide a graph decomposition heuristic to solve the underlying computational problem.
+
+	Building on the Integer Linear Programming formulation proposed by \textcite{dittrich2008identifying} and \textcite{zhao2008uncovering}, \textcite{backes2012integer} provides a new ILP expression for the closely related $k$-cardinality \mwcs{} problem that they solve using a branch-and-cut procedure.
+	They test the significance of their results using graph permutation and show that the most significant results are obtained inside a small range of sizes over all their data.
+
+	\Textcite{mitra2013integrative} provides an overview of the many network centric approaches to modular detection of cellular processes.
+	In particular they classify modern techniques into four classes: the 'active modules' discovery techhniques, the 'conserved modules' identification across species, 'differential modules' that are simultaneously active under different conditions, and the 'composite modules' that integrate many of the possible interaction type into single unified components.
+
+
+\subsection{Cross-species connected active modules}
 
 	\Textcite{deshpande2010scalable} developed the \nexus{} algorithm for finding conserved active subnetworks.
 	\nexus{} is based on simple notions of activity and orthology and uses a heuristic search strategy.
@@ -156,7 +176,7 @@ They are treated in \cref{subsec:activemodules}.
 	In recent work, \textcite{zinman2015moduleblast} introduce \moduleblast{}, a method that, similarly to \nexus{}, represents groups of orthologous proteins as single nodes in a combined network and tries to find connected subnetworks that are differentially expressed.
 	The novelty of the method is the classification of the found modules according to the sign of the log fold change expression values.
 	By doing so, the authors are able to assess whether conserved active modules show consistent or inconsistent
-  eession patterns.
+  expression patterns.
 	However \moduleblast{}, like \nexus{}, requires strict conservation of module genes.
 	We see that as an important limitation that our present work aim to correct.
 
@@ -189,7 +209,7 @@ They are treated in \cref{subsec:activemodules}.
 
 	The \pcst{} problem is an \emph{utility versus cost optimization} variant (as formally defined by \textcite{conrad2007connections}) of the \textsc{steiner tree} problem.
 	\Textcite{bienstock1993note} were the firsts to formally introduce the problem, and the first recognized proof of NP-hardness follows from \textcite{camerini1979complexity} (even through the problem was not formally defined at the time).
-	Surprisingly\footnote{They themselves acknowledge that this is an easy result \parencite[footnote 12]{feigenbaum2000sharing}.}, \textcite{feigenbaum2000sharing} were the first to prove that the \pcst{} problem is NP-hard to approximate within any constant ratio $0 < \epsilon < 1$, or APX-hard, using a reduction from \textsc{sat}.
+	As a surprisingly late result\footnote{They themselves acknowledge that this is an easy result \parencite[footnote 12]{feigenbaum2000sharing}.}, \textcite{feigenbaum2000sharing} were the first to prove that the \pcst{} problem is NP-hard to approximate within any constant ratio $0 < \epsilon < 1$, or APX-hard, using a reduction from \textsc{sat}.
 	This variant is highly relevant to our context as there exist bidirectional reductions between the \pcst{} and \mwcs{} problems, and for a long time reducing an \mwcs{} instance to a \pcst{} instance was the technique of choice to actually solve the problem (cf. \cref{subsec:solvingmwcs}).
 
 	\paragraph{}
@@ -199,7 +219,7 @@ They are treated in \cref{subsec:activemodules}.
 	\textbf{\mwcs{}$\colon$} Given a graph and a real-valued weight for each vertex, the goal is to find the connected subset of vertices that maximizes the sum of the weights.
 
 	First observe that, since the edges are unweighted, the solution is trivial, full or empty, if the vertices' weights are respectively all positive or all negative.
-	This is in constrast with the \pcst{} problem where the positive weights of the vertices oppose the costs of the edges.
+	This is in contrast with the \pcst{} problem where the positive weights of the vertices oppose the costs of the edges.
 
 	From a computer science point of view, the \mwcs{} problem is simple in its definition.
 	Nevertheless, it is actually a very difficult problem to solve, and in many cases remains intractable.
@@ -251,12 +271,11 @@ They are treated in \cref{subsec:activemodules}.
 
 		Gomes' team looked into the budget constrained version of the problem, both rooted and unrooted variants, that they apply in the context of \emph{conservation planning} \parencites{conrad2007connections}{gomes2008connections}{dilkina2010solving}.
 
-		\Textcite{chen2012efficient} used the \mwcs{} problem to extract signatures from a video stream for the activity detection problem. They represent the video as a three dimentionnal 6-connect graph, i.e. a space-time matrix, where each node's weights represent video features. They then use standard classifier to classify the signatures.
+		\Textcite{chen2012efficient} used the \mwcs{} problem to extract signatures from a video stream for the activity detection problem. They represent the video as a three dimentional 6-connect graph, i.e. a space-time matrix, where each node's weights represent video features. They then use standard classifier to classify the signatures.
 
 		\Textcite{carvajal2013imposing} also looked into the forest planning problem to select contiguous regions of forest to maximizes ecosystem protection in nature reserve design, i.e. the number of species and habitats preserved.
 
-		Furthermore, as stated in section XXX, \textcites{dittrich2008identifying}{yamamoto2009better}{backes2012integer}{mitra2013integrative} all used the \mwcs{} problem or its variants in system biology to extract connected sets of genes.
-
+		Furthermore, as stated in \cref{subsec:activemodules}, \textcites{dittrich2008identifying}{yamamoto2009better}{backes2012integer}{mitra2013integrative} all used the \mwcs{} problem or its variants in system biology to extract connected sets of genes.
 
 
 	\subsection{Solving the \mwcs{} problems}
@@ -275,18 +294,18 @@ They are treated in \cref{subsec:activemodules}.
 		They further develop their method in \parencite{goemans1997primal}.
 		This is an important contribution since they reformulate the problem into an easy to approximate formulation (the standard formulation is APX-hard), which became the basis for many other contributions afterward.
 
-		Builting on these algorithms, \textcite{johnson2000prize} proposed multiple variations of this 2-approximation for \pcst{}, that provide better performance, and application to variants such as the \textsc{quota \pcst{}} where the sum of the weights must be at least a given \emph{quota}, and the \textsc{budget \pcst{}} where the sum of the costs must be at most a given \emph{budget}.
+		Building on these algorithms, \textcite{johnson2000prize} proposed multiple variations of this 2-approximation for \pcst{}, that provide better performance, and application to variants such as the \textsc{quota \pcst{}} where the sum of the weights must be at least a given \emph{quota}, and the \textsc{budget \pcst{}} where the sum of the costs must be at most a given \emph{budget}.
 
 		\Textcite{lucena2004strong} introduces the \emph{generalized subtour elimination constraints} technique, and uses the separation algorithm first described by \textcites{fischetti1994weighted}.
 
-		In two papers, \textcites{ljubic2005solving}{ljubic2006algorithmic} solved the \mwcs{} problem by combining previously introduced methods for various Steiner tree problems over directed graphs. Their technique was the first to solve to optimality some of the privous benchmark instances and was order of magnitude faster than previous methods on some other instances.
+		In two papers, \textcites{ljubic2005solving}{ljubic2006algorithmic} solved the \mwcs{} problem by combining previously introduced methods for various Steiner tree problems over directed graphs. Their technique was the first to solve to optimality some of the previous benchmark instances and was order of magnitude faster than previous methods on some other instances.
 
 		\Textcite{dittrich2008identifying} were the first to describe a reduction from \mwcs{} to \pcst{} with linear conservation of the objective function optimal value.
 		Given this reduction, any method previously proposed to solve the \pcst{} problem could now be used to solve instances of the \mwcs{} problem, application that they demonstrate in system biology for module extraction.
 		They also gave an approximation-preserving reduction from \pcst{} to \mwcs{}.
 	
 		\Textcite{chimani2009obtaining} introduces an ILP formulation equivalent to the \textsc{generalized subtour elimination constraints} formulation proposed by \textcite{lucena2004strong} that they call the \emph{directed cut} formulation.
-		They then propose a stronger separation algorithm for this new formulation, which is more efficient in pratice than the previous technique introduced by \textcites{fischetti1994weighted}.
+		They then propose a stronger separation algorithm for this new formulation, which is more efficient in practice than the previous technique introduced by \textcites{fischetti1994weighted}.
 
 	\subsubsection{Direct formulation}
 
@@ -297,6 +316,7 @@ They are treated in \cref{subsec:activemodules}.
 		\Textcite{quintao2010k} further improves the technique by further integrating the constraints introduced very early by \textcite{miller1960integer}.
 
 		\Textcite{backes2012integer} proposed an exact formulation to solve the $k$-cardinality subtrees and connected subgraphs problems.
+		See \cref{subsec:activemodules} for details.
 
 		\Textcites{alvarez2013maximum}{alvarez2013rooted} introduced the first technique which does not explicitly model the graph edges.
 		Instead they introduce a Branch-and-Cut scheme where connectivity violations are detected from candidate solutions and corresponding constraints are recursively added to the model.

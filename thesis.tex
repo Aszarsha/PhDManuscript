@@ -129,7 +129,7 @@
 	\setlength{\cftchapterindent}{0em}
 }
 
-\setlrmarginsandblock{4.5cm}{3.5cm}{*}
+\setlrmarginsandblock{3.5cm}{3cm}{*}
 %\setulmarginsandblock{2.5cm}{3cm}{*}
 \checkandfixthelayout
 
@@ -153,6 +153,17 @@
         \renewcommand\@thefnmark{\hyperref[\BackrefFootnoteTag]{\BHFN@thefnmark}}%
         \BHFN@OldMakefntext{#1}}%
 \makeatother
+
+\DeclareCiteCommand{\citetitle}
+  {\boolfalse{citetracker}%
+   \boolfalse{pagetracker}%
+   \usebibmacro{prenote}}
+  {\ifciteindex
+     {\indexfield{indextitle}}
+     {}%
+   \printtext[bibhyperref]{\printfield[citetitle]{labeltitle}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
 
 \newcommand{\eg}{\emph{e.g.}}
 \newcommand{\ie}{\emph{i.e.}}
@@ -260,6 +271,7 @@
 
 \addtocontents{toc}{\cftpagenumberson{chapter}} % to restore the showing of page numbers
 
+ \input{intro}
 %\addcontentsline{toc}{chapter}{Introduction}
 %\chaptermark{Introduction}
  \input{prelim}

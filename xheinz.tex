@@ -117,7 +117,7 @@ Using a permutation test, we show that our results are statistically significant
 		This corresponds to constraints \eqref{eq:m_u} and \eqref{eq:m_v}.
 		Indeed, constraints \eqref{eq:m_u} encode that a node $u \in V_1$ that is present in the solution ($x_u = 1$) is conserved if there exists a related node $v \in V_2$ ($uv \in R$) that is also present in the solution ($x_v = 1$).
 		Similarly, constraints \eqref{eq:m_v} defines conserved nodes in $V_2$ that are present in the solution.
-		We linearize $x_ux_v$, in a standard way, by introducing binary variables $\mathbf{z} \in \{0,1\}^R$ such that $z_{uv} = x_ux_v$ for all $uv \in R$:
+		We linearise $x_ux_v$, in a standard way, by introducing binary variables $\mathbf{z} \in \{0,1\}^R$ such that $z_{uv} = x_ux_v$ for all $uv \in R$:
 		\allowdisplaybreaks
 		\begin{alignat}{3}
 		\label{eq:z1} & z_{uv} \leq x_u                 & uv \in R\\
@@ -168,15 +168,15 @@ Using a permutation test, we show that our results are statistically significant
 		Where $\delta(S) = \{ v \in V_1 \setminus S \mid \exists u \in S: uv \in E_1 \}$ denotes the \emph{neighbors} of $S$.
 
 		The modularity property states that $\mathbf{x}$ should induce a connected subgraph in $G_1$.
-		However in our model, we don't explicitely model graph connectevity, and model local connectivity instead.
+		However in our model, we don't explicitly model graph connectivity, and model local connectivity instead.
 		The first sum of \eqref{eq:cut} state that $x_v$ can only be $1$ if, for all sets $S \subseteq V$ containing $v$, it holds that there is a neighbor $u$ of $S$ in the solution.
-		Informally, this constraint is a form of expension where we require the nodes in the solution to be part of the neighborhoud of the other nodes in the solution, hence forming a connected subgraph.
+		Informally, this constraint is a form of expansion where we require the nodes in the solution to be part of the neighborhood of the other nodes in the solution, hence forming a connected subgraph.
 		However this is not sufficient, because this would require all nodes to be included in the end.
-		We solve this by introducing binary variables $\mathbf{y} \in \{0, 1\}^{V_1}$ that determine a root node, which serves as a local expension termination condition.
+		We solve this by introducing binary variables $\mathbf{y} \in \{0, 1\}^{V_1}$ that determine a root node, which serves as a local expansion termination condition.
 		First, constraints \eqref{eq:sumy} and \eqref{eq:y} state that at most one node $v$ part of the solution can also be the root node -- in which case $y_v = 1$.
 		Second, the last sum of \eqref{eq:cut} state that $x_v$ can only be $1$ if, for all sets $S
 		\subseteq V$ containing $v$, it holds that the root node is in $S$.
-		Informally and integrating the first sum, this constraint encode that the graph is locally connected around $v$ if, for all possible sets $S \subseteq V$ containing $v$, either the root node is part of $S$ or at least one node of the neighborhoud of $S$ is part of the solution.
+		Informally and integrating the first sum, this constraint encode that the graph is locally connected around $v$ if, for all possible sets $S \subseteq V$ containing $v$, either the root node is part of $S$ or at least one node of the neighborhood of $S$ is part of the solution.
 
 		There is an exponential number of such constraints.
 		Therefore, we cannot add all them to our initial formulation.
@@ -199,8 +199,8 @@ Using a permutation test, we show that our results are statistically significant
 		This was already required for the previous set of constraints but never explicitly instructed to the solver.
 		Constraints \eqref{eq:1neighbor} is an optimization for the cases where the set $S$ in \eqref{eq:cut} is a singleton.
 		Finally, constraints \eqref{eq:sym_break} are symmetry breaking constraints: they encore an ordering for the possible root selections.
-		It effectively requires that among all positively weighted nodes in the solution, the root node is the smallest one -- according to some arbitrary order\footnote{In our case: the order of apperances of the nodes in the network definition.}.
-		This last set of constraints also provide determinism: the ordering garantee that two runs of the ILP will choose the same root node.
+		It effectively requires that among all positively weighted nodes in the solution, the root node is the smallest one -- according to some arbitrary order\footnote{In our case: the order of appearances of the nodes in the network definition.}.
+		This last set of constraints also provide determinism: the ordering guarantee that two runs of the ILP will choose the same root node.
 
 \section{Material and methods}
 \label{sec:xexp}
