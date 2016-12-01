@@ -237,7 +237,17 @@
 
 \chapter*{Résumé}
 
-	Cette these 
+Un des principaux défis de la bioinformatique moderne est de saisir le sens des données biologiques en constante croissance.
+Il est prépondérant de trouver de bons modèles pour toutes ces données, modèles qui servent à la fois à expliquer les données et à produire des réponses aux questions biologiques sous-jacentes.
+Une des nombreuses difficultés d'une telle approche est la grande variété dans les types des données manipulées.
+La biologie computationnelle moderne propose des approches qui combinent ces types de données dans des techniques dites intégratives.
+
+Cette thèse contribue au problème de l'identification de module biologique en intégrant les informations de conservation dans les modèles modernes d’identification d'ensemble de protéines.
+Nous introduisons un modèle pour la détection de \emph{modules connexes actifs et conservés}, c'est-à-dire des modules connexes dont une majorité d'éléments sont similaires entre deux espèces.
+
+Nous présentons une formulation de notre modèle sous forme de programmation linéaire en nombres entiers, et proposons un algorithme branch-and-cut qui résout le modèle à l'optimalité en temps raisonnable.
+Nous appliquons notre modèle sur des données de différentiation cellulaire, à savoir les cellules Th0 en Th17 pour l'humain et la sourie.
+Nous analysons également notre modèle du point du vue de la complexité algorithmique, et fournissons des résultats pour le cas général ainsi que des cas spéciaux.
 
 \paragraph{Mots clés:}Bioinformatique, Optimization combinatoire, Maximum-Weight Connected Subgraph, Recherche de modules biologiques
 
@@ -245,7 +255,18 @@
 
 \chapter*{Abstract}
 
-	This thesis
+One of the major challenge for modern bioinformatics is making sense of the ever increasing size of biological data.
+Finding good models for all this data, models that can both explain the data and provide insight into biological questions, is paramount.
+One of the many difficulties of such path is the variety in the types of data.
+Modern computational biology approaches combine these many data into integrative approaches, that combine the knowledge inside the data in the hope to extract higher level information.
+
+This thesis contribute to the biological module identification problem by integrating conservation information with modern models of modular detection of protein sets.
+We introduce a model for the detection of \emph{conserved active connected modules}, that is connected modules that are conversed across two species.
+These active connected modules are similar in sequence composition between the two species.
+
+We present a mixed-integer linear programming formulation of our model, and propose a branch-and-cut algorithm to solve to provable optimality in reasonable run time.
+We apply our model to cell line differentiation data, namely Th0 into Th17 for both human and mouse.
+We also analyse the model from a complexity standpoint, and provide general as well as special cases complexity results.
 
 \paragraph{Keywords:}Bioinformatics, Combinatorial optimization, Maximum-Weight Connected Subgraph, Biological module discovery
 

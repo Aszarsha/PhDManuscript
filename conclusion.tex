@@ -3,4 +3,35 @@
 %\chaptermark{Conclusion}
 \label{chap:concl}
 
+One of the major challenge for modern biology is making sense of the ever increasing size of biological data.
+Finding good models for all this data, models that can both explain the data and provide insight into biological questions, is paramount.
+One of the many difficulties of such path is the variety in the types of data. %: expression data, interaction networks, and sequence similarity knowledge.
+%Expression profiles, the many types of biological networks, %---metabolic, signaling, gene co-expression, protein-protein interaction---, sequencing
+%	xequenced genetic information
+%This is exacerbated by the fact that many techniques work
+
+Modern computational biology approaches combine these many data into integrative approaches, that combine the knowledge inside the data in the hope to extract higher level information.
+This is the path that we followed in thesis, by contribute to the connected module identification problem ---in itself a model that integrates expression profiles and interaction networks ---, while integrating conservation information between two species.
+
+\paragraph{}
+We introduced a model for the detection of this integrated problem that we call the \emph{conserved active connected modules} problem.
+We provided a mixed-integer linear programming formulation of our model and a branch-and-cut algorithm to solve the model to provable optimality in reasonable run time.
+We then applied our model over cell line differentiation data, namely T helper 0 into T helper 17, for both human and mouse.
+And we analysed the model from a complexity standpoint, resulting in general and special cases complexity results.
+
+\paragraph{}
+The results that we present in \cref{chap:xheinz} validate the model in comparison to previous knowledge but also show that some aspects that we introduce, in particular our flexible definition of conservation, are crucial for understanding the mechanisms underlying Th17 cell differentiation in both mouse and human.
+In \cref{chap:hard} we showed that the problem is inherently difficult; precisely we showed that there cannot be a PTAS for the problem.
+
+\paragraph{}
+One of the major limit of our approach is the run time.
+Great care was applied to our branch-and-cut solver to obtain reasonable running time, but as data grows so does the computational requirements.
+Solving the model to provable optimality remains is an inherently exponential problem.
+Furthermore we showed that the problem is APX-hard, this means that there cannot be an efficient algorithm to approximate the model to any probable quality.
+
+\paragraph{}
+Overall, these results provide many possible improvements.
+For one, the general problem applied to more that two graphs has practical applications, for multiple species but also for time series analysis.
+In \cref{chap:hard} we suggested possible relationships between some subproblems of \mwccs{} and many well known combinatorial optimization problems.
+This is a clear avenue of research, that would allow the application of well optimized optimization techniques to the \mwccs{} problem.
 
